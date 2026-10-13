@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="aloeLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6EE7B7"/>
+      <stop offset="50%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="aloeGel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#A7F3D0"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+  <!-- Background Badge Circle -->
+  <circle cx="50" cy="50" r="46" fill="#ECFDF5" stroke="#10B981" stroke-width="2"/>
+  <circle cx="50" cy="50" r="42" fill="none" stroke="#A7F3D0" stroke-width="1" stroke-dasharray="2 2"/>
+
+  <!-- Aloe Vera Succulent Leaves -->
+  <!-- Left Leaf -->
+  <path d="M 50 78 C 45 60, 30 45, 24 35 C 26 48, 38 68, 48 80 Z" fill="#059669"/>
+  <line x1="24" y1="35" x2="27" y2="42" stroke="#A7F3D0" stroke-width="1"/>
+  <line x1="30" y1="48" x2="33" y2="54" stroke="#A7F3D0" stroke-width="1"/>
+
+  <!-- Right Leaf -->
+  <path d="M 50 78 C 55 60, 70 45, 76 35 C 74 48, 62 68, 52 80 Z" fill="#047857"/>
+  <line x1="76" y1="35" x2="73" y2="42" stroke="#A7F3D0" stroke-width="1"/>
+  <line x1="70" y1="48" x2="67" y2="54" stroke="#A7F3D0" stroke-width="1"/>
+
+  <!-- Center Primary Leaf -->
+  <path d="M 44 80 C 44 55, 48 30, 50 18 C 52 30, 56 55, 56 80 Z" fill="url(#aloeLeaf)"/>
+  <!-- Center Leaf Spines -->
+  <path d="M 47 32 L 44 34 M 53 32 L 56 34 M 46 45 L 43 47 M 54 45 L 57 47 M 45 58 L 42 60 M 55 58 L 58 60" stroke="#6EE7B7" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Crystalline Hydro-Gel Droplet -->
+  <path d="M 50 48 C 50 48, 62 64, 62 74 C 62 80, 57 85, 50 85 C 43 85, 38 80, 38 74 C 38 64, 50 48, 50 48 Z" fill="url(#aloeGel)" stroke="#10B981" stroke-width="1.2" opacity="0.9"/>
+  <!-- Specular -->
+  <ellipse cx="47" cy="70" rx="3" ry="5" transform="rotate(-20 47 70)" fill="#FFFFFF"/>
+</svg>

@@ -1,0 +1,30 @@
+{
+  "name": "anjucia-dermaceutical-frontend",
+  "version": "2.0.0",
+  "description": "ANJUCIA - Revolutionary Dermaceutical Skincare Hydration in Algeria & AI DermoScan Analyzer",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000"
+  },
+  "dependencies": {
+    "gsap": "^3.15.0",
+    "lucide-react": "^0.475.0",
+    "next": "^15.2.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "keywords": [
+    "anjucia",
+    "skincare",
+    "dermaceutical",
+    "hydration",
+    "algeria",
+    "ai-skin-analyzer",
+    "soothing-gel-cream",
+    "cerahydra"
+  ],
+  "author": "Laboratoires ANJUCIA Algérie",
+  "license": "MIT"
+}

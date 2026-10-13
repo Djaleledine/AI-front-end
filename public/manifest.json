@@ -1,0 +1,23 @@
+{
+  "name": "ANJUCIA Dermaceuticals",
+  "short_name": "ANJUCIA",
+  "description": "Boutique en ligne parapharmaceutique ANJUCIA Algérie. Soin visage apaisant 2 100 DZD, livraison 58 Wilayas.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060B12",
+  "theme_color": "#00D2C4",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/symbol.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/symbol-white.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

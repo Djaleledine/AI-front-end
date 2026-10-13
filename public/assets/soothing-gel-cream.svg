@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 520" width="100%" height="100%">
+  <defs>
+    <!-- Tube Body Gradients -->
+    <linearGradient id="tubeBody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="20%" stop-color="#F8FAFC"/>
+      <stop offset="55%" stop-color="#EEF2F6"/>
+      <stop offset="85%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+
+    <!-- Aqua Clinical Gradient -->
+    <linearGradient id="aquaAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D2C4"/>
+      <stop offset="50%" stop-color="#00A896"/>
+      <stop offset="100%" stop-color="#028090"/>
+    </linearGradient>
+
+    <!-- Navy Clinical Gradient -->
+    <linearGradient id="navyClinical" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="50%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0B1320"/>
+    </linearGradient>
+
+    <!-- Nozzle Cap Gradient -->
+    <linearGradient id="nozzleCap" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F1F5F9"/>
+      <stop offset="35%" stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#E2E8F0"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+
+    <!-- Precision Tip Gradient -->
+    <linearGradient id="precisionTip" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#CBD5E1"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#94A3B8"/>
+    </linearGradient>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="tubeShadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#028090" flood-opacity="0.22"/>
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0B1320" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient Glow Behind Tube -->
+  <ellipse cx="225" cy="465" rx="130" ry="24" fill="#00D2C4" opacity="0.22" filter="blur(16px)"/>
+  <!-- Contact Shadow -->
+  <ellipse cx="225" cy="460" rx="90" ry="14" fill="#0B1320" opacity="0.38"/>
+
+  <g filter="url(#tubeShadow)">
+    <!-- Top Crimped Seal of Tube -->
+    <path d="M 148 70 L 302 70 L 306 94 L 144 94 Z" fill="url(#navyClinical)" stroke="#334155" stroke-width="1"/>
+    <!-- Crimp vertical micro-ribs -->
+    <line x1="160" y1="70" x2="160" y2="94" stroke="#475569" stroke-width="1.5"/>
+    <line x1="175" y1="70" x2="175" y2="94" stroke="#475569" stroke-width="1.5"/>
+    <line x1="190" y1="70" x2="190" y2="94" stroke="#475569" stroke-width="1.5"/>
+    <line x1="205" y1="70" x2="205" y2="94" stroke="#475569" stroke-width="1.5"/>
+    <line x1="220" y1="70" x2="220" y2="94" stroke="#475569" stroke-width="1.5"/>
+    <line x1="235" y1="70" x2="235" y2="94" stroke="#475569" stroke-width="1.5"/>
+    <line x1="250" y1="70" x2="250" y2="94" stroke="#475569" stroke-width="1.5"/>
+    <line x1="265" y1="70" x2="265" y2="94" stroke="#475569" stroke-width="1.5"/>
+    <line x1="280" y1="70" x2="280" y2="94" stroke="#475569" stroke-width="1.5"/>
+    <line x1="295" y1="70" x2="295" y2="94" stroke="#475569" stroke-width="1.5"/>
+
+    <!-- Main Matte Tube Body -->
+    <path d="M 144 94 
+             C 142 160, 150 300, 160 360 
+             C 163 378, 172 390, 192 394 
+             L 258 394 
+             C 278 390, 287 378, 290 360 
+             C 300 300, 308 160, 306 94 Z" 
+          fill="url(#tubeBody)" stroke="#CBD5E1" stroke-width="1.5"/>
+
+    <!-- High Precision Shoulder & Screw Neck Ring -->
+    <rect x="188" y="394" width="74" height="12" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1"/>
+    <line x1="192" y1="400" x2="258" y2="400" stroke="#00D2C4" stroke-width="2"/>
+
+    <!-- Nozzle Tip Applicator Cap (Canule de Précision) -->
+    <path d="M 194 406 L 256 406 L 246 470 L 204 470 Z" fill="url(#nozzleCap)" stroke="#CBD5E1" stroke-width="1.2"/>
+    
+    <!-- Ultra-fine dispensing nozzle tip (Tête canule) -->
+    <path d="M 218 470 L 232 470 L 228 495 L 222 495 Z" fill="url(#precisionTip)" stroke="#64748B" stroke-width="0.8"/>
+    <!-- Nozzle orifice drop indicator -->
+    <circle cx="225" cy="497" r="2.5" fill="#00D2C4"/>
+
+    <!-- Cap knurling / grip ridges -->
+    <line x1="202" y1="412" x2="202" y2="462" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="210" y1="412" x2="210" y2="462" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="218" y1="412" x2="218" y2="462" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="226" y1="412" x2="226" y2="462" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="234" y1="412" x2="234" y2="462" stroke="#CBD5E1" stroke-width="1"/>
+    <line x1="242" y1="412" x2="242" y2="462" stroke="#CBD5E1" stroke-width="1"/>
+
+    <!-- Gloss Highlight Stripe on Left Side of Tube -->
+    <path d="M 154 105 C 151 180, 158 280, 168 350 L 176 350 C 166 280, 160 180, 162 105 Z" fill="#FFFFFF" opacity="0.65"/>
+  </g>
+
+  <!-- Graphic Elements & Scientific Typography on Tube Face -->
+  <g id="tubeGraphics">
+    <!-- Clinical Band Accent -->
+    <rect x="156" y="115" width="138" height="4" rx="2" fill="url(#aquaAccent)"/>
+
+    <!-- ANJUCIA Logo Monogram -->
+    <g transform="translate(205, 126) scale(0.19)">
+      <path d="M 110 10 L 10 230 L 45 230 L 110 65 Z" fill="#0E1B2C"/>
+      <path d="M 110 10 L 210 230 L 175 230 L 110 65 Z" fill="#0E1B2C"/>
+      <path d="M 97 38 L 110 10 L 123 38 Z" fill="#0E1B2C"/>
+      <path d="M 110 95 C 110 95, 88 140, 88 155 C 88 167, 98 177, 110 177 C 122 177, 132 167, 132 155 C 132 140, 110 95, 110 95 Z" fill="#00A896"/>
+      <path d="M 64 172 C 84 198, 136 198, 156 172 C 158 169, 163 172, 160 177 C 136 208, 84 208, 60 177 C 58 172, 62 169, 64 172 Z" fill="#00A896"/>
+    </g>
+
+    <!-- Brand Typography -->
+    <text x="225" y="180" text-anchor="middle" fill="#0F172A" font-family="'Inter', -apple-system, sans-serif" font-size="12.5" font-weight="900" letter-spacing="3.8">ANJUCIA</text>
+    <text x="225" y="193" text-anchor="middle" fill="#00A896" font-family="'Inter', sans-serif" font-size="7" font-weight="800" letter-spacing="1.4">DERMACEUTICAL HYDRATION</text>
+
+    <!-- Product Title Badge -->
+    <rect x="162" y="206" width="126" height="34" rx="4" fill="#0F172A"/>
+    <text x="225" y="221" text-anchor="middle" fill="#00D2C4" font-family="'Inter', sans-serif" font-size="8" font-weight="800" letter-spacing="1">LIGHTWEIGHT SOOTHING</text>
+    <text x="225" y="233" text-anchor="middle" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="7.5" font-weight="700" letter-spacing="0.8">FACE GEL-CREAM</text>
+
+    <!-- Actives Specs Breakdown -->
+    <g transform="translate(164, 252)">
+      <rect x="0" y="0" width="122" height="74" rx="4" fill="#FFFFFF" opacity="0.95" stroke="#E2E8F0" stroke-width="0.8"/>
+      
+      <!-- Micro-Active Badges -->
+      <text x="6" y="13" fill="#0F172A" font-family="'Inter', sans-serif" font-size="6.5" font-weight="800">NIACINAMIDE 3.0%</text>
+      <text x="80" y="13" fill="#00A896" font-family="'Inter', sans-serif" font-size="6" font-weight="700">• BARRIÈRE</text>
+
+      <line x1="6" y1="18" x2="116" y2="18" stroke="#F1F5F9" stroke-width="1"/>
+
+      <text x="6" y="28" fill="#0F172A" font-family="'Inter', sans-serif" font-size="6.5" font-weight="800">PANTHENOL B5 2.0%</text>
+      <text x="86" y="28" fill="#00A896" font-family="'Inter', sans-serif" font-size="6" font-weight="700">• APAISANT</text>
+
+      <line x1="6" y1="33" x2="116" y2="33" stroke="#F1F5F9" stroke-width="1"/>
+
+      <text x="6" y="43" fill="#475569" font-family="'Inter', sans-serif" font-size="5.8" font-weight="700">CENTELLA 1% • BETA-GLUCAN 1%</text>
+
+      <line x1="6" y1="48" x2="116" y2="48" stroke="#F1F5F9" stroke-width="1"/>
+
+      <text x="6" y="58" fill="#475569" font-family="'Inter', sans-serif" font-size="5.8" font-weight="700">SQUALANE 3% • DUAL HA 0.2%</text>
+
+      <line x1="6" y1="63" x2="116" y2="63" stroke="#F1F5F9" stroke-width="1"/>
+
+      <text x="6" y="70" fill="#028090" font-family="'Inter', sans-serif" font-size="5.5" font-weight="700">O/W EMULSION • pH 5.0-5.5</text>
+    </g>
+
+    <!-- Volume & Standard -->
+    <text x="225" y="342" text-anchor="middle" fill="#0F172A" font-family="'Inter', sans-serif" font-size="7" font-weight="800" letter-spacing="0.5">50 ml ℮ 1.7 FL. OZ.</text>
+    <text x="225" y="353" text-anchor="middle" fill="#64748B" font-family="'Inter', sans-serif" font-size="5.5" font-weight="600">TUBE CANULE SANS POMPE • FABRIQUÉ EN ALGÉRIE</text>
+  </g>
+
+  <!-- Precision Nozzle Floating Badge -->
+  <g transform="translate(305, 390)">
+    <circle cx="28" cy="28" r="26" fill="#0F172A" stroke="#00D2C4" stroke-width="2"/>
+    <text x="28" y="24" text-anchor="middle" fill="#00D2C4" font-family="'Inter', sans-serif" font-size="7" font-weight="900">NOZZLE</text>
+    <text x="28" y="34" text-anchor="middle" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="6.5" font-weight="700">TUBE</text>
+  </g>
+
+  <!-- Non-Greasy Gel Texture Stamp -->
+  <g transform="translate(85, 110)">
+    <rect x="0" y="0" width="58" height="20" rx="10" fill="#E6FFFA" stroke="#00D2C4" stroke-width="1.2"/>
+    <text x="29" y="13" text-anchor="middle" fill="#00A896" font-family="'Inter', sans-serif" font-size="6" font-weight="800">GEL-CRÈME</text>
+  </g>
+</svg>

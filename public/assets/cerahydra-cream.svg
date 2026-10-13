@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 500" width="100%" height="100%">
+  <defs>
+    <!-- Jar glass gradients -->
+    <linearGradient id="jarGlass" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="25%" stop-color="#F1F5F9" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#E2E8F0" stop-opacity="0.85"/>
+      <stop offset="75%" stop-color="#F8FAFC" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.98"/>
+    </linearGradient>
+    <!-- Navy clinical lid gradient -->
+    <linearGradient id="lidNavy" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="40%" stop-color="#1E293B"/>
+      <stop offset="50%" stop-color="#334155"/>
+      <stop offset="60%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0A0F1D"/>
+    </linearGradient>
+    <!-- Aqua inner cream core -->
+    <linearGradient id="aquaCream" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E6FFFA"/>
+      <stop offset="50%" stop-color="#CCFBF1"/>
+      <stop offset="100%" stop-color="#99F6E4"/>
+    </linearGradient>
+    <filter id="creamGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="15" stdDeviation="25" flood-color="#00A896" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient Glow -->
+  <ellipse cx="225" cy="420" rx="140" ry="25" fill="#00A896" opacity="0.2" filter="blur(15px)"/>
+  <!-- Base Shadow -->
+  <ellipse cx="225" cy="415" rx="120" ry="18" fill="#0B1320" opacity="0.35"/>
+
+  <!-- Jar Outer Heavy Acrylic/Glass Wall -->
+  <g filter="url(#creamGlow)">
+    <rect x="110" y="180" width="230" height="210" rx="28" fill="url(#jarGlass)" stroke="#CBD5E1" stroke-width="1.5"/>
+
+    <!-- Inner Cream Reservoir (Frosted Aqua/White Emulsion) -->
+    <rect x="130" y="200" width="190" height="170" rx="20" fill="url(#aquaCream)"/>
+
+    <!-- Subtle meniscus / cream texture wave -->
+    <path d="M 130 220 Q 175 210 225 220 T 320 220 L 320 370 L 130 370 Z" fill="#F0FDFA" opacity="0.75"/>
+
+    <!-- Clinical Label on the Jar -->
+    <rect x="142" y="235" width="166" height="115" rx="6" fill="#FFFFFF" opacity="0.95" stroke="#E2E8F0" stroke-width="1"/>
+
+    <!-- Monogram Symbol on Label -->
+    <g transform="translate(205, 242) scale(0.18)">
+      <path d="M 110 10 L 10 230 L 45 230 L 110 65 Z" fill="#0E1B2C"/>
+      <path d="M 110 10 L 210 230 L 175 230 L 110 65 Z" fill="#0E1B2C"/>
+      <path d="M 97 38 L 110 10 L 123 38 Z" fill="#0E1B2C"/>
+      <path d="M 110 95 C 110 95, 88 140, 88 155 C 88 167, 98 177, 110 177 C 122 177, 132 167, 132 155 C 132 140, 110 95, 110 95 Z" fill="#00A896"/>
+      <path d="M 64 172 C 84 198, 136 198, 156 172 C 158 169, 163 172, 160 177 C 136 208, 84 208, 60 177 C 58 172, 62 169, 64 172 Z" fill="#00A896"/>
+    </g>
+
+    <!-- Typography on Jar -->
+    <text x="225" y="293" text-anchor="middle" fill="#0F172A" font-family="'Inter', sans-serif" font-size="12" font-weight="900" letter-spacing="3.5">ANJUCIA</text>
+    <text x="225" y="306" text-anchor="middle" fill="#00A896" font-family="'Inter', sans-serif" font-size="7.5" font-weight="800" letter-spacing="1.5">CERAHYDRA+</text>
+    <text x="225" y="318" text-anchor="middle" fill="#475569" font-family="'Inter', sans-serif" font-size="6" font-weight="600" letter-spacing="1">CELLULAR BARRIER RESTORATIVE</text>
+    <text x="225" y="328" text-anchor="middle" fill="#64748B" font-family="'Inter', sans-serif" font-size="5" font-weight="500">7x Hyaluronic • 5 Ceramides • Ectoin 2% • Sahara Date Ferment</text>
+    <text x="225" y="340" text-anchor="middle" fill="#0F172A" font-family="'Inter', sans-serif" font-size="6" font-weight="700">50 ml ℮ 1.7 FL. OZ. • FABRIQUÉ EN ALGÉRIE</text>
+
+    <!-- Glass Reflection Highlights -->
+    <path d="M 116 195 L 126 195 L 126 375 L 116 370 Z" fill="#FFFFFF" opacity="0.6"/>
+    <path d="M 324 195 L 334 195 L 334 370 L 324 375 Z" fill="#FFFFFF" opacity="0.4"/>
+  </g>
+
+  <!-- Heavy Precision Brushed Navy Lid -->
+  <g>
+    <!-- Lid neck/rim -->
+    <rect x="125" y="165" width="200" height="20" rx="4" fill="#0B1320"/>
+    <!-- Main Lid Cap -->
+    <rect x="115" y="110" width="220" height="60" rx="12" fill="url(#lidNavy)" stroke="#334155" stroke-width="1"/>
+    <!-- Metallic Aqua Accent Band on lid rim -->
+    <line x1="120" y1="168" x2="330" y2="168" stroke="#00D2C4" stroke-width="2" stroke-linecap="round"/>
+    <!-- Lid reflection gleam -->
+    <path d="M 170 112 L 195 112 L 180 168 L 155 168 Z" fill="#FFFFFF" opacity="0.12"/>
+  </g>
+
+  <!-- Clinical Badge Floating Tag -->
+  <g transform="translate(305, 110)">
+    <circle cx="28" cy="28" r="28" fill="#00A896" stroke="#FFFFFF" stroke-width="2"/>
+    <text x="28" y="24" text-anchor="middle" fill="#FFFFFF" font-family="'Inter', sans-serif" font-size="9" font-weight="900">72H</text>
+    <text x="28" y="36" text-anchor="middle" fill="#E6FFFA" font-family="'Inter', sans-serif" font-size="7" font-weight="700">LOCK</text>
+  </g>
+</svg>

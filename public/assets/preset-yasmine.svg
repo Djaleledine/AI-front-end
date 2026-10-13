@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" width="100%" height="100%">
+  <defs>
+    <radialGradient id="faceYasmine" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#FFE4D0"/>
+      <stop offset="70%" stop-color="#F2C4A7"/>
+      <stop offset="100%" stop-color="#D79C7B"/>
+    </radialGradient>
+    <radialGradient id="sebumTZone" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.65"/>
+      <stop offset="60%" stop-color="#00B0FF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00B0FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="450" fill="#0E1929"/>
+  <circle cx="200" cy="210" r="140" fill="#182A42"/>
+  <!-- Hair -->
+  <path d="M 110 200 C 100 80, 290 80, 290 200 C 300 280, 310 370, 310 390 L 90 390 C 90 370, 100 280, 110 200 Z" fill="#241B18"/>
+  <path d="M 130 160 C 130 95, 270 95, 270 160 C 270 240, 255 295, 200 305 C 145 295, 130 240, 130 160 Z" fill="url(#faceYasmine)"/>
+  <!-- Eyes -->
+  <ellipse cx="166" cy="178" rx="13" ry="7" fill="#2E1C14"/>
+  <ellipse cx="234" cy="178" rx="13" ry="7" fill="#2E1C14"/>
+  <!-- Brows -->
+  <path d="M 150 164 Q 166 157 182 165" stroke="#241B18" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 218 165 Q 234 157 250 164" stroke="#241B18" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Nose -->
+  <path d="M 200 172 L 197 212 L 204 217" stroke="#BA8262" stroke-width="2.5" fill="none"/>
+  <!-- Lips -->
+  <path d="M 185 246 Q 200 240 215 246 Q 200 255 185 246 Z" fill="#CC6B76"/>
+  <!-- T-Zone Dehydration & Sebum Imbalance Spots -->
+  <ellipse cx="200" cy="145" rx="36" ry="16" fill="url(#sebumTZone)"/>
+  <ellipse cx="200" cy="195" rx="16" ry="26" fill="url(#sebumTZone)"/>
+  <circle cx="200" cy="275" r="18" fill="url(#sebumTZone)"/>
+  <!-- Metadata tag -->
+  <rect x="20" y="390" width="360" height="40" rx="8" fill="#142338" stroke="#00E5FF" stroke-width="1"/>
+  <text x="35" y="415" fill="#E2E8F0" font-family="monospace" font-size="13" font-weight="600">PRESET 03: YASMINE T. • ORAN (MEDITERRANEAN COMB.)</text>
+</svg>

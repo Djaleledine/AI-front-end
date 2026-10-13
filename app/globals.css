@@ -1,0 +1,3403 @@
+/* ==========================================================================
+   ANJUCIA DERMACEUTICALS — DESIGN SYSTEM (DARK & LIGHT THEMES + RTL)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Zain:ital,wght@0,200;0,300;0,400;0,700;0,800;0,900;1,300;1,400&display=swap');
+
+:root, [data-theme="dark"] {
+  /* Official ANJUCIA Mineral-Botanical Palette (Exact Swatch Colors) */
+  --bg-primary: #11171A;         /* Swatch 14: Deep Abyss Charcoal */
+  --bg-secondary: #1E272E;       /* Swatch 13: Midnight Slate Surface */
+  --bg-card: #182229;            /* Refined Card Surface */
+  --bg-card-hover: #213039;      /* Interactive Hover Elevation */
+  --bg-glass: rgba(17, 23, 26, 0.88);
+  --bg-input: #141C21;
+
+  --text-primary: #FFFFFF;       /* Swatch 1: Pure White */
+  --text-secondary: #D0E1E9;     /* Swatch 7: Soft Ice Glacial Blue */
+  --text-muted: #8FAAB8;         /* Swatch 6: Cerulean Mist */
+  --text-inverse: #11171A;
+
+  --accent-aqua: #719FB7;        /* Swatch 8: Clinical Glacier Cyan */
+  --accent-aqua-hover: #8AB2C7;  /* Lightened for interactive hover */
+  --accent-aqua-glow: rgba(113, 159, 183, 0.35);
+  --accent-aqua-subtle: rgba(113, 159, 183, 0.12);
+
+  --brand-deep: #436D88;         /* Swatch 9: Deep Ocean Slate */
+  --accent-botanical: #9BB0A0;   /* Swatch 12: Muted Botanical Eucalyptus */
+  --accent-botanical-subtle: rgba(155, 176, 160, 0.15);
+
+  --border-subtle: rgba(208, 225, 233, 0.1);
+  --border-light: rgba(113, 159, 183, 0.28);
+  --border-accent: #719FB7;
+
+  --badge-bg: rgba(113, 159, 183, 0.16);
+  --badge-text: #D0E1E9;
+
+  --success: #9BB0A0;
+  --danger: #E06D6D;
+  --warning: #D9A066;
+
+  --card-radius: 16px;
+  --btn-radius: 10px;
+  --badge-radius: 9999px;
+  --btn-gradient: linear-gradient(135deg, #719FB7 0%, #436D88 100%);
+  --hero-glow-color: rgba(113, 159, 183, 0.18);
+
+  --shadow-sm: 0 4px 14px rgba(17, 23, 26, 0.35);
+  --shadow-md: 0 10px 30px rgba(17, 23, 26, 0.55);
+  --shadow-glow: 0 0 25px rgba(113, 159, 183, 0.25);
+  --logo-filter: invert(1) brightness(1.2);
+}
+
+[data-theme="light"] {
+  /* Light Mode (Mineral Off-White, Pale Sage & Cool Mist from Swatch) */
+  --bg-primary: #F5F7F8;         /* Swatch 2: Crisp Clinical Off-White */
+  --bg-secondary: #EDF1F2;       /* Swatch 3: Soft Cool Grey */
+  --bg-card: #FFFFFF;            /* Swatch 1: Pure White Card */
+  --bg-card-hover: #F0F4F6;
+  --bg-glass: rgba(255, 255, 255, 0.92);
+  --bg-input: #FFFFFF;
+
+  --text-primary: #11171A;       /* Swatch 14: Deep Slate Charcoal */
+  --text-secondary: #436D88;     /* Swatch 9: Rich Aegean Slate */
+  --text-muted: #728A97;         /* Swatch 6: Slate Muted */
+  --text-inverse: #FFFFFF;
+
+  --accent-aqua: #436D88;        /* Swatch 9: High Contrast Clinical Cyan-Blue */
+  --accent-aqua-hover: #35586E;
+  --accent-aqua-glow: rgba(67, 109, 136, 0.22);
+  --accent-aqua-subtle: rgba(113, 159, 183, 0.12);
+
+  --brand-deep: #2C3E50;         /* Swatch 13: Slate Navy */
+  --accent-botanical: #5E7E67;   /* Botanical Sage Green */
+  --accent-botanical-subtle: rgba(155, 176, 160, 0.18);
+
+  --border-subtle: #E2E7E9;      /* Swatch 4: Clean Border */
+  --border-light: rgba(113, 159, 183, 0.35);
+  --border-accent: #436D88;
+
+  --badge-bg: #E5ECE7;           /* Swatch 10: Pale Botanical Sage */
+  --badge-text: #2C3E50;
+
+  --success: #5F7F68;
+  --danger: #C0392B;
+  --warning: #D3833E;
+
+  --card-radius: 16px;
+  --btn-radius: 10px;
+  --badge-radius: 9999px;
+  --btn-gradient: linear-gradient(135deg, #436D88 0%, #2C3E50 100%);
+  --hero-glow-color: rgba(113, 159, 183, 0.14);
+
+  --shadow-sm: 0 4px 12px rgba(30, 39, 46, 0.05);
+  --shadow-md: 0 10px 28px rgba(30, 39, 46, 0.08);
+  --shadow-glow: 0 0 20px rgba(67, 109, 136, 0.15);
+  --logo-filter: none;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: clip;
+}
+
+body {
+  font-family: 'Zain', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Arabic RTL Mode */
+html[dir="rtl"] body, body.rtl-mode {
+  font-family: 'Zain', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  direction: rtl;
+  text-align: right;
+}
+
+/* Ensure inputs, buttons, selects inherit the Zain font */
+input, button, select, textarea, optgroup {
+  font-family: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Typography Helpers */
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-aqua) 0%, var(--badge-text) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-aqua);
+  background: var(--accent-aqua-subtle);
+  border: 1px solid var(--border-light);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--badge-radius, 9999px);
+  margin-bottom: 0.85rem;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1.2;
+  margin-bottom: 0.8rem;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 680px;
+}
+
+/* Buttons */
+.btn-aqua {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: var(--btn-gradient, var(--accent-aqua));
+  color: #06111C;
+  font-weight: 800;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.65rem;
+  border-radius: var(--btn-radius, 10px);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--shadow-glow);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-aqua:hover {
+  filter: brightness(1.1);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px var(--accent-aqua-glow);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  background: transparent;
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.85rem 1.55rem;
+  border-radius: var(--btn-radius, 10px);
+  border: 1.5px solid var(--border-light);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-aqua);
+  background: var(--accent-aqua-subtle);
+  color: var(--accent-aqua);
+  transform: translateY(-2px);
+}
+
+/* Navigation */
+.nav-topbar {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.45rem 0;
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+}
+
+.nav-topbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.topbar-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--accent-aqua);
+}
+
+.topbar-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-aqua);
+  box-shadow: 0 0 8px var(--accent-aqua);
+  animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.header-clinical {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-glass);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.95rem 0;
+}
+
+.gsap-scroll-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2.5px;
+  width: 0%;
+  background: var(--btn-gradient);
+  box-shadow: 0 0 10px var(--accent-aqua);
+  z-index: 101;
+  pointer-events: none;
+  will-change: width;
+}
+
+.topbar-shipping-text {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+
+.nav-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.brand-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-symbol-icon {
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(0 2px 8px var(--accent-aqua-glow));
+}
+
+.brand-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.brand-tagline {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--accent-aqua);
+  display: block;
+  margin-top: 2px;
+}
+
+/* Clean Desktop Navigation Links — Spacious & Elegant */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.4rem 0;
+  position: relative;
+  transition: color 0.18s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  color: var(--accent-aqua);
+}
+
+.nav-link.active {
+  color: var(--accent-aqua);
+  font-weight: 800;
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--accent-aqua);
+  border-radius: 2px;
+}
+
+.nav-link-ai {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--accent-aqua);
+  font-weight: 800;
+}
+
+.nav-link-ai:hover {
+  color: var(--text-primary);
+}
+
+.nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-shrink: 0;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--accent-aqua);
+  color: var(--accent-aqua);
+  transform: rotate(35deg) scale(1.05);
+  box-shadow: 0 0 12px var(--accent-aqua-glow);
+}
+
+/* Mobile Menu Hamburger Button */
+.mobile-menu-btn {
+  display: none;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-btn:hover, .mobile-menu-btn.active {
+  border-color: var(--accent-aqua);
+  color: var(--accent-aqua);
+}
+
+/* Slide-Over Mobile Drawer */
+.mobile-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 23, 26, 0.6);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: min(340px, 86vw);
+  background: var(--bg-card);
+  border-left: 1.5px solid var(--border-light);
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+}
+
+[dir="rtl"] .mobile-nav-drawer {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 1.5px solid var(--border-light);
+  transform: translateX(-100%);
+  box-shadow: 10px 0 35px rgba(0, 0, 0, 0.4);
+}
+
+.mobile-nav-drawer.open {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.4rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mobile-drawer-close {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-drawer-close:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-aqua);
+}
+
+.mobile-drawer-links {
+  list-style: none;
+  padding: 0.75rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.mobile-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-decoration: none;
+  background: transparent;
+  transition: all 0.2s ease;
+}
+
+.mobile-drawer-link:hover, .mobile-drawer-link.active {
+  background: var(--accent-aqua-subtle);
+  color: var(--accent-aqua);
+}
+
+.mobile-drawer-footer {
+  margin-top: auto;
+  padding: 1.4rem 1.2rem;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+
+@media (max-width: 1080px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-quick-quiz-btn {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: flex;
+  }
+}
+
+/* Language Selector */
+.lang-selector-wrap {
+  display: flex;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.35rem 0.65rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.lang-btn.active {
+  background: var(--accent-aqua);
+  color: #06111C;
+}
+
+.cart-trigger-btn {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cart-trigger-btn:hover {
+  border-color: var(--accent-aqua);
+  color: var(--accent-aqua);
+}
+
+.cart-counter-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--accent-aqua);
+  color: #06111C;
+  font-size: 0.72rem;
+  font-weight: 900;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg-primary);
+}
+
+/* Product Cards Grid */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+  gap: 2rem;
+}
+
+.product-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--card-radius, 18px);
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-md);
+}
+
+.product-badge-flag {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--badge-radius, 9999px);
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  border: 1px solid var(--border-light);
+}
+
+html[dir="rtl"] .product-badge-flag {
+  left: auto;
+  right: 1.2rem;
+}
+
+.product-card-img-wrap {
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0 1rem;
+}
+
+.product-card-img-wrap img {
+  max-height: 100%;
+  width: auto;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-card-img-wrap img {
+  transform: scale(1.04);
+}
+
+.product-card-vol {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.product-card-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0.25rem 0 0.5rem;
+}
+
+.product-card-desc {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.2rem;
+  flex-grow: 1;
+}
+
+.product-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1rem;
+}
+
+.price-dzd {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.price-dzd span {
+  font-size: 0.82rem;
+  color: var(--accent-aqua);
+}
+
+/* Cart Drawer */
+.cart-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.cart-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-card);
+  border-left: 1px solid var(--border-light);
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  z-index: 1001;
+}
+
+html[dir="rtl"] .cart-drawer {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 1px solid var(--border-light);
+  transform: translateX(-100%);
+}
+
+.cart-drawer-overlay.open .cart-drawer {
+  transform: translateX(0);
+}
+
+.cart-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cart-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+}
+
+.cart-item-thumb {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  background: var(--bg-card);
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.cart-item-details {
+  flex: 1;
+}
+
+.cart-item-name {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.cart-item-price {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--accent-aqua);
+  margin-top: 2px;
+}
+
+.cart-qty-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.qty-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cart-footer {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+
+.cart-subtotal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Footer */
+.footer-clinical {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+  padding: 4.5rem 0 2rem;
+  margin-top: 5rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.2fr;
+  gap: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Toast Alert */
+.toast-alert {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1.5px solid var(--accent-aqua);
+  color: var(--text-primary);
+  padding: 0.9rem 1.8rem;
+  border-radius: 9999px;
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  z-index: 3000;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  animation: slide-up-toast 0.3s ease;
+}
+
+@keyframes slide-up-toast {
+  from { opacity: 0; transform: translate(-50%, 15px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .nav-links {
+    display: none;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav-main {
+    gap: 0.75rem;
+  }
+  .brand-title {
+    font-size: 1.15rem;
+  }
+  .brand-symbol-icon {
+    width: 30px;
+    height: 30px;
+  }
+  .nav-controls {
+    gap: 0.35rem;
+  }
+  .lang-btn {
+    padding: 0.25rem 0.45rem;
+    font-size: 0.68rem;
+  }
+  .palette-toggle-btn, .theme-toggle-btn {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    justify-content: center;
+  }
+  .palette-toggle-btn .palette-dot-indicator {
+    width: 7px;
+    height: 7px;
+  }
+  .cart-trigger-btn {
+    width: 36px;
+    height: 36px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Mobile Hamburger Button */
+.mobile-menu-btn {
+  display: none;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--btn-radius, 10px);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-menu-btn:hover {
+  border-color: var(--accent-aqua);
+  color: var(--accent-aqua);
+}
+
+@media (max-width: 960px) {
+  .mobile-menu-btn {
+    display: flex;
+  }
+}
+
+/* Mobile Slide-Over Navigation Drawer */
+.mobile-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 1500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 340px;
+  background: var(--bg-card);
+  border-left: 1.5px solid var(--border-light);
+  box-shadow: -10px 0 35px rgba(0, 0, 0, 0.6);
+  z-index: 1501;
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+html[dir="rtl"] .mobile-nav-drawer {
+  right: auto;
+  left: 0;
+  border-left: none;
+  border-right: 1.5px solid var(--border-light);
+  transform: translateX(-100%);
+}
+
+.mobile-nav-drawer.open {
+  transform: translateX(0);
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.4rem;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+
+.mobile-drawer-close {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mobile-drawer-close:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-aqua);
+}
+
+.mobile-drawer-links {
+  list-style: none;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex-grow: 1;
+}
+
+.mobile-drawer-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.8rem 1rem;
+  border-radius: var(--btn-radius, 10px);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.18s ease;
+}
+
+.mobile-drawer-link:hover, .mobile-drawer-link.active {
+  background: var(--accent-aqua-subtle);
+  color: var(--accent-aqua);
+  padding-left: 1.2rem;
+}
+
+html[dir="rtl"] .mobile-drawer-link:hover, html[dir="rtl"] .mobile-drawer-link.active {
+  padding-left: 1rem;
+  padding-right: 1.2rem;
+}
+
+.mobile-drawer-footer {
+  padding: 1.2rem 1.4rem calc(1.4rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+
+/* DermLabMixer Enhanced Responsive Styles */
+.mixer-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 140px 1.25fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.mixer-botanicals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mixer-botanical-btn {
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--card-radius, 14px);
+  padding: 0.9rem 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+}
+
+.mixer-botanical-btn:hover {
+  border-color: var(--border-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.mixer-botanical-btn.selected {
+  background: var(--accent-aqua-subtle);
+  border-color: var(--accent-aqua);
+  box-shadow: 0 0 16px var(--accent-aqua-subtle);
+}
+
+.mixer-check-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mixer-middle-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+}
+
+.mixer-plus-bubble {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(113, 159, 183, 0.2) 0%, rgba(67, 109, 136, 0.2) 100%);
+  border: 2px solid var(--accent-aqua);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-aqua);
+  box-shadow: var(--shadow-glow);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+.mixer-plus-bubble:hover {
+  background: var(--accent-aqua);
+  color: #FFFFFF;
+  box-shadow: 0 0 25px rgba(113, 159, 183, 0.55);
+  transform: scale(1.1) rotate(90deg);
+}
+
+@media (max-width: 960px) {
+  .mixer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .mixer-middle-connector {
+    flex-direction: row;
+    padding: 0.5rem 0;
+    gap: 1.2rem;
+  }
+  .mixer-botanicals-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .mixer-botanicals-list {
+    grid-template-columns: 1fr;
+  }
+  .topbar-shipping-text {
+    display: none;
+  }
+}
+
+/* Sticky Mobile Buy Bar */
+.sticky-mobile-buy-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border-top: 1.5px solid var(--border-light);
+  padding: 0.75rem 1.2rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  animation: slide-up-bar 0.3s ease;
+}
+
+@keyframes slide-up-bar {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.sticky-mobile-inner {
+  max-width: 540px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+@media (min-width: 769px) {
+  .sticky-mobile-buy-bar {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   DERMOSCAN OPTICAL SCANNER STYLING & ANIMATIONS
+   ========================================================================== */
+
+.scanner-box {
+  position: relative;
+  background: #02060A;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  border: 1.5px solid var(--border-light);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8), var(--shadow-glow);
+  aspect-ratio: 4 / 3;
+  max-height: 480px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scanner-laser-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-aqua) 50%, transparent 100%);
+  box-shadow: 0 0 18px var(--accent-aqua), 0 0 35px var(--accent-aqua);
+  z-index: 20;
+  pointer-events: none;
+  animation: scanLaserSweep 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes scanLaserSweep {
+  0% { top: 6%; opacity: 0.85; }
+  50% { opacity: 1; filter: drop-shadow(0 0 10px var(--accent-aqua)); }
+  100% { top: 92%; opacity: 0.85; }
+}
+
+.scanner-radar-ring {
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(113, 159, 183, 0.45);
+  pointer-events: none;
+  z-index: 18;
+  animation: radarSweep 3.5s linear infinite;
+  background: conic-gradient(from 0deg, rgba(113, 159, 183, 0.28) 0deg, transparent 70deg, transparent 360deg);
+  box-shadow: 0 0 20px rgba(113, 159, 183, 0.2);
+}
+
+@keyframes radarSweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.scanner-matrix-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(0, 210, 196, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 210, 196, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.scanner-face-oval {
+  position: absolute;
+  width: 220px;
+  height: 290px;
+  border: 2px dashed rgba(0, 210, 196, 0.45);
+  border-radius: 50% 50% 45% 45% / 55% 55% 45% 45%;
+  pointer-events: none;
+  z-index: 15;
+  box-shadow: 0 0 25px rgba(0, 210, 196, 0.1);
+  animation: pulseOval 3s ease-in-out infinite;
+}
+
+@keyframes pulseOval {
+  0%, 100% { transform: scale(1); border-color: rgba(0, 210, 196, 0.4); }
+  50% { transform: scale(1.02); border-color: var(--accent-aqua); box-shadow: 0 0 30px rgba(0, 210, 196, 0.25); }
+}
+
+.scanner-corner {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: var(--accent-aqua);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 25;
+}
+.scanner-corner-tl { top: 16px; left: 16px; border-width: 3px 0 0 3px; }
+.scanner-corner-tr { top: 16px; right: 16px; border-width: 3px 3px 0 0; }
+.scanner-corner-bl { bottom: 16px; left: 16px; border-width: 0 0 3px 3px; }
+.scanner-corner-br { bottom: 16px; right: 16px; border-width: 0 3px 3px 0; }
+
+.scanner-hud-bar {
+  position: absolute;
+  z-index: 25;
+  background: rgba(2, 6, 10, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  font-family: 'Zain', monospace;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--accent-aqua);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  letter-spacing: 0.06em;
+}
+
+.scanner-hud-top {
+  top: 14px;
+}
+.scanner-hud-bottom {
+  bottom: 14px;
+}
+
+.biopoint-spot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 22;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.biopoint-spot:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.biopoint-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-aqua);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0 0 12px var(--accent-aqua);
+  position: relative;
+}
+.biopoint-dot::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent-aqua);
+  animation: biopointPulse 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes biopointPulse {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+.biopoint-tag {
+  background: rgba(4, 10, 18, 0.85);
+  border: 1px solid var(--accent-aqua);
+  color: #FFFFFF;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   GSAP SCROLL REVEAL — INITIAL STATES (GSAP sets these via fromTo)
+   Elements start visible to avoid flash; GSAP immediately sets opacity:0
+   and animates back in. Safety: if GSAP fails, content stays visible.
+   ========================================================================== */
+
+.scroll-reveal,
+.scroll-reveal-scale,
+.scroll-reveal-left,
+.scroll-reveal-right {
+  will-change: opacity, transform;
+}
+
+/* Stagger delay classes — used by GSAP batch for CSS-side ordering hints */
+.stagger-1 { --stagger-i: 1; }
+.stagger-2 { --stagger-i: 2; }
+.stagger-3 { --stagger-i: 3; }
+.stagger-4 { --stagger-i: 4; }
+.stagger-5 { --stagger-i: 5; }
+
+/* ==========================================================================
+   LUXURY SCROLL PROGRESS & SCROLL-TO-TOP ORB
+   ========================================================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Luminous Top Scroll Progress Bar */
+.global-scroll-progress-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.16);
+  pointer-events: none;
+}
+
+.global-scroll-progress-bar {
+  height: 100%;
+  position: relative;
+  background: linear-gradient(90deg, var(--accent-aqua) 0%, #38BDF8 50%, var(--accent-botanical) 100%);
+  box-shadow: 0 0 16px var(--accent-aqua-glow), 0 0 6px var(--accent-aqua);
+  transition: width 0.08s linear;
+  will-change: width;
+}
+
+.global-scroll-progress-bar::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: -2px;
+  bottom: -2px;
+  width: 16px;
+  border-radius: 4px;
+  background: #FFFFFF;
+  box-shadow: 0 0 16px #FFFFFF, 0 0 24px var(--accent-aqua);
+}
+
+/* 2. Floating Circular Progress Gauge / Scroll to Top Orb */
+.scroll-to-top-orb {
+  position: fixed;
+  right: 24px;
+  bottom: 30px;
+  z-index: 92;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.32);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.85);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s, box-shadow 0.25s;
+}
+
+.scroll-to-top-orb.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.scroll-to-top-orb:hover {
+  transform: translateY(-4px) scale(1.08);
+  border-color: var(--accent-aqua);
+  box-shadow: 0 12px 32px var(--accent-aqua-glow);
+}
+
+.scroll-to-top-orb:active {
+  transform: scale(0.94);
+}
+
+.scroll-progress-ring {
+  position: absolute;
+  inset: 0;
+  transform: rotate(-90deg);
+}
+
+.scroll-progress-ring-circle {
+  transition: stroke-dashoffset 0.12s linear;
+}
+
+.scroll-orb-icon {
+  color: var(--accent-aqua);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: transform 0.25s ease;
+}
+
+.scroll-to-top-orb:hover .scroll-orb-icon {
+  transform: translateY(-3px);
+}
+
+/* Mobile responsive placement: stays clearly above StickyMobileBuyBar (which is ~64px) */
+@media (max-width: 768px) {
+  .scroll-to-top-orb {
+    bottom: 84px;
+    right: 18px;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+/* 3. Creative Scroll Reveal Animations (STAND-OUT Cascading Dynamics) */
+.scroll-reveal,
+.scroll-reveal-scale,
+.scroll-reveal,
+.scroll-reveal-scale,
+.scroll-reveal-left,
+.scroll-reveal-right {
+  transition: opacity 0.9s cubic-bezier(0.16, 1.25, 0.35, 1), 
+              transform 0.95s cubic-bezier(0.16, 1.25, 0.35, 1), 
+              filter 0.8s ease,
+              box-shadow 0.85s ease;
+  will-change: opacity, transform, filter;
+  perspective: 1200px;
+}
+
+/* Base SSR fallback: visible by default if JS doesn't mount */
+.scroll-reveal,
+.scroll-reveal-scale,
+.scroll-reveal-left,
+.scroll-reveal-right {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Dynamic waiting states once client animation engine is active */
+html.scroll-anim-ready .scroll-reveal {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(12deg) translateY(68px);
+  filter: blur(6px);
+}
+
+html.scroll-anim-ready .scroll-reveal-scale {
+  opacity: 0;
+  transform: perspective(1200px) rotateX(14deg) scale(0.88) translateY(60px);
+  filter: blur(6px);
+}
+
+html.scroll-anim-ready .scroll-reveal-left {
+  opacity: 0;
+  transform: perspective(1200px) rotateY(-14deg) translateX(-72px) scale(0.90);
+  filter: blur(6px);
+}
+
+html.scroll-anim-ready .scroll-reveal-right {
+  opacity: 0;
+  transform: perspective(1200px) rotateY(14deg) translateX(72px) scale(0.90);
+  filter: blur(6px);
+}
+
+/* Revealed state: blooms into full clarity, 3D upright leveling, and zero blur */
+html.scroll-anim-ready .scroll-reveal.is-revealed,
+html.scroll-anim-ready .scroll-reveal-scale.is-revealed,
+html.scroll-anim-ready .scroll-reveal-left.is-revealed,
+html.scroll-anim-ready .scroll-reveal-right.is-revealed {
+  opacity: 1 !important;
+  transform: perspective(1200px) rotateX(0deg) rotateY(0deg) translate(0, 0) scale(1) !important;
+  filter: blur(0) !important;
+}
+
+/* Cascading Stagger Timings — Dramatic Wave Rhythm */
+.stagger-1 { transition-delay: 0.10s !important; }
+.stagger-2 { transition-delay: 0.24s !important; }
+.stagger-3 { transition-delay: 0.38s !important; }
+.stagger-4 { transition-delay: 0.52s !important; }
+.stagger-5 { transition-delay: 0.66s !important; }
+
+/* Interactive 3D Hover Depth on Revealed Cards */
+html.scroll-anim-ready .is-revealed.scroll-reveal-scale:hover,
+html.scroll-anim-ready .is-revealed.product-card:hover {
+  transform: perspective(1200px) rotateX(0deg) translateY(-8px) scale(1.02) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 28px var(--accent-aqua-glow) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease !important;
+}
+
+/* Luminous Photon Laser Flare Sweep Across Revealed Cards */
+html.scroll-anim-ready .is-revealed.scroll-reveal-scale,
+html.scroll-anim-ready .is-revealed.product-card {
+  position: relative;
+  overflow: hidden;
+  animation: cardEntranceGlow 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+html.scroll-anim-ready .is-revealed.scroll-reveal-scale::after,
+html.scroll-anim-ready .is-revealed.product-card::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -120%;
+  width: 55%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 210, 196, 0.14) 35%,
+    rgba(255, 255, 255, 0.40) 50%,
+    rgba(0, 210, 196, 0.14) 65%,
+    transparent 100%
+  );
+  transform: rotate(25deg);
+  pointer-events: none;
+  animation: laserFlareSweep 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+}
+
+@keyframes laserFlareSweep {
+  0% { left: -120%; opacity: 0; }
+  25% { opacity: 1; }
+  75% { opacity: 0.9; }
+  100% { left: 180%; opacity: 0; }
+}
+
+@keyframes cardEntranceGlow {
+  0% {
+    box-shadow: 0 0 0 rgba(0, 210, 196, 0);
+  }
+  45% {
+    box-shadow: 0 14px 38px var(--accent-aqua-glow), 0 0 2px var(--accent-aqua);
+  }
+  100% {
+    box-shadow: var(--shadow-sm);
+  }
+}
+
+/* Section Title Underline Beam */
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 72%;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, var(--accent-aqua), transparent);
+  box-shadow: 0 0 14px var(--accent-aqua);
+  opacity: 0;
+  transition: opacity 0.6s ease 0.4s;
+}
+
+.section-title.gsap-headline-done::after {
+  opacity: 1;
+}
+
+
+/* Subtle Parallax Floating Drift on Hero Tube */
+@keyframes atmosphericDrift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(2.5deg); }
+}
+
+.parallax-float {
+  animation: atmosphericDrift 5s ease-in-out infinite;
+}
+
+/* Scanner laser beam pulse for DermoScan AI */
+@keyframes laserSweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  25% { opacity: 0.95; }
+  50% { transform: translateY(120%); opacity: 0.95; }
+  75% { opacity: 0; }
+  100% { transform: translateY(-100%); opacity: 0; }
+}
+
+.scanner-laser-beam {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-aqua) 50%, transparent 100%);
+  box-shadow: 0 0 16px var(--accent-aqua);
+  animation: laserSweep 3.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   5. GSAP-STYLE CINEMA ENGINE & LAYOUT REFINEMENTS (gsap.com aesthetics)
+   ========================================================================== */
+
+/* Magnetic Button Base & Interactions */
+.magnetic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  will-change: transform;
+  cursor: pointer;
+  transform-origin: center center;
+}
+
+/* Split-text Word Masks */
+.gsap-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+
+.gsap-word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* High-Precision Infinite Velocity Ticker (Marquee) */
+.gsap-ticker-container {
+  overflow: hidden;
+  white-space: nowrap;
+  user-select: none;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.95rem 0;
+  position: relative;
+}
+
+.gsap-ticker-track {
+  display: inline-flex;
+  gap: 3rem;
+  /* animation removed — GSAP velocity marquee handles this */
+  will-change: transform;
+  white-space: nowrap;
+}
+
+.gsap-ticker-track:hover {
+  /* pause handled via GSAP */
+}
+
+.gsap-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+}
+
+.gsap-ticker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-aqua);
+  box-shadow: 0 0 8px var(--accent-aqua);
+  flex-shrink: 0;
+}
+
+/* Normalized Layout & Height Baselines */
+.bundle-card,
+.product-card,
+.review-card,
+.pharmacy-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  box-sizing: border-box;
+}
+
+.card-footer-action {
+  margin-top: auto;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Hero Asymmetric Layout Optical Spacing */
+.hero-grid-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .hero-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* ==========================================================================
+   MOBILE-FIRST RESPONSIVE OVERRIDES
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Typography scale down */
+  .gsap-headline { font-size: clamp(1.5rem, 5vw, 2.2rem) !important; }
+  .section-title  { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+  .section-subtitle { font-size: 0.9rem; }
+
+  /* Hero grid stacks */
+  .hero-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Product grid single col on very small screens */
+  .products-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  /* Cards lose 3D tilt on touch */
+  .product-card,
+  .bundle-card {
+    transform-style: flat;
+  }
+
+  /* Cursor hidden on touch */
+  .anjucia-cursor,
+  .anjucia-cursor-dot {
+    display: none !important;
+  }
+
+  /* Section header spacing */
+  .section-header { gap: 0.25rem; }
+
+  /* Ticker font smaller */
+  .gsap-ticker-item { font-size: 0.74rem; }
+
+  /* Scanner box height reduced */
+  .scanner-box { height: 280px !important; min-height: 280px !important; }
+
+  /* Progress bar wider text */
+  .scanner-hud-bar { font-size: 0.6rem; gap: 0.3rem; }
+
+  /* Touch-friendly tap targets */
+  button, a {
+    min-height: 44px;
+  }
+
+  /* Radar canvas full width on mobile */
+  canvas { max-width: 100% !important; }
+}
+
+@media (max-width: 480px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-grid-layout {
+    gap: 1.5rem;
+  }
+
+  .gsap-ticker-item { font-size: 0.7rem; gap: 0.5rem; }
+}
+
+.gsap-card-glow {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.gsap-card-glow:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35), 0 0 24px var(--accent-aqua-glow);
+}
+
+/* ==========================================================================
+   CURSOR FOLLOWER (GSAP controlled, desktop only)
+   ========================================================================== */
+
+.anjucia-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent-aqua);
+  background: rgba(113, 159, 183, 0.08);
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0;
+  mix-blend-mode: screen;
+  will-change: transform;
+  transition: opacity 0.3s ease;
+}
+
+.anjucia-cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-aqua);
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0;
+  box-shadow: 0 0 10px var(--accent-aqua);
+  will-change: transform;
+}
+
+/* Show cursors only when mouse is used */
+@media (pointer: fine) {
+  .anjucia-cursor,
+  .anjucia-cursor-dot {
+    opacity: 0.85;
+  }
+}
+
+/* ==========================================================================
+   HERO FLOATING PARTICLES LAYER
+   ========================================================================== */
+
+.gsap-hero-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* ==========================================================================
+   CONFETTI PARTICLES (created dynamically by GSAP)
+   ========================================================================== */
+
+.anjucia-confetti {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  border-radius: 2px;
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   SECTION TITLE — block display so headings are on their own line
+   ========================================================================== */
+
+.section-title {
+  position: relative;
+  display: block;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+/* Utility: stack section-tag above section-title correctly */
+.section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+
+.section-header.center {
+  align-items: center;
+  text-align: center;
+}
+
+/* ==========================================================================
+   HERO ENTRANCE CLASSES
+   ========================================================================== */
+
+.gsap-hero-el {
+  will-change: opacity, transform;
+}
+
+/* ==========================================================================
+   PRODUCT CARD — ensure 3D tilt works
+   ========================================================================== */
+
+.product-card,
+.bundle-card {
+  transform-style: preserve-3d;
+}
+
+/* ==========================================================================
+   PRODUCT TITLE / SUBTITLE — keep class names used in page.jsx
+   ========================================================================== */
+
+.product-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0.2rem 0 0.25rem;
+  line-height: 1.25;
+}
+
+.product-subtitle {
+  font-size: 0.83rem;
+  color: var(--accent-aqua);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.product-desc {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  flex-grow: 1;
+  margin-bottom: 0;
+}
+
+.product-category-tag {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+/* ==========================================================================
+   GSAP SPLIT TEXT — word reveal masks
+   ========================================================================== */
+
+.gsap-word-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1.1;
+}
+
+.gsap-word {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   GSAP ROLL NUMBER — stat counter
+   ========================================================================== */
+
+.gsap-roll-number {
+  display: inline-block;
+  will-change: transform, opacity;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   SECTION TAG — pop-in spring ready
+   ========================================================================== */
+
+.section-tag {
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   ROLLING CIRCULAR SEAL / BADGE (Continuous + Scroll Velocity Roll)
+   ========================================================================== */
+
+.gsap-rotating-badge {
+  position: absolute;
+  top: 1.15rem;
+  right: 1.15rem;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid var(--border-light);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12), var(--shadow-glow);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: pointer;
+  transform-origin: center center;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+
+.gsap-rotating-badge:hover {
+  transform: scale(1.08) rotate(6deg);
+  box-shadow: 0 14px 34px rgba(113, 159, 183, 0.32), var(--shadow-glow);
+}
+
+@media (max-width: 768px) {
+  .gsap-rotating-badge {
+    width: 84px;
+    height: 84px;
+    top: 0.8rem;
+    right: 0.8rem;
+  }
+}
+
+.rotating-text-svg {
+  width: 100%;
+  height: 100%;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.rotating-text-path {
+  font-size: 10.6px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  fill: var(--accent-aqua);
+  text-transform: uppercase;
+}
+
+.rotating-badge-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+  .rotating-badge-center {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.rotating-badge-symbol {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  filter: var(--logo-filter, none);
+}
+
+/* ==========================================================================
+   FLOATING SCROLL COMPANION (Brand Follower & Radial Progress)
+   ========================================================================== */
+
+.floating-scroll-companion {
+  position: fixed;
+  bottom: 2.2rem;
+  right: 2.2rem;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  z-index: 990;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22), var(--shadow-glow);
+  opacity: 0;
+  transform: translateY(20px) scale(0.85);
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.floating-scroll-companion.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.floating-scroll-companion:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 16px 36px rgba(113, 159, 183, 0.35), var(--shadow-glow);
+  border-color: var(--accent-aqua);
+}
+
+.floating-scroll-companion:active {
+  transform: translateY(0) scale(0.96);
+}
+
+.companion-progress-svg {
+  position: absolute;
+  inset: -1px;
+  transform: rotate(-90deg);
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.companion-track {
+  fill: transparent;
+  stroke: var(--border-subtle);
+}
+
+.companion-indicator {
+  fill: transparent;
+  stroke: var(--accent-aqua);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.15s ease-out;
+  filter: drop-shadow(0 0 4px var(--accent-aqua-glow));
+}
+
+.companion-inner-core {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.25s ease;
+}
+
+.floating-scroll-companion:hover .companion-inner-core {
+  background: var(--accent-aqua-subtle);
+  border-color: var(--accent-aqua);
+}
+
+.companion-symbol {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: var(--logo-filter, none);
+  transition: transform 0.25s ease;
+}
+
+.floating-scroll-companion:hover .companion-symbol {
+  transform: scale(1.1);
+}
+
+.companion-arrow {
+  animation: bounceArrow 1.2s infinite alternate ease-in-out;
+}
+
+@keyframes bounceArrow {
+  0% { transform: translateY(1px); }
+  100% { transform: translateY(-3px); }
+}
+
+.companion-tooltip {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--badge-radius, 9999px);
+  border: 1px solid var(--border-light);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: var(--shadow-sm);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.floating-scroll-companion:hover .companion-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* Mobile: elevated above bottom nav & sticky mobile buy bar */
+@media (max-width: 768px) {
+  .floating-scroll-companion {
+    bottom: 5.6rem;
+    right: 1.2rem;
+    width: 48px;
+    height: 48px;
+  }
+  .companion-inner-core {
+    width: 32px;
+    height: 32px;
+  }
+  .companion-symbol {
+    width: 15px;
+    height: 15px;
+  }
+  .companion-tooltip {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   SCROLL REVEAL SIDE TRANSFORMS & HARDWARE ACCELERATION
+   ========================================================================== */
+
+.scroll-reveal-left,
+.scroll-reveal-right,
+.scroll-reveal-scale,
+.scroll-reveal {
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   SCROLL TRAIL SPAWNING PARTICLES
+   ========================================================================== */
+
+.scroll-spark-particle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 998;
+  will-change: transform, opacity;
+  background: radial-gradient(circle, var(--accent-aqua) 0%, transparent 80%);
+  filter: drop-shadow(0 0 6px var(--accent-aqua));
+}
+
+/* ==========================================================================
+   LAYOUT, CENTERING & SECTION SYSTEM
+   ========================================================================== */
+
+.hero-grid-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+@media (max-width: 980px) {
+  .hero-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.5rem;
+  gap: 0.5rem;
+}
+
+.section-header.center {
+  align-items: center;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 780px;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1.15rem;
+  border-radius: var(--badge-radius, 9999px);
+  background: var(--accent-aqua-subtle);
+  color: var(--accent-aqua);
+  border: 1px solid var(--border-light);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+  width: fit-content;
+  box-shadow: var(--shadow-sm);
+}
+
+.section-header.center .section-tag {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-title {
+  font-size: clamp(1.85rem, 3.2vw, 2.6rem);
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.68;
+  max-width: 680px;
+}
+
+.section-header.center .section-subtitle {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Equal height and flex cards */
+.review-card,
+.pharmacy-card,
+.feature-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.pharmacy-card:hover {
+  border-color: var(--accent-aqua) !important;
+  transform: translateY(-4px);
+  transition: all 0.25s ease;
+}
+
+.radar-ping-dot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radar-ping-wave {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--accent-aqua);
+  opacity: 0.7;
+  animation: radarPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes radarPing {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* ==========================================================================
+   ANJU-BOT ROBOTIC SCROLL COMPANION STYLES
+   ========================================================================== */
+
+.anjubot-floating-companion {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  gap: 0.85rem;
+  pointer-events: auto;
+  user-select: none;
+}
+
+html[dir="rtl"] .anjubot-floating-companion {
+  right: auto;
+  left: 2rem;
+  flex-direction: row-reverse;
+}
+
+/* The Robot Drone Pod */
+.anjubot-drone-core {
+  position: relative;
+  width: 68px;
+  height: 68px;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  transition: filter 0.25s ease;
+}
+
+.anjubot-drone-core:hover {
+  filter: drop-shadow(0 0 16px var(--accent-aqua-glow));
+}
+
+/* Orbital Glowing Energy Ring */
+.anjubot-orbital-ring {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-aqua);
+  opacity: 0.85;
+  box-shadow: 0 0 16px var(--accent-aqua-glow), inset 0 0 10px rgba(56, 189, 248, 0.3);
+  animation: spinOrbital 10s linear infinite;
+}
+
+@keyframes spinOrbital {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mascot Image Inside Glass Frame */
+.anjubot-dome-frame {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-card);
+  box-shadow: var(--shadow-md);
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+}
+
+.anjubot-mascot-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  transform: scale(1.18);
+  transition: transform 0.3s ease;
+}
+
+.anjubot-drone-core:hover .anjubot-mascot-img {
+  transform: scale(1.28);
+}
+
+/* Ion Thruster Glow */
+.anjubot-ion-thruster {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-aqua) 0%, transparent 80%);
+  filter: blur(2px);
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* Mini Online Indicator Beacon */
+.anjubot-pulse-beacon {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #10B981;
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 8px #10B981;
+}
+
+/* HUD Speech Bubble */
+.anjubot-hud-bubble {
+  position: relative;
+  width: 280px;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-aqua);
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  box-shadow: var(--shadow-md), 0 0 20px rgba(56, 189, 248, 0.15);
+  backdrop-filter: blur(12px);
+  margin-bottom: 0.5rem;
+}
+
+.anjubot-bubble-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.anjubot-bubble-close:hover {
+  color: var(--text-primary);
+}
+
+.anjubot-bubble-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+.anjubot-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-aqua);
+  box-shadow: 0 0 6px var(--accent-aqua);
+  animation: pulseDot 1.4s infinite alternate;
+}
+
+@keyframes pulseDot {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+.anjubot-badge-title {
+  font-size: 0.68rem;
+  font-weight: 900;
+  color: var(--accent-aqua);
+  letter-spacing: 0.05em;
+}
+
+.anjubot-section-pill {
+  font-size: 0.62rem;
+  font-weight: 800;
+  background: var(--accent-aqua-subtle);
+  color: var(--accent-aqua);
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-light);
+  margin-left: auto;
+}
+
+.anjubot-bubble-text {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  line-height: 1.45;
+  margin: 0 0 0.55rem;
+  font-weight: 600;
+}
+
+.anjubot-bubble-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 0.4rem;
+}
+
+.anjubot-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  background: none;
+  border: none;
+  color: var(--accent-aqua);
+  font-weight: 800;
+  font-size: 0.72rem;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Command Menu Popover */
+.anjubot-command-menu {
+  position: absolute;
+  bottom: calc(100% + 14px);
+  right: 0;
+  width: 290px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: var(--shadow-lg), 0 0 25px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(16px);
+  z-index: 1002;
+}
+
+.anjubot-menu-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.anjubot-menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.anjubot-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 10px;
+  text-decoration: none;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.anjubot-menu-item:hover {
+  background: var(--accent-aqua-subtle);
+  border-color: var(--accent-aqua);
+  transform: translateX(-2px);
+}
+
+.anjubot-reopen-bubble-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   ANJU-BOT AUTONOMOUS FLIGHT COMPANION STYLES
+   ========================================================================== */
+
+.anjubot-viewport-stage {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.anjubot-flying-pod {
+  position: absolute;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: left, top, transform;
+  transition: transform 0.15s ease-out;
+}
+
+/* Flight Bubble & Dynamic Docking */
+.anjubot-flight-bubble {
+  position: absolute;
+  width: 280px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--accent-aqua);
+  border-radius: 16px;
+  padding: 0.85rem 1rem;
+  box-shadow: var(--shadow-md), 0 0 22px rgba(56, 189, 248, 0.25);
+  backdrop-filter: blur(16px);
+  z-index: 1001;
+}
+
+.bubble-dock-left {
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bubble-dock-right {
+  left: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.bubble-dock-bottom {
+  top: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.bubble-dock-top {
+  bottom: calc(100% + 14px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .bubble-dock-left,
+  .bubble-dock-right,
+  .bubble-dock-bottom,
+  .bubble-dock-top {
+    right: 0;
+    left: auto;
+    bottom: calc(100% + 10px);
+    top: auto;
+    transform: none;
+    width: 220px;
+    padding: 0.65rem 0.8rem;
+  }
+  .anjubot-drone-core {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .anjubot-dome-frame {
+    width: 42px !important;
+    height: 42px !important;
+  }
+}
+
+/* ==========================================================================
+   DERMLAB MIXER — LUXURY COSMETIC WORKSTATION SYSTEM
+   ========================================================================== */
+
+.dermlab-luxury-section {
+  position: relative;
+  padding: 6rem 0 5rem;
+  background: radial-gradient(circle at 50% 10%, rgba(56, 189, 248, 0.04) 0%, transparent 60%),
+              linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-card) 50%, var(--bg-primary) 100%);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+/* Routine Switcher */
+.dermlab-routine-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.5rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 9999px;
+  margin-top: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.routine-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.routine-switch-btn:hover {
+  color: var(--text-primary);
+}
+
+.routine-switch-btn.active-day {
+  background: linear-gradient(135deg, #FFF7ED 0%, #FED7AA 100%);
+  color: #9A3412;
+  box-shadow: 0 2px 10px rgba(234, 88, 12, 0.25);
+  font-weight: 800;
+}
+
+.routine-switch-btn.active-night {
+  background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);
+  color: #E0E7FF;
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.35);
+  font-weight: 800;
+}
+
+/* 3-Zone Workstation Grid */
+.dermlab-workstation-board {
+  display: grid;
+  grid-template-columns: 1.05fr 1.25fr 1.1fr;
+  gap: 1.8rem;
+  align-items: stretch;
+}
+
+@media (max-width: 1100px) {
+  .dermlab-workstation-board {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+/* Zone Container Common */
+.dermlab-rack-zone,
+.dermlab-crucible-zone,
+.dermlab-preview-zone {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-light);
+  border-radius: 20px;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.zone-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 1.3rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.zone-header.center {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.zone-step-num {
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: var(--accent-aqua);
+  background: var(--accent-aqua-subtle);
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  letter-spacing: 0.05em;
+}
+
+.zone-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0 0 0.15rem;
+}
+
+.zone-subtitle {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ZONE 1: Botanical Rack */
+.dermlab-botanical-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex-grow: 1;
+}
+
+.dermlab-botanical-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.9rem;
+  border-radius: 14px;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-subtle);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  width: 100%;
+}
+
+.dermlab-botanical-item:hover {
+  transform: translateX(4px);
+  background: var(--bg-primary);
+}
+
+.botanical-drop-bubble {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.botanical-item-body {
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.botanical-item-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.botanical-name {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.botanical-synergy-pill {
+  font-size: 0.68rem;
+  font-weight: 900;
+  padding: 0.1rem 0.4rem;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.botanical-desc {
+  font-size: 0.74rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+  margin-bottom: 0.25rem;
+}
+
+.botanical-origin {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.empty-radio {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-light);
+}
+
+/* ZONE 2: Central Crucible Apparatus */
+.crucible-vessel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem 1rem;
+  position: relative;
+  background: radial-gradient(circle at 50% 40%, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+  border-radius: 16px;
+  border: 1px dashed var(--border-subtle);
+  margin-bottom: 1.4rem;
+}
+
+/* Pipette Rig */
+.crucible-pipette-rig {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  z-index: 4;
+}
+
+.pipette-tube {
+  width: 10px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1.5px solid rgba(255, 255, 255, 0.8);
+  border-radius: 5px 5px 2px 2px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.pipette-liquid {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 65%;
+  border-radius: 0 0 2px 2px;
+  transition: background 0.4s ease;
+}
+
+.pipette-falling-drop {
+  width: 10px;
+  height: 13px;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  transform-origin: center top;
+  margin-top: 2px;
+}
+
+/* Glass Crucible Dish */
+.crucible-glass-dish {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.05) 70%);
+  border: 3px solid rgba(255, 255, 255, 0.5);
+  box-shadow: inset 0 8px 24px rgba(0, 0, 0, 0.08), 0 12px 32px rgba(0, 0, 0, 0.12), 0 0 20px var(--accent-aqua-glow);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+}
+
+.crucible-liquid-ripple {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  border: 2.5px solid var(--accent-aqua);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.crucible-cream-base {
+  width: 146px;
+  height: 146px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: inset 0 4px 16px rgba(0, 0, 0, 0.06);
+  transition: background 0.5s ease;
+}
+
+.cream-surface-glint {
+  position: absolute;
+  top: 18px;
+  left: 22px;
+  width: 32px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  transform: rotate(-35deg);
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+.crucible-center-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.15rem;
+  z-index: 3;
+}
+
+.dish-graduations {
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: var(--text-muted);
+  opacity: 0.7;
+}
+
+.crucible-blend-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-light);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.76rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.crucible-blend-btn:hover {
+  background: var(--accent-aqua-subtle);
+  border-color: var(--accent-aqua);
+  color: var(--accent-aqua);
+}
+
+.spin-active {
+  animation: spinBlend 0.65s linear infinite;
+}
+
+@keyframes spinBlend {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Dosage Stepper */
+.dermlab-dosage-controller {
+  width: 100%;
+}
+
+.dosage-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.dosage-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.dosage-val {
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+
+.dosage-stepper-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.55rem;
+}
+
+.dosage-step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.65rem 0.4rem;
+  border-radius: 12px;
+  border: 1.5px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-align: center;
+}
+
+.dosage-step-card:hover {
+  transform: translateY(-2px);
+}
+
+.dosage-step-card.active {
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.step-drops-icon {
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+  letter-spacing: -2px;
+}
+
+.step-title {
+  font-size: 0.76rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  margin-bottom: 0.15rem;
+}
+
+.step-desc {
+  font-size: 0.64rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ZONE 3: Preview & Telemetry */
+.macro-texture-swatch-card {
+  padding: 1.2rem;
+  background: var(--bg-secondary);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: 16px;
+  margin-bottom: 1.3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.swatch-header {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: var(--accent-aqua);
+  margin-bottom: 0.85rem;
+}
+
+.swatch-visual-disc {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), inset 0 2px 6px rgba(255, 255, 255, 0.5);
+  margin-bottom: 0.85rem;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.swatch-gloss-streak {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.65) 0%, transparent 45%);
+}
+
+.swatch-title {
+  font-size: 0.96rem;
+  font-weight: 900;
+  margin: 0 0 0.35rem;
+}
+
+.swatch-description {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  margin: 0;
+}
+
+/* Circular Bio-Telemetry */
+.dermlab-circular-telemetry {
+  margin-bottom: 1.3rem;
+}
+
+.telemetry-bar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  margin-bottom: 0.85rem;
+}
+
+.circular-gauges-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.65rem;
+  text-align: center;
+}
+
+.gauge-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.65rem 0.3rem;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+}
+
+.gauge-svg-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 68px;
+  margin-bottom: 0.35rem;
+}
+
+.gauge-value {
+  position: absolute;
+  font-size: 0.82rem;
+  font-weight: 900;
+  color: var(--text-primary);
+}
+
+.gauge-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--text-muted);
+}
+
+/* Order Footer Card */
+.dermlab-order-card {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.order-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.order-price {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.order-shipping-note {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+
+
+

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 520" width="100%" height="100%">
+  <defs>
+    <!-- Translucent Bottle Gradient -->
+    <linearGradient id="cleanseBottle" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ECFDF5"/>
+      <stop offset="25%" stop-color="#F0FDF4"/>
+      <stop offset="60%" stop-color="#D1FAE5" stop-opacity="0.85"/>
+      <stop offset="85%" stop-color="#F0FDF4"/>
+      <stop offset="100%" stop-color="#A7F3D0" stop-opacity="0.95"/>
+    </linearGradient>
+
+    <!-- Pump Head Gradient -->
+    <linearGradient id="pumpHead" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="35%" stop-color="#10B981"/>
+      <stop offset="70%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#064E3B"/>
+    </linearGradient>
+
+    <filter id="cleanseShadow" x="-20%" y="-10%" width="140%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#10B981" flood-opacity="0.22"/>
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0B1320" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+
+  <!-- Ambient Glow & Contact Shadow -->
+  <ellipse cx="225" cy="465" rx="120" ry="22" fill="#10B981" opacity="0.22" filter="blur(16px)"/>
+  <ellipse cx="225" cy="460" rx="85" ry="12" fill="#064E3B" opacity="0.35"/>
+
+  <g filter="url(#cleanseShadow)">
+    <!-- Pump Dispenser Spout -->
+    <path d="M 180 50 L 235 50 C 242 50, 248 56, 248 63 L 248 85 L 210 85 L 180 62 Z" fill="url(#pumpHead)"/>
+    <ellipse cx="180" cy="56" rx="4" ry="6" fill="#34D399"/>
+    <!-- Pump Neck Column -->
+    <rect x="217" y="85" width="16" height="35" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="1"/>
+    <!-- Lock Collar Ring -->
+    <rect x="202" y="120" width="46" height="20" rx="3" fill="#059669" stroke="#047857" stroke-width="1"/>
+    <line x1="202" y1="130" x2="248" y2="130" stroke="#34D399" stroke-width="1.5"/>
+
+    <!-- Dip Tube passing down bottle -->
+    <rect x="222" y="140" width="6" height="295" fill="#A7F3D0" opacity="0.75"/>
+
+    <!-- Bottle Body (Tall 200ml Cleanser Column) -->
+    <rect x="165" y="140" width="120" height="310" rx="20" fill="url(#cleanseBottle)" stroke="#6EE7B7" stroke-width="1.5"/>
+
+    <!-- Specular Highlight Line -->
+    <rect x="174" y="155" width="10" height="275" rx="5" fill="#FFFFFF" opacity="0.75"/>
+    <rect x="188" y="165" width="3" height="255" rx="1.5" fill="#FFFFFF" opacity="0.4"/>
+
+    <!-- Label Shield -->
+    <rect x="180" y="220" width="90" height="185" rx="10" fill="rgba(255, 255, 255, 0.94)" stroke="#A7F3D0" stroke-width="1.2"/>
+
+    <!-- Brand Header -->
+    <text x="225" y="248" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="900" fill="#0F172A" text-anchor="middle" letter-spacing="2">ANJUCIA</text>
+    <text x="225" y="260" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="800" fill="#059669" text-anchor="middle" letter-spacing="1.5">LABORATOIRE</text>
+
+    <line x1="190" y1="268" x2="260" y2="268" stroke="#E2E8F0" stroke-width="1"/>
+
+    <!-- Title -->
+    <text x="225" y="286" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" font-weight="900" fill="#065F46" text-anchor="middle">DERMOCLEANSE</text>
+    <text x="225" y="297" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="700" fill="#64748B" text-anchor="middle">ÉMULSION NETTOYANTE</text>
+    <text x="225" y="307" font-family="'Plus Jakarta Sans', sans-serif" font-size="6" font-weight="800" fill="#10B981" text-anchor="middle">SANS SULFATES • SANS SAVON</text>
+
+    <!-- pH 5.5 Circle -->
+    <circle cx="225" cy="330" r="16" fill="#ECFDF5" stroke="#10B981" stroke-width="1.5"/>
+    <text x="225" y="329" font-family="'Plus Jakarta Sans', sans-serif" font-size="6" font-weight="800" fill="#059669" text-anchor="middle">pH PHYSIO</text>
+    <text x="225" y="338" font-family="'Plus Jakarta Sans', sans-serif" font-size="8" font-weight="900" fill="#047857" text-anchor="middle">5.5</text>
+
+    <!-- Actives -->
+    <text x="225" y="362" font-family="'Plus Jakarta Sans', sans-serif" font-size="6.5" font-weight="700" fill="#0F172A" text-anchor="middle">Acides Aminés &amp; Eau Thermale</text>
+
+    <!-- Volume -->
+    <rect x="195" y="375" width="60" height="18" rx="9" fill="#D1FAE5"/>
+    <text x="225" y="387" font-family="'Plus Jakarta Sans', sans-serif" font-size="7.5" font-weight="900" fill="#065F46" text-anchor="middle">200 ml ℮</text>
+  </g>
+</svg>

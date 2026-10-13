@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" width="100%" height="100%">
+  <defs>
+    <radialGradient id="faceKarim" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#E29F74"/>
+      <stop offset="70%" stop-color="#C0774D"/>
+      <stop offset="100%" stop-color="#934D25"/>
+    </radialGradient>
+    <radialGradient id="saharaCracking" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF3D00" stop-opacity="0.7"/>
+      <stop offset="70%" stop-color="#FF9100" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FF9100" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="450" fill="#0E1929"/>
+  <circle cx="200" cy="210" r="140" fill="#182A42"/>
+  <!-- Short hair silhouette -->
+  <path d="M 120 160 C 120 70, 280 70, 280 160 L 285 200 L 115 200 Z" fill="#1A1F29"/>
+  <!-- Face -->
+  <path d="M 130 150 C 130 90, 270 90, 270 150 C 270 235, 255 295, 200 310 C 145 295, 130 235, 130 150 Z" fill="url(#faceKarim)"/>
+  <!-- Eyes -->
+  <ellipse cx="166" cy="180" rx="14" ry="7" fill="#1F1510"/>
+  <ellipse cx="234" cy="180" rx="14" ry="7" fill="#1F1510"/>
+  <!-- Eyebrows -->
+  <path d="M 148 165 Q 166 158 184 167" stroke="#1F1510" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <path d="M 216 167 Q 234 158 252 165" stroke="#1F1510" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <!-- Nose bridge -->
+  <path d="M 200 170 L 196 215 L 208 222" stroke="#8E481F" stroke-width="3" fill="none"/>
+  <!-- Stubble / Beard -->
+  <path d="M 142 220 C 142 285, 160 305, 200 308 C 240 305, 258 285, 258 220 C 258 240, 245 290, 200 292 C 155 290, 142 240, 142 220 Z" fill="#1C212B" opacity="0.6"/>
+  <!-- Lips -->
+  <path d="M 184 250 Q 200 245 216 250 Q 200 257 184 250 Z" fill="#99574D"/>
+  <!-- Sahara Wind Micro-Cracking Patches -->
+  <circle cx="150" cy="205" r="34" fill="url(#saharaCracking)"/>
+  <circle cx="250" cy="205" r="34" fill="url(#saharaCracking)"/>
+  <circle cx="200" cy="275" r="25" fill="url(#saharaCracking)"/>
+  <!-- Metadata tag -->
+  <rect x="20" y="390" width="360" height="40" rx="8" fill="#142338" stroke="#FF9100" stroke-width="1"/>
+  <text x="35" y="415" fill="#E2E8F0" font-family="monospace" font-size="13" font-weight="600">PRESET 02: KARIM B. • GHARDAÏA (SAHARA DESERT)</text>
+</svg>

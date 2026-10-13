@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450" width="100%" height="100%">
+  <defs>
+    <radialGradient id="faceNadia" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#F5CEB2"/>
+      <stop offset="70%" stop-color="#DE9F7F"/>
+      <stop offset="100%" stop-color="#BD7453"/>
+    </radialGradient>
+    <radialGradient id="barrierDepletion" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E040FB" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#7C4DFF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#7C4DFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="450" fill="#0E1929"/>
+  <circle cx="200" cy="210" r="140" fill="#182A42"/>
+  <!-- Hair wrap / styled hair -->
+  <path d="M 115 170 C 115 80, 285 80, 285 170 C 295 240, 285 360, 280 390 L 120 390 C 115 360, 105 240, 115 170 Z" fill="#382E3E"/>
+  <path d="M 130 160 C 130 95, 270 95, 270 160 C 270 240, 255 295, 200 305 C 145 295, 130 240, 130 160 Z" fill="url(#faceNadia)"/>
+  <!-- Eyes -->
+  <ellipse cx="166" cy="180" rx="13" ry="7" fill="#2E1C14"/>
+  <ellipse cx="234" cy="180" rx="13" ry="7" fill="#2E1C14"/>
+  <!-- Fine lines / mature marks -->
+  <path d="M 148 184 Q 152 188 156 186" stroke="#995D40" stroke-width="1.2" fill="none"/>
+  <path d="M 252 184 Q 248 188 244 186" stroke="#995D40" stroke-width="1.2" fill="none"/>
+  <!-- Brows -->
+  <path d="M 152 165 Q 166 158 182 166" stroke="#251E19" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M 218 166 Q 234 158 248 165" stroke="#251E19" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Nose -->
+  <path d="M 200 172 L 197 214 L 205 219" stroke="#9E5F3F" stroke-width="2.5" fill="none"/>
+  <!-- Lips -->
+  <path d="M 185 248 Q 200 242 215 248 Q 200 256 185 248 Z" fill="#B35864"/>
+  <!-- Deep Barrier Depletion & Micro-lines -->
+  <circle cx="155" cy="225" r="28" fill="url(#barrierDepletion)"/>
+  <circle cx="245" cy="225" r="28" fill="url(#barrierDepletion)"/>
+  <ellipse cx="200" cy="148" rx="28" ry="14" fill="url(#barrierDepletion)"/>
+  <!-- Metadata tag -->
+  <rect x="20" y="390" width="360" height="40" rx="8" fill="#142338" stroke="#E040FB" stroke-width="1"/>
+  <text x="35" y="415" fill="#E2E8F0" font-family="monospace" font-size="13" font-weight="600">PRESET 04: NADIA K. • CONSTANTINE (PLATEAU / MATURE)</text>
+</svg>
