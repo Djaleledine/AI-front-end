@@ -2,14 +2,16 @@
 
 import React from "react";
 import Link from "next/link";
-import { ShoppingBag, Download } from "lucide-react";
+import { ShoppingBag, Sun, Moon, Shield } from "lucide-react";
 import AnjuciaLogo from "../brand/AnjuciaLogo";
 import { useCart } from "../../context/CartContext";
 import { useLanguage } from "../../context/LanguageContext";
+import { useTheme } from "../../context/ThemeContext";
 
 export default function TopAppBar({ onInstallClick }) {
   const { totalCount, setIsCartOpen } = useCart();
   const { lang, setLang } = useLanguage();
+  const { theme, toggleTheme, isDark } = useTheme();
 
   return (
     <header
@@ -18,11 +20,12 @@ export default function TopAppBar({ onInstallClick }) {
         position: "sticky",
         top: 0,
         zIndex: 890,
-        background: "rgba(17, 23, 26, 0.92)",
+        background: "var(--bg-glass)",
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
         borderBottom: "1px solid var(--border-subtle)",
-        padding: "0.6rem 1rem"
+        padding: "0.6rem 1rem",
+        transition: "background-color 0.25s ease, border-color 0.25s ease"
       }}
     >
       <div
@@ -40,8 +43,30 @@ export default function TopAppBar({ onInstallClick }) {
           <AnjuciaLogo size={24} />
         </Link>
 
-        {/* Right Controls: Language Selector, PWA Install prompt trigger, Cart */}
-        <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+        {/* Right Controls: Theme Toggle, Language Selector, Admin link, Cart */}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
+          {/* Dark / Light Mode Switcher */}
+          <button
+            onClick={toggleTheme}
+            aria-label={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
+            title={isDark ? "Mode Clair (Dermocosmétique Blanc & Sauge)" : "Mode Sombre (Ardoise & Glacier)"}
+            style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "10px",
+              background: "var(--bg-secondary)",
+              border: "1px solid var(--border-light)",
+              color: "var(--accent-aqua)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              transition: "transform 0.15s ease"
+            }}
+          >
+            {isDark ? <Sun size={17} /> : <Moon size={17} />}
+          </button>
+
           {/* Quick Language switch */}
           <div
             style={{
@@ -59,10 +84,10 @@ export default function TopAppBar({ onInstallClick }) {
                 onClick={() => setLang(l)}
                 style={{
                   background: lang === l ? "var(--accent-aqua)" : "transparent",
-                  color: lang === l ? "#11171A" : "var(--text-muted)",
+                  color: lang === l ? "var(--text-inverse)" : "var(--text-muted)",
                   border: "none",
                   borderRadius: "9999px",
-                  padding: "0.22rem 0.5rem",
+                  padding: "0.22rem 0.48rem",
                   fontSize: "0.68rem",
                   fontWeight: 800,
                   cursor: "pointer",
@@ -73,6 +98,27 @@ export default function TopAppBar({ onInstallClick }) {
               </button>
             ))}
           </div>
+
+          {/* Admin Dashboard Quick Access Button */}
+          <Link
+            href="/admin"
+            title="Panneau d'administration Anjucia"
+            aria-label="Tableau de bord admin"
+            style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "10px",
+              background: "var(--bg-secondary)",
+              border: "1px solid var(--border-subtle)",
+              color: "var(--text-secondary)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textDecoration: "none"
+            }}
+          >
+            <Shield size={16} />
+          </Link>
 
           {/* Cart Icon Button */}
           <button
@@ -100,7 +146,7 @@ export default function TopAppBar({ onInstallClick }) {
                   top: "-4px",
                   right: "-4px",
                   background: "var(--accent-aqua)",
-                  color: "#11171A",
+                  color: "var(--text-inverse)",
                   fontSize: "0.65rem",
                   fontWeight: 900,
                   width: "16px",

@@ -25,7 +25,7 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     // Load Dark/Light Mode
     const savedTheme = localStorage.getItem("anjucia_theme");
-    const initialTheme = savedTheme === "light" ? "light" : "dark";
+    const initialTheme = savedTheme || "light";
     setThemeState(initialTheme);
     document.documentElement.setAttribute("data-theme", initialTheme);
     document.documentElement.setAttribute("data-color-palette", "mineral");

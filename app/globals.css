@@ -51,48 +51,48 @@
 }
 
 [data-theme="light"] {
-  /* Light Mode (Mineral Off-White, Pale Sage & Cool Mist from Swatch) */
-  --bg-primary: #F5F7F8;         /* Swatch 2: Crisp Clinical Off-White */
-  --bg-secondary: #EDF1F2;       /* Swatch 3: Soft Cool Grey */
-  --bg-card: #FFFFFF;            /* Swatch 1: Pure White Card */
-  --bg-card-hover: #F0F4F6;
-  --bg-glass: rgba(255, 255, 255, 0.92);
+  /* High-End Skincare Mineral & Botanical Light Theme */
+  --bg-primary: #FAFBFB;         /* Pristine Alabaster Clinical White */
+  --bg-secondary: #F0F4F7;       /* Soft Mineral Mist */
+  --bg-card: #FFFFFF;            /* Pure Crisp White Card */
+  --bg-card-hover: #F4F8FA;
+  --bg-glass: rgba(250, 251, 251, 0.94);
   --bg-input: #FFFFFF;
 
-  --text-primary: #11171A;       /* Swatch 14: Deep Slate Charcoal */
-  --text-secondary: #436D88;     /* Swatch 9: Rich Aegean Slate */
-  --text-muted: #728A97;         /* Swatch 6: Slate Muted */
+  --text-primary: #121E26;       /* Deep Mineral Slate */
+  --text-secondary: #3D5A6C;     /* Aegean Slate */
+  --text-muted: #6B8899;         /* Gentle Muted Slate */
   --text-inverse: #FFFFFF;
 
-  --accent-aqua: #436D88;        /* Swatch 9: High Contrast Clinical Cyan-Blue */
-  --accent-aqua-hover: #35586E;
-  --accent-aqua-glow: rgba(67, 109, 136, 0.22);
-  --accent-aqua-subtle: rgba(113, 159, 183, 0.12);
+  --accent-aqua: #386B88;        /* High-Definition Clinical Glacier Cyan */
+  --accent-aqua-hover: #29546E;
+  --accent-aqua-glow: rgba(56, 107, 136, 0.2);
+  --accent-aqua-subtle: rgba(56, 107, 136, 0.09);
 
-  --brand-deep: #2C3E50;         /* Swatch 13: Slate Navy */
-  --accent-botanical: #5E7E67;   /* Botanical Sage Green */
-  --accent-botanical-subtle: rgba(155, 176, 160, 0.18);
+  --brand-deep: #1F3342;
+  --accent-botanical: #4D7358;   /* Calming Eucalyptus Botanical Sage */
+  --accent-botanical-subtle: rgba(77, 115, 88, 0.12);
 
-  --border-subtle: #E2E7E9;      /* Swatch 4: Clean Border */
-  --border-light: rgba(113, 159, 183, 0.35);
-  --border-accent: #436D88;
+  --border-subtle: rgba(18, 30, 38, 0.08);
+  --border-light: rgba(56, 107, 136, 0.22);
+  --border-accent: #386B88;
 
-  --badge-bg: #E5ECE7;           /* Swatch 10: Pale Botanical Sage */
-  --badge-text: #2C3E50;
+  --badge-bg: #E8F0ED;           /* Botanical Sage Tint */
+  --badge-text: #1F3342;
 
-  --success: #5F7F68;
+  --success: #4D7358;
   --danger: #C0392B;
   --warning: #D3833E;
 
-  --card-radius: 16px;
+  --card-radius: 18px;
   --btn-radius: 10px;
   --badge-radius: 9999px;
-  --btn-gradient: linear-gradient(135deg, #436D88 0%, #2C3E50 100%);
-  --hero-glow-color: rgba(113, 159, 183, 0.14);
+  --btn-gradient: linear-gradient(135deg, #386B88 0%, #203A4C 100%);
+  --hero-glow-color: rgba(56, 107, 136, 0.08);
 
-  --shadow-sm: 0 4px 12px rgba(30, 39, 46, 0.05);
-  --shadow-md: 0 10px 28px rgba(30, 39, 46, 0.08);
-  --shadow-glow: 0 0 20px rgba(67, 109, 136, 0.15);
+  --shadow-sm: 0 4px 16px rgba(18, 30, 38, 0.04);
+  --shadow-md: 0 10px 32px rgba(18, 30, 38, 0.07);
+  --shadow-glow: 0 0 24px rgba(56, 107, 136, 0.12);
   --logo-filter: none;
 }
 
@@ -182,7 +182,7 @@ input, button, select, textarea, optgroup {
   justify-content: center;
   gap: 0.55rem;
   background: var(--btn-gradient, var(--accent-aqua));
-  color: #06111C;
+  color: var(--text-inverse, #FFFFFF);
   font-weight: 800;
   font-size: 0.95rem;
   padding: 0.85rem 1.65rem;

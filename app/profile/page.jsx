@@ -14,6 +14,20 @@ export default function ProfilePage() {
   const handleWaitlist = (e) => {
     e.preventDefault();
     if (!waitlistEmail.trim()) return;
+    try {
+      const leads = JSON.parse(localStorage.getItem("anjucia_waitlist_leads") || "[]");
+      leads.unshift({
+        id: `VIP-${Date.now().toString().slice(-5)}`,
+        productId: "vip-club-access",
+        productName: "Club VIP Anjucia",
+        contact: waitlistEmail.trim(),
+        wilaya: "Algérie",
+        source: "Profile VIP Waitlist",
+        createdAt: new Date().toISOString()
+      });
+      localStorage.setItem("anjucia_waitlist_leads", JSON.stringify(leads));
+      window.dispatchEvent(new CustomEvent("anjucia:waitlist_joined", { detail: { email: waitlistEmail.trim() } }));
+    } catch (_) {}
     showToast(lang === "dz" ? "تم تسجيل بريدك في قائمة الانتظار !" : "Votre inscription au Club VIP est enregistrée !");
     setWaitlistEmail("");
   };

@@ -21,6 +21,18 @@ export default function ComingSoonCard({ product, index = 0 }) {
     }
     try {
       localStorage.setItem(`anjucia_notify_${product.id}`, "true");
+      const leads = JSON.parse(localStorage.getItem("anjucia_waitlist_leads") || "[]");
+      leads.unshift({
+        id: `LEAD-${Date.now().toString().slice(-5)}`,
+        productId: product.id,
+        productName: product.name,
+        contact: "Visiteur Boutique (App Web)",
+        wilaya: "Algérie",
+        source: "ComingSoonCard",
+        createdAt: new Date().toISOString()
+      });
+      localStorage.setItem("anjucia_waitlist_leads", JSON.stringify(leads));
+      window.dispatchEvent(new CustomEvent("anjucia:waitlist_joined", { detail: { productId: product.id } }));
     } catch (_) {}
     setNotified(true);
     showToast(

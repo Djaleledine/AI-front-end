@@ -49,12 +49,13 @@ export default function BottomTabBar() {
         left: 0,
         right: 0,
         zIndex: 900,
-        background: "rgba(17, 23, 26, 0.94)",
+        background: "var(--bg-glass)",
         backdropFilter: "blur(18px)",
         WebkitBackdropFilter: "blur(18px)",
         borderTop: "1px solid var(--border-subtle)",
-        boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.45)",
-        paddingBottom: "max(env(safe-area-inset-bottom, 0px), 6px)"
+        boxShadow: "0 -4px 20px var(--shadow-sm)",
+        paddingBottom: "max(env(safe-area-inset-bottom, 0px), 6px)",
+        transition: "background-color 0.25s ease, border-color 0.25s ease"
       }}
     >
       <div

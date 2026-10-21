@@ -23,6 +23,75 @@ import { CLINICAL_PRESETS } from "../data/analyzerData";
 
 // --- Mock Database Stores ---
 
+export const INITIAL_ORDERS = [
+  {
+    id: "DZ-ANJ-90412",
+    orderId: "DZ-ANJ-90412",
+    trackingCode: "YAL-781920",
+    customerName: "Amina Benali",
+    customerPhone: "0550 12 34 56",
+    customerAddress: "12 Rue Didouche Mourad",
+    wilaya: "16 - Alger",
+    commune: "Alger-Centre",
+    items: [{ id: "soothing-gel-cream", name: "Lightweight Soothing Face Gel-Cream", qty: 2, priceDZD: 1800 }],
+    totalDZD: 3600,
+    paymentMethod: "COD (Paiement à la Livraison)",
+    carrier: "Yalidine Express",
+    status: "CONFIRMED_PREPARING",
+    createdAt: new Date(Date.now() - 3600000 * 4).toISOString()
+  },
+  {
+    id: "DZ-ANJ-89104",
+    orderId: "DZ-ANJ-89104",
+    trackingCode: "YAL-452109",
+    customerName: "Yacine Messaoudi",
+    customerPhone: "0661 98 76 54",
+    customerAddress: "Cité El Bahia, Bâtiment 4B",
+    wilaya: "31 - Oran",
+    commune: "Bir El Djir",
+    items: [{ id: "soothing-gel-cream", name: "Lightweight Soothing Face Gel-Cream", qty: 1, priceDZD: 1800 }],
+    totalDZD: 1800,
+    paymentMethod: "COD (Paiement à la Livraison)",
+    carrier: "Yalidine Express",
+    status: "SHIPPED",
+    createdAt: new Date(Date.now() - 3600000 * 24).toISOString()
+  },
+  {
+    id: "DZ-ANJ-87652",
+    orderId: "DZ-ANJ-87652",
+    trackingCode: "YAL-331289",
+    customerName: "Dr. Meriem Cherif",
+    customerPhone: "0770 45 88 12",
+    customerAddress: "Résidence des Pins, Coudiat",
+    wilaya: "25 - Constantine",
+    commune: "Constantine",
+    items: [{ id: "soothing-gel-cream", name: "Lightweight Soothing Face Gel-Cream", qty: 3, priceDZD: 1800 }],
+    totalDZD: 5400,
+    paymentMethod: "COD (Paiement à la Livraison)",
+    carrier: "ZR Express",
+    status: "DELIVERED",
+    createdAt: new Date(Date.now() - 3600000 * 48).toISOString()
+  },
+  {
+    id: "DZ-ANJ-86510",
+    orderId: "DZ-ANJ-86510",
+    trackingCode: "YAL-998124",
+    customerName: "Farid Belkacem",
+    customerPhone: "0541 22 33 44",
+    customerAddress: "Boulevard de la Soummam",
+    wilaya: "06 - Béjaïa",
+    commune: "Béjaïa",
+    items: [{ id: "soothing-gel-cream", name: "Lightweight Soothing Face Gel-Cream", qty: 1, priceDZD: 1800 }],
+    totalDZD: 1800,
+    paymentMethod: "COD (Paiement à la Livraison)",
+    carrier: "Yalidine Express",
+    status: "PENDING_VERIFICATION",
+    createdAt: new Date(Date.now() - 3600000 * 2).toISOString()
+  }
+];
+
+export const mockOrdersDb = [...INITIAL_ORDERS];
+
 export const MOCK_BUNDLES = [
   {
     id: "solo",
@@ -384,8 +453,6 @@ export const MOCK_WILAYAS_DATA = ALGERIAN_WILAYAS.map((wilayaStr, index) => {
   };
 });
 
-// In-memory mock orders DB
-const mockOrdersDb = [];
 
 // Helper for safe client fetch
 async function safeFetch(url, options) {
@@ -514,39 +581,90 @@ export const mock = {
   // Orders and COD checkout endpoint
   orders: {
     async create(orderPayload) {
-      if (typeof window !== "undefined") {
-        try {
-          const res = await fetch("/api/mock/orders", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(orderPayload)
-          });
-          if (res.ok) {
-            const data = await res.json();
-            return data.data;
-          }
-        } catch {
-          // Fallback below
-        }
-      }
-
       const orderId = `DZ-ANJ-${Date.now().toString().slice(-6)}`;
       const order = {
+        id: orderId,
         orderId,
         trackingCode: `YAL-${Math.floor(100000 + Math.random() * 900000)}`,
-        status: "CONFIRMED_PENDING_DISPATCH",
-        paymentMethod: "COD_PAIEMENT_A_LA_LIVRAISON",
+        status: "CONFIRMED_PREPARING",
+        carrier: "Yalidine Express",
+        paymentMethod: "COD (Paiement à la Livraison)",
         createdAt: new Date().toISOString(),
         ...orderPayload
       };
-      mockOrdersDb.push(order);
+
+      if (typeof window !== "undefined") {
+        try {
+          const stored = localStorage.getItem("anjucia_orders");
+          const list = stored ? JSON.parse(stored) : [...INITIAL_ORDERS];
+          list.unshift(order);
+          localStorage.setItem("anjucia_orders", JSON.stringify(list));
+          window.dispatchEvent(new CustomEvent("anjucia:order_created", { detail: order }));
+        } catch (_) {}
+
+        try {
+          fetch("/api/mock/orders", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(order)
+          }).catch(() => {});
+        } catch (_) {}
+      } else {
+        mockOrdersDb.unshift(order);
+      }
+
       return order;
     },
 
     async list() {
-      const apiResult = await safeFetch("/api/mock/orders");
-      if (apiResult && apiResult.data) return apiResult.data;
+      if (typeof window !== "undefined") {
+        try {
+          const stored = localStorage.getItem("anjucia_orders");
+          if (stored) {
+            return JSON.parse(stored);
+          }
+          localStorage.setItem("anjucia_orders", JSON.stringify(INITIAL_ORDERS));
+          return INITIAL_ORDERS;
+        } catch (_) {}
+      }
       return mockOrdersDb;
+    },
+
+    async updateStatus(orderId, newStatus) {
+      if (typeof window !== "undefined") {
+        try {
+          const stored = localStorage.getItem("anjucia_orders");
+          const list = stored ? JSON.parse(stored) : [...INITIAL_ORDERS];
+          const updated = list.map((o) => (o.id === orderId || o.orderId === orderId ? { ...o, status: newStatus } : o));
+          localStorage.setItem("anjucia_orders", JSON.stringify(updated));
+          return updated;
+        } catch (_) {}
+      }
+      const item = mockOrdersDb.find((o) => o.id === orderId || o.orderId === orderId);
+      if (item) item.status = newStatus;
+      return mockOrdersDb;
+    },
+
+    async delete(orderId) {
+      if (typeof window !== "undefined") {
+        try {
+          const stored = localStorage.getItem("anjucia_orders");
+          const list = stored ? JSON.parse(stored) : [...INITIAL_ORDERS];
+          const filtered = list.filter((o) => o.id !== orderId && o.orderId !== orderId);
+          localStorage.setItem("anjucia_orders", JSON.stringify(filtered));
+          return filtered;
+        } catch (_) {}
+      }
+      return mockOrdersDb;
+    },
+
+    async resetDefaults() {
+      if (typeof window !== "undefined") {
+        try {
+          localStorage.setItem("anjucia_orders", JSON.stringify(INITIAL_ORDERS));
+        } catch (_) {}
+      }
+      return INITIAL_ORDERS;
     }
   }
 };
