@@ -34,7 +34,7 @@ export const CLINICAL_PRESETS = {
       id: "soothing-gel-cream",
       name: "ANJUCIA Lightweight Soothing Face Gel-Cream",
       role: "Cœur du Soin Apaisant & Barrière",
-      priceDZD: 1500,
+      priceDZD: 1800,
       reason: "Notre formule gel-crème H/E apporte 3% de Niacinamide et 2% de Panthénol pur pour apaiser la peau tout en scellant l'eau avec le Squalane et le double Acide Hyaluronique, sans film collant sous l'humidité côtière."
     },
     hybridRoutine: [
@@ -71,7 +71,7 @@ export const CLINICAL_PRESETS = {
         product: "ANJUCIA Lightweight Soothing Face Gel-Cream",
         size: "50 ml • Tube Canule Précision",
         type: "Gel-Crème Apaisant & Barrière H/E",
-        priceDZD: 1500,
+        priceDZD: 1800,
         action: "Appliquer délicatement sur le visage et le cou. Fini satiné et velouté, absorption express en 30 secondes.",
         isHero: true,
         highlight: "Formule locale experte • Niacinamide 3% + Panthénol 2% + Centella 1% + Squalane 3%",
@@ -93,7 +93,7 @@ export const CLINICAL_PRESETS = {
     synergyInsights: {
       title: "Pourquoi cette Synergie Naturelle pour Amina ?",
       summary: "Cette routine combine la pureté des trésors botaniques locaux (Hydrolat de Rose et Huile d'Argan vierge) avec la haute précision biochimique de notre Soothing Gel-Cream ANJUCIA. Les actifs titrés (Niacinamide 3%, Panthénol 2%, Centella) comblent exactement ce que les huiles végétales seules ne peuvent pas apporter, sans film gras.",
-      costComparison: "En associant des matières naturelles pures accessibles au Soin ANJUCIA (1 500 DA), Amina économise plus de 4 000 DZD par rapport aux crèmes importées surtaxées."
+      costComparison: "En associant des matières naturelles pures accessibles au Soin ANJUCIA (1 800 DA), Amina économise plus de 4 000 DZD par rapport aux crèmes importées surtaxées."
     }
   },
 
@@ -218,7 +218,7 @@ export const CLINICAL_PRESETS = {
       id: "soothing-gel-cream",
       name: "ANJUCIA Lightweight Soothing Face Gel-Cream",
       role: "Matité & Régulation Sébacée Niacinamide 3%",
-      priceDZD: 1500,
+      priceDZD: 1800,
       reason: "Texture gel-crème sans résidu gras, formulée à pH 5.2 avec 3% de Niacinamide pure qui normalise la taille des pores et réduit le flux sébacé sans assécher."
     },
     hybridRoutine: [
@@ -255,7 +255,7 @@ export const CLINICAL_PRESETS = {
         product: "ANJUCIA Lightweight Soothing Face Gel-Cream",
         size: "50 ml • Tube Canule Précision",
         type: "Gel-Crème Matifiant Apaisant H/E",
-        priceDZD: 1500,
+        priceDZD: 1800,
         action: "Appliquer sur l'ensemble du visage. Fini poudré instantané zéro brillance toute la journée.",
         isHero: true,
         highlight: "Niacinamide 3% + Panthénol 2% + Centella 1% + Squalane 3%",
@@ -277,7 +277,7 @@ export const CLINICAL_PRESETS = {
     synergyInsights: {
       title: "Pourquoi cette Synergie Naturelle pour Yasmine ?",
       summary: "L'huile de jojoba pure mime le sébum naturel pour calmer la surproduction nocturne, tandis que le Gel-Cream ANJUCIA assure une hydratation matifiante parfaite avec sa Niacinamide 3% le jour. Une routine sans risque comédogène.",
-      costComparison: "Économie de plus de 45% sur le budget beauté grâce au prix local accessible de 1 500 DA d'ANJUCIA."
+      costComparison: "Économie de plus de 45% sur le budget beauté grâce au prix local accessible de 1 800 DA d'ANJUCIA."
     }
   },
 
@@ -405,7 +405,7 @@ export const IN_HOUSE_ROUTINE_TEMPLATE = [
     product: "ANJUCIA Lightweight Soothing Face Gel-Cream",
     size: "50 ml",
     type: "Gel-Crème Apaisant & Barrière H/E",
-    priceDZD: 1500,
+    priceDZD: 1800,
     action: "Niacinamide 3% + Panthénol 2% + Centella 1% : scelle l'hydratation et apaise la peau."
   },
   {

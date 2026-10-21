@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { ANJUCIA_PRODUCTS } from "../data/products";
+import { ANJUCIA_PRODUCTS, isPurchasable, AVAILABLE_PRODUCT_ID } from "../data/products";
 
 const CartContext = createContext(null);
 
@@ -16,7 +16,12 @@ export function CartProvider({ children }) {
     try {
       const saved = localStorage.getItem("anjucia_next_cart");
       if (saved) {
-        setCartItems(JSON.parse(saved));
+        const fresh = ANJUCIA_PRODUCTS.find((p) => p.id === AVAILABLE_PRODUCT_ID);
+        // Drop items that are no longer for sale and refresh price from the catalog
+        const items = JSON.parse(saved)
+          .filter((i) => isPurchasable(i.id))
+          .map((i) => ({ ...i, priceDZD: fresh?.priceDZD ?? i.priceDZD, image: null }));
+        setCartItems(items);
       }
     } catch (e) {
       console.warn("Could not load cart from localStorage", e);
@@ -43,6 +48,10 @@ export function CartProvider({ children }) {
     const productId = typeof productOrId === "object" ? productOrId?.id : productOrId;
     const product = ANJUCIA_PRODUCTS.find((p) => p.id === productId) || (typeof productOrId === "object" ? productOrId : null);
     if (!product) return;
+    if (!isPurchasable(product.id)) {
+      showToast("Bientôt disponible — on vous préviendra ✨", "info");
+      return;
+    }
 
     setCartItems((prev) => {
       const existing = prev.find((item) => item.id === productId);
@@ -101,14 +110,10 @@ export function CartProvider({ children }) {
         }
       });
       if (addedCount === 0) {
-        addToCart("soothing-gel-cream", 1);
-        addToCart("cerahydra-cream-50", 1);
-        addToCart("bioshield-spf50", 1);
+        addToCart(AVAILABLE_PRODUCT_ID, 1);
       }
     } else {
-      addToCart("soothing-gel-cream", 1);
-      addToCart("cerahydra-cream-50", 1);
-      addToCart("bioshield-spf50", 1);
+      addToCart(AVAILABLE_PRODUCT_ID, 1);
     }
     setIsCartOpen(true);
     showToast("Protocole Expert DermoScan ajouté au panier !");

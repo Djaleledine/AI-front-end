@@ -3,6 +3,7 @@
 import React from "react";
 import { ShieldCheck, Truck, RefreshCw, Sun } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
+import AnjuciaLogo from "./brand/AnjuciaLogo";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -44,9 +45,8 @@ export default function Footer() {
 
         <div className="footer-grid">
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.7rem", marginBottom: "1rem" }}>
-              <img src="/assets/anjucia-symbol.png" alt="ANJUCIA" className="brand-symbol-icon" style={{ width: "30px", height: "30px" }} />
-              <span style={{ fontSize: "1.3rem", fontWeight: 900, letterSpacing: "0.1em", color: "var(--text-primary)" }}>ANJUCIA</span>
+            <div style={{ marginBottom: "1rem" }}>
+              <AnjuciaLogo size={28} />
             </div>
             <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", maxWidth: "320px", lineHeight: 1.6, marginBottom: "1.2rem" }}>
               {t.footer.about}
@@ -61,7 +61,7 @@ export default function Footer() {
               {t.nav.products}
             </h4>
             <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "0.6rem", fontSize: "0.85rem", padding: 0 }}>
-              <li><a href="/products" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Soothing Face Gel-Cream (1 500 DA)</a></li>
+              <li><a href="/products" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>Soothing Face Gel-Cream (1 800 DA)</a></li>
               <li><a href="/products" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>CeraHydra+ Cellular Cream 50ml</a></li>
               <li><a href="/products" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>CeraHydra+ Grand Format 100ml</a></li>
               <li><a href="/products" style={{ color: "var(--text-secondary)", textDecoration: "none" }}>AquaLipid Hydro-Infusion Essence</a></li>

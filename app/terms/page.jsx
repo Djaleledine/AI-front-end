@@ -118,7 +118,7 @@ export default function TermsPage() {
                   {lang === "dz" ? "سعر المنتج النجم :" : "Tarif Officiel Produit Phare :"}
                 </span>
                 <span style={{ fontSize: "1rem", fontWeight: 900, color: "var(--accent-aqua)", marginLeft: "0.5rem" }}>
-                  1 500 DA (Lightweight Soothing Face Gel-Cream 50ml)
+                  1 800 DA (Lightweight Soothing Face Gel-Cream 50ml)
                 </span>
               </div>
             </div>

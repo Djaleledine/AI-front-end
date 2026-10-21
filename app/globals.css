@@ -3398,6 +3398,131 @@ html[dir="rtl"] .anjubot-floating-companion {
   font-weight: 600;
 }
 
+/* ==========================================================================
+   APP SHELL, BRAND LOGO & VIEW TRANSITIONS
+   ========================================================================== */
+
+:root {
+  --tab-bar-height: 64px;
+}
+
+/* Brand Wordmark & Droplet */
+.anj-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: inherit;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.anj-logo-mark {
+  color: var(--accent-aqua);
+  filter: drop-shadow(0 2px 8px var(--accent-aqua-glow));
+}
+
+.anj-logo-word {
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+  line-height: 1;
+}
+
+/* App shell content padding */
+.app-shell-content {
+  min-height: 100vh;
+  padding-bottom: calc(var(--tab-bar-height) + 20px);
+}
+
+/* Coming soon shimmer animation */
+.coming-soon-shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(113, 159, 183, 0.08) 50%,
+    transparent 100%
+  );
+  animation: cs-shimmer 3.2s infinite ease-in-out;
+  pointer-events: none;
+}
+
+@keyframes cs-shimmer {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+/* Analyzer laser line */
+.analyzer-laser-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--accent-aqua) 50%, transparent 100%);
+  box-shadow: 0 0 14px var(--accent-aqua);
+  animation: laser-sweep 3s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+}
+
+@keyframes laser-sweep {
+  0% { top: 10%; opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { top: 90%; opacity: 0; }
+}
+
+/* View Transitions Keyframes (Modern Web Guidance) */
+@keyframes vt-fade-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.98); }
+}
+
+@keyframes vt-fade-in {
+  from { opacity: 0; transform: scale(1.02); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+::view-transition-old(root) {
+  animation: 0.22s cubic-bezier(0.4, 0, 1, 1) both vt-fade-out;
+}
+
+::view-transition-new(root) {
+  animation: 0.28s cubic-bezier(0, 0, 0.2, 1) both vt-fade-in;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/* Toast and Slide down animations */
+@keyframes slide-down {
+  from { transform: translate(-50%, -12px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+
 
 
 

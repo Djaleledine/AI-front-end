@@ -33,7 +33,7 @@ export async function POST(request) {
           id: "soothing-gel-cream",
           name: "Lightweight Soothing Face Gel-Cream",
           reason: "Apaisement immédiat au Panthénol B5 2% et régulation sébacée par la Niacinamide 3% sans film lourd.",
-          priceDZD: 1500
+          priceDZD: 1800
         },
         booster: isArid ? {
           id: "cerahydra-cream-50",

@@ -54,7 +54,7 @@ export default function StickyMobileBuyBar() {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "2px" }}>
               <span style={{ fontSize: "0.95rem", fontWeight: 900, color: "var(--accent-aqua)" }}>
-                {lang === "dz" ? "1500 دج" : "1 500 DA"}
+                {lang === "dz" ? "1800 دج" : "1 800 DA"}
               </span>
               <span style={{ fontSize: "0.65rem", color: "var(--success)", fontWeight: 800 }}>
                 • {current.badge}

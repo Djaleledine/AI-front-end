@@ -1,23 +1,55 @@
 {
-  "name": "ANJUCIA Dermaceuticals",
+  "name": "ANJUCIA • Advanced Skincare",
   "short_name": "ANJUCIA",
-  "description": "Boutique en ligne parapharmaceutique ANJUCIA Algérie. Soin visage apaisant 2 100 DZD, livraison 58 Wilayas.",
+  "description": "Application officielle ANJUCIA Algérie. Soin visage apaisant 1 800 DA, livraison 58 Wilayas & rituels cutanés.",
   "start_url": "/",
+  "scope": "/",
+  "id": "dz.anjucia.app",
   "display": "standalone",
-  "background_color": "#060B12",
-  "theme_color": "#00D2C4",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#11171A",
+  "theme_color": "#11171A",
   "orientation": "portrait-primary",
+  "lang": "fr",
+  "dir": "ltr",
   "icons": [
     {
-      "src": "/assets/symbol.svg",
-      "sizes": "192x192 512x512",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "/assets/symbol-white.svg",
-      "sizes": "192x192 512x512",
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/symbol.svg",
+      "sizes": "any",
       "type": "image/svg+xml"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "Commander Gel-Crème",
+      "short_name": "Commander",
+      "url": "/products",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Jeu Goutte Rescue",
+      "short_name": "Jeu",
+      "url": "/game",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "categories": ["shopping", "lifestyle", "beauty"]
 }

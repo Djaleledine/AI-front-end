@@ -1,13 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { mock, MOCK_REVIEWS, MOCK_PHARMACIES } from "./services/mockApi";
-import { ANJUCIA_PRODUCTS } from "./data/products";
+import { ANJUCIA_PRODUCTS, AVAILABLE_PRODUCT_ID, FLAGSHIP_PRODUCT, COMING_SOON_PRODUCTS } from "./data/products";
 import { useCart } from "./context/CartContext";
 import { useLanguage } from "./context/LanguageContext";
-import DermLabMixer from "./components/DermLabMixer";
+import DropletHeroVisual from "./components/ui/DropletHeroVisual";
+import ComingSoonCard from "./components/ui/ComingSoonCard";
+import DropletGame from "./components/game/DropletGame";
 import BundleOffers from "./components/BundleOffers";
 import QuickSkinMatchModal from "./components/QuickSkinMatchModal";
+import AnjuciaLogo, { DropletMark } from "./components/brand/AnjuciaLogo";
 import {
   Sparkles,
   ShieldCheck,
@@ -18,202 +20,189 @@ import {
   Star,
   Truck,
   Sun,
-  PhoneCall
+  Gamepad2,
+  Clock,
+  Bell,
+  HeartHandshake
 } from "lucide-react";
+import Link from "next/link";
 
 export default function HomePage() {
-  const { addToCart, addHybridHero, setIsCartOpen } = useCart();
+  const { addToCart, setIsCartOpen, showToast } = useCart();
   const { t, lang } = useLanguage();
   const [isQuizOpen, setIsQuizOpen] = useState(false);
-  const [reviews, setReviews] = useState(MOCK_REVIEWS);
-  const [pharmacies, setPharmacies] = useState(MOCK_PHARMACIES);
-  const [products, setProducts] = useState(ANJUCIA_PRODUCTS);
+  const [wilayaWaitlist, setWilayaWaitlist] = useState("");
 
-  useEffect(() => {
-    async function loadData() {
-      const [reviewsData, pharmaciesData, productsData] = await Promise.all([
-        mock.reviews.getAll(),
-        mock.pharmacies.getAll(),
-        mock.products.getAll()
-      ]);
-      if (reviewsData?.length) setReviews(reviewsData);
-      if (pharmaciesData?.length) setPharmacies(pharmaciesData);
-      if (productsData?.length) setProducts(productsData);
-    }
-    loadData();
-  }, []);
-
-  // Track mouse position globally for confetti origin
-  useEffect(() => {
-    const trackMouse = (e) => {
-      window._lastMouseX = e.clientX;
-      window._lastMouseY = e.clientY;
-    };
-    window.addEventListener("mousemove", trackMouse, { passive: true });
-    return () => window.removeEventListener("mousemove", trackMouse);
-  }, []);
+  const handleWilayaSubmit = (e) => {
+    e.preventDefault();
+    if (!wilayaWaitlist.trim()) return;
+    showToast(
+      lang === "dz"
+        ? `تم تسجيلك ! سنخبرك فور توفر الصيدليات المعتمدة في ${wilayaWaitlist}`
+        : `Enregistré ! Vous serez informé des officines partenaires à ${wilayaWaitlist} 🇩🇿`
+    );
+    setWilayaWaitlist("");
+  };
 
   return (
-    <main>
-      {/* Cursor Follower Elements (GSAP controlled) */}
-      <div className="anjucia-cursor" aria-hidden="true" />
-      <div className="anjucia-cursor-dot" aria-hidden="true" />
-
+    <main style={{ paddingBottom: "5rem" }}>
       {/* 10-Second Quick Skin Match Modal */}
       <QuickSkinMatchModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
 
       {/* ── Hero Section ─────────────────────────────────────────────────────── */}
-      <section id="hero" style={{ position: "relative", padding: "2.5rem 0 3.5rem", overflow: "hidden", background: "radial-gradient(circle at 50% -10%, var(--hero-glow-color, rgba(113, 159, 183, 0.18)) 0%, var(--bg-primary) 70%)", borderBottom: "1px solid var(--border-subtle)" }}>
-        {/* Hero floating particles layer */}
-        <div className="gsap-hero-particles" aria-hidden="true" />
-        <div style={{ position: "absolute", top: "-120px", right: "-120px", width: "520px", height: "520px", borderRadius: "50%", background: "radial-gradient(circle, var(--accent-aqua-glow) 0%, transparent 70%)", filter: "blur(50px)", pointerEvents: "none" }} />
-
-        <div className="container" style={{ marginTop: "1rem" }}>
-          <div className="hero-grid-layout">
+      <section
+        id="hero"
+        style={{
+          position: "relative",
+          padding: "2rem 0 3.5rem",
+          overflow: "hidden",
+          background: "radial-gradient(circle at 50% -10%, var(--hero-glow-color, rgba(113, 159, 183, 0.18)) 0%, var(--bg-primary) 70%)",
+          borderBottom: "1px solid var(--border-subtle)"
+        }}
+      >
+        <div className="container">
+          <div className="hero-grid-layout" style={{ alignItems: "center" }}>
             {/* Left — Brand copy */}
             <div>
-              <div className="gsap-hero-el" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", background: "var(--accent-aqua-subtle)", border: "1px solid var(--border-light)", padding: "0.45rem 1rem", borderRadius: "var(--badge-radius, 9999px)", fontSize: "0.8rem", fontWeight: 800, color: "var(--accent-aqua)", marginBottom: "1.2rem" }}>
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  background: "var(--accent-aqua-subtle)",
+                  border: "1px solid var(--border-light)",
+                  padding: "0.45rem 1rem",
+                  borderRadius: "var(--badge-radius, 9999px)",
+                  fontSize: "0.8rem",
+                  fontWeight: 800,
+                  color: "var(--accent-aqua)",
+                  marginBottom: "1.2rem"
+                }}
+              >
                 <span className="topbar-dot" />
-                <span>{t.hero.pill}</span>
+                <span>FORMULATION EXPERTE • 1800 DA • ALGÉRIE 🇩🇿</span>
               </div>
 
-              <h1 className="gsap-headline gsap-hero-el" style={{ fontSize: "clamp(2.1rem, 3.8vw, 3.2rem)", fontWeight: 900, color: "var(--text-primary)", lineHeight: 1.16, marginBottom: "1.3rem", letterSpacing: "-0.025em" }}>
-                {t.hero.title}
+              <h1
+                style={{
+                  fontSize: "clamp(2.1rem, 3.8vw, 3.2rem)",
+                  fontWeight: 900,
+                  color: "var(--text-primary)",
+                  lineHeight: 1.16,
+                  marginBottom: "1.2rem",
+                  letterSpacing: "-0.025em"
+                }}
+              >
+                {lang === "dz"
+                  ? "العناية الطبية الفائقة بالبشرة في الجزائر"
+                  : "Le Soin Visage Apaisant & Hydratant Conçu pour le Climat Algérien"}
               </h1>
 
-              <p className="gsap-hero-el" style={{ fontSize: "1.05rem", color: "var(--text-secondary)", lineHeight: 1.68, maxWidth: "620px", marginBottom: "2.2rem" }}>
-                {t.hero.desc}
+              <p
+                style={{
+                  fontSize: "1.02rem",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.65,
+                  maxWidth: "600px",
+                  marginBottom: "1.8rem"
+                }}
+              >
+                {lang === "dz"
+                  ? "مستحلب خفيف فائق الترطيب بملمس حريري غير زيتي، يجمع بين النياسيناميد 3% والبانتينول B5 2%. مصمم ليحمي بشرتك من حرارة 45°C والشهيلي بسعر مناسب 1800 دج."
+                  : "Une émulsion ultra-légère au fini satiné non gras formulée pour protéger votre peau des chaleurs extrêmes et du vent sec. Niacinamide 3% pure, Panthénol B5 2% et Centella 1%."}
               </p>
 
-              {/* Stats with rolling GSAP counters */}
-              <div className="gsap-hero-el" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.2rem", marginBottom: "2.4rem", padding: "1.3rem 1.6rem", background: "var(--bg-card)", border: "1px solid var(--border-subtle)", borderRadius: "var(--card-radius, 16px)", boxShadow: "var(--shadow-sm)" }}>
+              {/* Stats Counters */}
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: "repeat(3, 1fr)",
+                  gap: "1rem",
+                  marginBottom: "2rem",
+                  padding: "1.1rem 1.4rem",
+                  background: "var(--bg-card)",
+                  border: "1px solid var(--border-subtle)",
+                  borderRadius: "var(--card-radius, 16px)",
+                  boxShadow: "var(--shadow-sm)"
+                }}
+              >
                 <div>
-                  <div data-gsap-counter="148" data-prefix="+" data-suffix="%" className="gsap-roll-number" style={{ fontSize: "1.85rem", fontWeight: 900, color: "var(--accent-aqua)", lineHeight: 1 }}>{t.hero.stat1Val}</div>
-                  <div style={{ fontSize: "0.75rem", color: "var(--text-secondary)", marginTop: "0.35rem", fontWeight: 600 }}>{t.hero.stat1Lbl}</div>
+                  <div style={{ fontSize: "1.8rem", fontWeight: 900, color: "var(--accent-aqua)", lineHeight: 1 }}>+148%</div>
+                  <div style={{ fontSize: "0.72rem", color: "var(--text-secondary)", marginTop: "0.3rem", fontWeight: 700 }}>Hydratation 15min</div>
                 </div>
                 <div>
-                  <div data-gsap-counter="72" data-suffix="H" className="gsap-roll-number" style={{ fontSize: "1.85rem", fontWeight: 900, color: "var(--text-primary)", lineHeight: 1 }}>{t.hero.stat2Val}</div>
-                  <div style={{ fontSize: "0.75rem", color: "var(--text-secondary)", marginTop: "0.35rem", fontWeight: 600 }}>{t.hero.stat2Lbl}</div>
+                  <div style={{ fontSize: "1.8rem", fontWeight: 900, color: "var(--text-primary)", lineHeight: 1 }}>45°C</div>
+                  <div style={{ fontSize: "0.72rem", color: "var(--text-secondary)", marginTop: "0.3rem", fontWeight: 700 }}>Stabilité Prouvée</div>
                 </div>
                 <div>
-                  <div data-gsap-counter="58" data-suffix="" className="gsap-roll-number" style={{ fontSize: "1.85rem", fontWeight: 900, color: "var(--success)", lineHeight: 1 }}>{t.hero.stat3Val}</div>
-                  <div style={{ fontSize: "0.75rem", color: "var(--text-secondary)", marginTop: "0.35rem", fontWeight: 600 }}>{t.hero.stat3Lbl}</div>
+                  <div style={{ fontSize: "1.8rem", fontWeight: 900, color: "var(--success)", lineHeight: 1 }}>1 800 DA</div>
+                  <div style={{ fontSize: "0.72rem", color: "var(--text-secondary)", marginTop: "0.3rem", fontWeight: 700 }}>Tarif Officiel Unique</div>
                 </div>
               </div>
 
               {/* CTAs */}
-              <div className="gsap-hero-el" style={{ display: "flex", gap: "1.1rem", flexWrap: "wrap", marginBottom: "1.6rem" }}>
+              <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap", marginBottom: "1.4rem" }}>
                 <button
                   className="btn-aqua magnetic-btn"
-                  onClick={() => { addHybridHero("soothing-gel-cream"); setIsCartOpen(true); }}
-                  style={{ fontSize: "1rem", padding: "1rem 2.2rem" }}
+                  onClick={() => {
+                    addToCart(AVAILABLE_PRODUCT_ID, 1);
+                    setIsCartOpen(true);
+                  }}
+                  style={{ fontSize: "0.98rem", padding: "0.95rem 2rem", display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
                 >
-                  <Droplets size={19} />
-                  <span>{t.hero.orderFlagship}</span>
+                  <Droplets size={18} />
+                  <span>{lang === "dz" ? "اطلب الجل-كريم (1800 دج)" : "Commander le Soin (1 800 DA)"}</span>
                 </button>
 
                 <button
                   className="btn-outline magnetic-btn"
                   onClick={() => setIsQuizOpen(true)}
-                  style={{ fontSize: "0.95rem", padding: "1rem 1.8rem" }}
+                  style={{ fontSize: "0.92rem", padding: "0.95rem 1.6rem", display: "inline-flex", alignItems: "center", gap: "0.45rem" }}
                 >
-                  <Sparkles size={18} color="var(--accent-aqua)" />
+                  <Sparkles size={17} color="var(--accent-aqua)" />
                   <span>{t.quickQuizBtn}</span>
                 </button>
               </div>
 
-              <div className="gsap-hero-el" style={{ display: "flex", alignItems: "center", gap: "1.2rem", fontSize: "0.78rem", color: "var(--text-muted)", flexWrap: "wrap" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}><Truck size={15} color="var(--accent-aqua)" /> 58 Wilayas</span>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}><ShieldCheck size={15} color="var(--success)" /> Paiement à la livraison</span>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}><Star size={15} color="#F59E0B" /> 4.9/5 Avis Clients</span>
+              <div style={{ display: "flex", alignItems: "center", gap: "1.2rem", fontSize: "0.76rem", color: "var(--text-muted)", flexWrap: "wrap" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}><Truck size={14} color="var(--accent-aqua)" /> Livraison 58 Wilayas</span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}><ShieldCheck size={14} color="var(--success)" /> Paiement à la réception</span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.35rem" }}><Zap size={14} color="var(--accent-aqua)" /> Tube Canule Zéro-Panne</span>
               </div>
             </div>
 
-            {/* Right — Flagship product */}
-            <div className="scroll-reveal-scale" style={{ position: "relative" }}>
-              <div style={{ background: "var(--bg-card)", border: "2px solid var(--accent-aqua)", borderRadius: "var(--card-radius, 24px)", padding: "2.2rem", boxShadow: "var(--shadow-md), var(--shadow-glow)", position: "relative" }}>
-                <span className="product-badge-flag">{t.hero.flagshipBadge}</span>
-
-                {/* Rolling Circular Dermo Seal */}
-                <div className="gsap-rotating-badge" aria-label="ANJUCIA Clinical Dermo Seal">
-                  <svg viewBox="0 0 160 160" className="rotating-text-svg">
-                    <circle cx="80" cy="80" r="76" fill="var(--bg-card)" stroke="var(--border-light)" strokeWidth="1.5" />
-                    <path
-                      id="heroBadgePath"
-                      d="M 80, 80 m -56, 0 a 56,56 0 1,1 112,0 a 56,56 0 1,1 -112,0"
-                      fill="none"
-                    />
-                    <text>
-                      <textPath href="#heroBadgePath" className="rotating-text-path">
-                        ✦ CLINICAL DERMO ✦ FORMULÉ EN ALGÉRIE ✦ 58 WILAYAS ✦
-                      </textPath>
-                    </text>
-                  </svg>
-                  <div className="rotating-badge-center">
-                    <img src="/assets/anjucia-symbol.png" alt="AJ" className="rotating-badge-symbol" />
-                  </div>
-                </div>
-
-                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "290px", margin: "1.2rem 0" }}>
-                  <img
-                    src="/assets/soothing-gel-cream.svg"
-                    alt="ANJUCIA Lightweight Soothing Face Gel-Cream"
-                    className="parallax-float hero-tube-parallax"
-                    style={{ maxHeight: "280px", width: "auto", filter: "drop-shadow(0 20px 38px rgba(0, 0, 0, 0.32))", transformOrigin: "center center" }}
-                  />
-                </div>
-
-                <div style={{ display: "flex", flexDirection: "column", gap: "0.65rem", marginBottom: "1.3rem" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.55rem", padding: "0.6rem 0.95rem", background: "var(--bg-secondary)", borderRadius: "10px", fontSize: "0.82rem", color: "var(--text-secondary)", border: "1px solid var(--border-subtle)" }}>
-                    <ShieldCheck size={16} color="var(--accent-aqua)" style={{ flexShrink: 0 }} />
-                    <span style={{ fontWeight: 600 }}>{t.hero.flagshipVol} • Tube canule hygiénique zéro-panne</span>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center", gap: "0.55rem", padding: "0.6rem 0.95rem", background: "var(--accent-aqua-subtle)", borderRadius: "10px", fontSize: "0.8rem", color: "var(--accent-aqua)", border: "1px solid var(--border-light)", fontWeight: 700 }}>
-                    <Sparkles size={15} style={{ flexShrink: 0 }} />
-                    <span>{lang === "dz" ? "اشتراك تلقائي مرفق : كود QR مختوم داخل كل علبة" : "Abonnement VIP automatique inclus : QR code scellé dans la boîte"}</span>
-                  </div>
-                </div>
-
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid var(--border-subtle)", paddingTop: "1.1rem" }}>
-                  <div>
-                    <div className="price-dzd" style={{ fontSize: "1.55rem", fontWeight: 900, color: "var(--accent-aqua)" }}>{t.hero.flagshipPrice}</div>
-                    <div style={{ fontSize: "0.74rem", color: "var(--success)", fontWeight: 800 }}>{t.hero.inStock}</div>
-                  </div>
-                  <button
-                    className="btn-aqua magnetic-btn"
-                    onClick={() => { addHybridHero("soothing-gel-cream"); setIsCartOpen(true); }}
-                    style={{ padding: "0.85rem 1.8rem", fontSize: "0.95rem" }}
-                  >
-                    {t.hero.addToCart}
-                  </button>
-                </div>
-              </div>
+            {/* Right — Single Flagship Hero Visual (vector droplet lockup, 1800 DA) */}
+            <div>
+              <DropletHeroVisual
+                onAddToCart={() => {
+                  addToCart(AVAILABLE_PRODUCT_ID, 1);
+                  setIsCartOpen(true);
+                }}
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── GSAP Velocity Marquee Ticker ────────────────────────────────────── */}
+      {/* ── Marquee Ticker ──────────────────────────────────────────────────── */}
       <div className="gsap-ticker-container" aria-hidden="true">
-        <div className="gsap-ticker-track" data-gsap-marquee="true">
+        <div className="gsap-ticker-track">
           {[
+            "1 800 DA · Soin Visage Apaisant 50 ml",
             "58 Wilayas · Livraison Rapide & COD",
             "Formulé pour le Climat Algérien",
             "pH 5.2 Physiologique Strict",
             "Niacinamide Pure 3% + Panthénol B5 2%",
             "Tube Canule Zéro-Panne Hygiénique",
-            "QR Code Scellé VIP Inclus",
-            "DermoScan AI · Analyse Cutanée Gratuite",
-            "Tolérance Testée Dermatologiquement",
+            "Application Mobile Installable (PWA)"
           ].concat([
+            "1 800 DA · Soin Visage Apaisant 50 ml",
             "58 Wilayas · Livraison Rapide & COD",
             "Formulé pour le Climat Algérien",
             "pH 5.2 Physiologique Strict",
             "Niacinamide Pure 3% + Panthénol B5 2%",
             "Tube Canule Zéro-Panne Hygiénique",
-            "QR Code Scellé VIP Inclus",
-            "DermoScan AI · Analyse Cutanée Gratuite",
-            "Tolérance Testée Dermatologiquement",
+            "Application Mobile Installable (PWA)"
           ]).map((item, i) => (
             <span key={i} className="gsap-ticker-item">
               <span className="gsap-ticker-dot" />
@@ -223,211 +212,220 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ── Bundles ──────────────────────────────────────────────────────────── */}
-      <BundleOffers />
-
-      {/* ── DermLab Mixer ────────────────────────────────────────────────────── */}
-      <DermLabMixer />
-
-      {/* ── Flagship Catalog Grid ────────────────────────────────────────────── */}
-      <section style={{ padding: "4.5rem 0" }} id="produits">
-        <div className="container">
-          <div className="scroll-reveal" style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2.5rem", flexWrap: "wrap", gap: "1rem" }}>
-            <div className="section-header">
-              <span className="section-tag">{t.productsPage?.tag || "COLLECTION EXPERTE ANJUCIA"}</span>
-              <h2 className="section-title gsap-headline" style={{ marginBottom: "0.4rem" }}>{t.nav.products}</h2>
-              <p style={{ color: "var(--text-secondary)", fontSize: "0.95rem" }}>
-                {t.productsPage?.desc || "Formulations pures et expertes pour la peau algérienne."}
-              </p>
-            </div>
-            <a href="/products" className="btn-outline magnetic-btn">
-              <span>{t.productsPage?.all || "Voir Tous les Soins"}</span>
-              <ArrowRight size={16} />
-            </a>
+      {/* ── Interactive Arcade Game Block: Goutte Rescue (Replaced DermLab Mixer) ─ */}
+      <section id="game-section" style={{ padding: "4rem 0", background: "var(--bg-secondary)" }}>
+        <div className="container" style={{ maxWidth: "860px" }}>
+          <div style={{ textAlign: "center", maxWidth: "620px", margin: "0 auto 2.5rem" }}>
+            <span className="section-tag" style={{ background: "rgba(155, 176, 160, 0.16)", color: "var(--success)", borderColor: "rgba(155, 176, 160, 0.3)" }}>
+              🎮 NOUVEAU • DÉFI INTERACTIF
+            </span>
+            <h2 style={{ fontSize: "clamp(1.7rem, 3.2vw, 2.3rem)", fontWeight: 900, color: "var(--text-primary)", marginBottom: "0.5rem" }}>
+              {lang === "dz" ? "لعبة أنقذ القطرة : تفادى الحرارة واجمع الترطيب" : "Goutte Rescue : Le Défi de la Barrière Cutanée"}
+            </h2>
+            <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem", lineHeight: 1.6 }}>
+              {lang === "dz"
+                ? "حرّك القطرة بإصبعك على الشاشة : التقط مكونات كريم أنجوسيا وتفادى أشعة الشمس الحارقة."
+                : "Glissez votre doigt pour attraper la Niacinamide et le Panthénol tout en esquivant les rayons UV et les pics de chaleur à 45°C."}
+            </p>
           </div>
 
-          <div className="products-grid">
-            {products.map((product, idx) => (
-              <div
-                key={product.id}
-                className={`product-card gsap-card-glow scroll-reveal-scale stagger-${(idx % 4) + 1}`}
-                style={{ border: product.isHero ? "2px solid var(--accent-aqua)" : "1px solid var(--border-subtle)", position: "relative" }}
-              >
-                {product.badge && (
-                  <span className={product.isHero ? "product-badge-hero" : "product-badge-clean"}>
-                    {product.badge}
-                  </span>
-                )}
+          <DropletGame compact={true} />
 
-                <div className="product-card-img-wrap">
-                  <img src={product.image} alt={product.name} className="product-card-img" />
-                </div>
-
-                <div className="product-card-body">
-                  <span className="product-category-tag">{product.category}</span>
-                  <h3 className="product-title">{product.name}</h3>
-                  <div className="product-subtitle">{product.subtitle}</div>
-                  <div style={{ fontSize: "0.76rem", color: "var(--text-muted)", marginBottom: "0.8rem", fontWeight: 700 }}>{product.packaging}</div>
-                  <p className="product-desc">{product.description}</p>
-
-                  <div className="card-footer-action product-card-footer">
-                    <div>
-                      <div className="price-dzd">{product.priceDZD.toLocaleString()} DZD</div>
-                      {product.originalPriceDZD && (
-                        <div style={{ fontSize: "0.75rem", textDecoration: "line-through", color: "var(--text-muted)" }}>
-                          {product.originalPriceDZD.toLocaleString()} DZD
-                        </div>
-                      )}
-                    </div>
-                    <button
-                      className="btn-aqua magnetic-btn"
-                      onClick={() => { addToCart(product.id); setIsCartOpen(true); }}
-                      style={{ padding: "0.65rem 1.15rem", fontSize: "0.85rem" }}
-                    >
-                      {lang === "dz" ? "أضف للسلة" : "Ajouter au Panier"}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+          <div style={{ textAlign: "center", marginTop: "1.2rem" }}>
+            <Link
+              href="/game"
+              className="btn-outline"
+              style={{ padding: "0.6rem 1.4rem", fontSize: "0.85rem", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
+            >
+              <Gamepad2 size={16} color="var(--accent-aqua)" />
+              <span>{lang === "dz" ? "فتح اللعبة في صفحة كاملة" : "Ouvrir en plein écran"}</span>
+              <ArrowRight size={14} />
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* ── Customer Reviews ─────────────────────────────────────────────────── */}
-      <section style={{ padding: "4.5rem 0", background: "var(--bg-secondary)", borderTop: "1px solid var(--border-subtle)" }} id="avis">
+      {/* ── Bundles ──────────────────────────────────────────────────────────── */}
+      <BundleOffers />
+
+      {/* ── Product Collection (1 Available, Rest Coming Soon without images) ──── */}
+      <section style={{ padding: "4rem 0" }} id="produits">
         <div className="container">
-          <div className="scroll-reveal" style={{ textAlign: "center", maxWidth: "760px", margin: "0 auto 3rem" }}>
-            <div className="section-header center">
-              <span className="section-tag">AVIS CLIENTS VÉRIFIÉS 🇩🇿</span>
-              <h2 className="section-title gsap-headline">
-                {lang === "dz" ? "أكثر من 8500 زبون راضٍ في الجزائر" : "Adopté par plus de 8 500 Utilisateurs en Algérie"}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "2.4rem", flexWrap: "wrap", gap: "1rem" }}>
+            <div>
+              <span className="section-tag">{t.productsPage?.tag || "COLLECTION EXPERTE ANJUCIA"}</span>
+              <h2 style={{ fontSize: "1.9rem", fontWeight: 900, color: "var(--text-primary)", marginBottom: "0.3rem" }}>
+                {t.nav.products}
               </h2>
-              <p className="section-subtitle">
-                {lang === "dz" ? "شوف واش قالو مستعملي جل-كريم أنجوسيا في مختلف الولايات." : "Des retours d'expérience concrets sous le climat algérien."}
+              <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
+                1 formule disponible en commande directe (1 800 DA) • Les autres formules arrivent bientôt.
               </p>
             </div>
+            <Link href="/products" className="btn-outline magnetic-btn">
+              <span>{t.productsPage?.all || "Voir le Catalogue"}</span>
+              <ArrowRight size={16} />
+            </Link>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.8rem" }}>
-            {reviews.map((rev, idx) => (
-              <div
-                key={rev.id}
-                className={`review-card gsap-card-glow ${idx % 2 === 0 ? "scroll-reveal-left" : "scroll-reveal-right"} stagger-${(idx % 4) + 1}`}
-                style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)", borderRadius: "var(--card-radius, 18px)", padding: "2rem", boxShadow: "var(--shadow-sm)" }}
-              >
-                <div>
-                  <div style={{ display: "flex", gap: "2px", color: "#F59E0B", marginBottom: "0.9rem" }}>
-                    {[...Array(rev.rating || 5)].map((_, i) => (
-                      <Star key={i} size={16} fill="#F59E0B" color="#F59E0B" />
-                    ))}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+              gap: "1.6rem"
+            }}
+          >
+            {/* The single live product card */}
+            <div
+              style={{
+                background: "var(--bg-card)",
+                border: "2px solid var(--accent-aqua)",
+                borderRadius: "var(--card-radius, 18px)",
+                padding: "1.8rem",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                boxShadow: "var(--shadow-glow), var(--shadow-sm)",
+                position: "relative"
+              }}
+            >
+              <div>
+                <span
+                  style={{
+                    display: "inline-block",
+                    fontSize: "0.72rem",
+                    fontWeight: 900,
+                    padding: "0.3rem 0.75rem",
+                    borderRadius: "9999px",
+                    background: "var(--accent-aqua)",
+                    color: "#11171A",
+                    marginBottom: "1rem"
+                  }}
+                >
+                  DISPONIBLE (1 800 DA)
+                </span>
+
+                <div style={{ textAlign: "center", padding: "1.5rem 0" }}>
+                  <DropletMark size={84} color="var(--accent-aqua)" />
+                  <div style={{ marginTop: "0.6rem", fontSize: "0.72rem", color: "var(--accent-aqua)", fontWeight: 800 }}>
+                    Tube canule haute précision 50 ml
                   </div>
-                  <p style={{ fontSize: "0.92rem", color: "var(--text-secondary)", lineHeight: 1.65, marginBottom: "1.4rem" }}>
-                    {rev.comment[lang] || rev.comment.fr}
-                  </p>
                 </div>
-                <div className="card-footer-action" style={{ paddingTop: "0.8rem", borderTop: "1px solid var(--border-subtle)", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <div>
-                    <div style={{ fontWeight: 800, color: "var(--text-primary)", fontSize: "0.88rem" }}>{rev.author}</div>
-                    <div style={{ fontSize: "0.76rem", color: "var(--accent-aqua)", fontWeight: 700, marginTop: "0.15rem" }}>{rev.location}</div>
-                  </div>
-                  <span style={{ fontSize: "0.72rem", color: "var(--success)", background: "rgba(16, 185, 129, 0.1)", border: "1px solid rgba(16, 185, 129, 0.25)", padding: "0.2rem 0.6rem", borderRadius: "9999px", fontWeight: 800 }}>
-                    Achat Vérifié
-                  </span>
-                </div>
+
+                <span style={{ fontSize: "0.72rem", color: "var(--accent-aqua)", fontWeight: 800, textTransform: "uppercase" }}>
+                  Hydratation Apaisante
+                </span>
+                <h3 style={{ fontSize: "1.25rem", fontWeight: 900, color: "var(--text-primary)", marginBottom: "0.4rem" }}>
+                  Lightweight Soothing Face Gel-Cream
+                </h3>
+                <p style={{ fontSize: "0.82rem", color: "var(--text-secondary)", lineHeight: 1.5, marginBottom: "1rem" }}>
+                  Émulsion H/E ultra-légère au fini satiné non gras. Niacinamide 3%, Panthénol B5 2%, Centella 1% & Squalane 3%.
+                </p>
               </div>
+
+              <div style={{ borderTop: "1px solid var(--border-subtle)", paddingTop: "1rem", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <div className="price-dzd" style={{ fontSize: "1.5rem", fontWeight: 900, color: "var(--accent-aqua)" }}>
+                    1 800 DA
+                  </div>
+                  <div style={{ fontSize: "0.72rem", color: "var(--success)", fontWeight: 800 }}>✓ En Stock</div>
+                </div>
+                <button
+                  className="btn-aqua magnetic-btn"
+                  onClick={() => {
+                    addToCart(AVAILABLE_PRODUCT_ID, 1);
+                    setIsCartOpen(true);
+                  }}
+                  style={{ padding: "0.7rem 1.3rem", fontSize: "0.85rem" }}
+                >
+                  {lang === "dz" ? "أضف للسلة" : "Ajouter au Panier"}
+                </button>
+              </div>
+            </div>
+
+            {/* Coming Soon Formulas (No images, clean teaser) */}
+            {COMING_SOON_PRODUCTS.slice(0, 3).map((product, idx) => (
+              <ComingSoonCard key={product.id} product={product} index={idx} />
             ))}
           </div>
         </div>
       </section>
 
       {/* ── Philosophy Cards ─────────────────────────────────────────────────── */}
-      <section style={{ padding: "4.5rem 0" }} id="charte">
+      <section style={{ padding: "4rem 0", background: "var(--bg-secondary)", borderTop: "1px solid var(--border-subtle)" }} id="charte">
         <div className="container">
-          <div className="scroll-reveal" style={{ textAlign: "center", maxWidth: "780px", margin: "0 auto 3rem" }}>
-            <div className="section-header center">
-              <span className="section-tag">{t.philosophy?.tag || "PHILOSOPHIE FORMULATEUR"}</span>
-              <h2 className="section-title gsap-headline">{t.philosophy?.title || "Une Approche Scientifique Dédiée au Marché Algérien"}</h2>
-              <p className="section-subtitle">
-                {t.philosophy?.subtitle || "Des formules de pointe ciblées, développées spécifiquement pour répondre aux exigences réelles du climat algérien."}
-              </p>
-            </div>
+          <div style={{ textAlign: "center", maxWidth: "780px", margin: "0 auto 3rem" }}>
+            <span className="section-tag">{t.philosophy?.tag || "PHILOSOPHIE FORMULATEUR"}</span>
+            <h2 style={{ fontSize: "1.9rem", fontWeight: 900, color: "var(--text-primary)", marginBottom: "0.4rem" }}>
+              {t.philosophy?.title || "Une Approche Scientifique Dédiée au Marché Algérien"}
+            </h2>
+            <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
+              {t.philosophy?.subtitle || "Des formules ciblées, développées spécifiquement pour répondre aux exigences réelles du climat algérien."}
+            </p>
           </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "2rem" }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.6rem" }}>
             {[
-              { icon: <ShieldCheck size={36} color="var(--accent-aqua)" />, title: t.philosophy?.card1Title || "Actifs Validés par la Science", desc: t.philosophy?.card1Desc || "Priorité aux molécules pures de grade cosmétique expert (Niacinamide pure, Panthénol B5, Ectoïne)." },
-              { icon: <Sun size={36} color="var(--accent-aqua)" />, title: t.philosophy?.card2Title || "Stabilité Haute Température", desc: t.philosophy?.card2Desc || "Formule testée avec succès sous stress thermique à 45 °C, garantit une stabilité parfaite face aux conditions climatiques extrêmes." },
-              { icon: <Zap size={36} color="var(--accent-aqua)" />, title: t.philosophy?.card3Title || "Tube Canule Zéro-Panne", desc: t.philosophy?.card3Desc || "Embout canule de précision. Évite les pannes fréquentes des pompes importées et prévient la contamination." },
+              { icon: <ShieldCheck size={34} color="var(--accent-aqua)" />, title: t.philosophy?.card1Title || "Actifs Validés par la Science", desc: t.philosophy?.card1Desc || "Priorité aux molécules pures de grade cosmétique expert (Niacinamide pure, Panthénol B5, Ectoïne)." },
+              { icon: <Sun size={34} color="var(--accent-aqua)" />, title: t.philosophy?.card2Title || "Stabilité Haute Température 45°C", desc: t.philosophy?.card2Desc || "Formule testée avec succès sous stress thermique à 45 °C, garantit une stabilité parfaite face aux conditions climatiques extrêmes." },
+              { icon: <Zap size={34} color="var(--accent-aqua)" />, title: t.philosophy?.card3Title || "Tube Canule Zéro-Panne", desc: t.philosophy?.card3Desc || "Embout canule de précision. Évite les pannes fréquentes des pompes importées et prévient la contamination." },
             ].map((card, i) => (
-              <div key={i} className={`feature-box gsap-card-glow ${i % 2 === 0 ? "scroll-reveal-left" : "scroll-reveal-right"} stagger-${i + 1}`} style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)", borderRadius: "var(--card-radius, 16px)", padding: "2rem", boxShadow: "var(--shadow-sm)" }}>
-                <div style={{ marginBottom: "1rem" }}>{card.icon}</div>
-                <h3 style={{ fontSize: "1.2rem", fontWeight: 800, color: "var(--text-primary)", marginBottom: "0.6rem" }}>{card.title}</h3>
-                <p style={{ fontSize: "0.88rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>{card.desc}</p>
+              <div key={i} style={{ background: "var(--bg-card)", border: "1px solid var(--border-subtle)", borderRadius: "var(--card-radius, 16px)", padding: "1.8rem", boxShadow: "var(--shadow-sm)" }}>
+                <div style={{ marginBottom: "0.9rem" }}>{card.icon}</div>
+                <h3 style={{ fontSize: "1.15rem", fontWeight: 800, color: "var(--text-primary)", marginBottom: "0.5rem" }}>{card.title}</h3>
+                <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.55 }}>{card.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── Points de Vente ──────────────────────────────────────────────────── */}
-      <section style={{ padding: "4.5rem 0", background: "var(--bg-secondary)", borderTop: "1px solid var(--border-subtle)" }} id="pharmacies">
-        <div className="container">
-          <div className="scroll-reveal" style={{ textAlign: "center", maxWidth: "720px", margin: "0 auto 2.8rem" }}>
-            <div className="section-header center">
-              <span className="section-tag">{t.nav.pharmacies}</span>
-              <h2 className="section-title gsap-headline">
-                {lang === "dz" ? "اعثر على منتجاتنا قريباً منك" : "Trouvez-nous Près de Chez Vous"}
-              </h2>
-              <p className="section-subtitle">
-                Disponible en commande en ligne avec livraison 58 Wilayas ou dans notre réseau d'officines conventionnées.
-              </p>
+      {/* ── Customer Feedback & Wilaya Coverage (Coming soon preview) ──────── */}
+      <section style={{ padding: "4rem 0" }} id="avis">
+        <div className="container" style={{ maxWidth: "780px" }}>
+          <div
+            style={{
+              background: "var(--bg-card)",
+              border: "1.5px dashed var(--border-light)",
+              borderRadius: "var(--card-radius, 22px)",
+              padding: "2.5rem 2rem",
+              textAlign: "center"
+            }}
+          >
+            <div style={{ width: "54px", height: "54px", borderRadius: "50%", background: "var(--accent-aqua-subtle)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.2rem", color: "var(--accent-aqua)" }}>
+              <HeartHandshake size={28} />
             </div>
-          </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "1.6rem" }}>
-            {pharmacies.map((pharma, idx) => (
-              <div
-                key={pharma.id}
-                className={`pharmacy-card gsap-card-glow ${idx % 2 === 0 ? "scroll-reveal-left" : "scroll-reveal-right"} stagger-${(idx % 4) + 1}`}
-                style={{ background: "var(--bg-card)", border: "1.5px solid var(--border-subtle)", borderRadius: "16px", padding: "1.8rem", boxShadow: "var(--shadow-sm)" }}
-              >
-                <div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.8rem" }}>
-                    <div className="radar-ping-dot" style={{ width: "32px", height: "32px" }}>
-                      <span className="radar-ping-wave" />
-                      <MapPin size={22} color="var(--accent-aqua)" style={{ position: "relative", zIndex: 2 }} />
-                    </div>
-                    <span style={{ fontSize: "0.72rem", color: "var(--accent-aqua)", fontWeight: 800, background: "var(--accent-aqua-subtle)", padding: "0.2rem 0.6rem", borderRadius: "9999px" }}>
-                      {pharma.wilaya || pharma.city}
-                    </span>
-                  </div>
+            <span className="section-tag">ENGAGEMENT TRANSPARENCE ANJUCIA</span>
+            <h3 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text-primary)", marginBottom: "0.5rem" }}>
+              Avis Clients Vérifiés & Réseau Pharmacies
+            </h3>
+            <p style={{ fontSize: "0.88rem", color: "var(--text-secondary)", lineHeight: 1.6, maxWidth: "560px", margin: "0 auto 1.6rem" }}>
+              À l'ouverture du lancement officiel, les avis proviennent exclusivement des clients ayant reçu leur commande avec code de vérification scellé.
+              Entrez votre Wilaya pour être informé de la mise en rayon dans votre secteur :
+            </p>
 
-                  <h4 style={{ color: "var(--text-primary)", fontWeight: 900, marginBottom: "0.4rem", fontSize: "1.1rem" }}>{pharma.name}</h4>
-                  <p style={{ fontSize: "0.84rem", color: "var(--text-secondary)", lineHeight: 1.5, marginBottom: "1rem" }}>{pharma.address}</p>
-                </div>
-
-                <div style={{ borderTop: "1px solid var(--border-subtle)", paddingTop: "0.8rem" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.65rem" }}>
-                    <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", fontSize: "0.75rem", color: "var(--success)", fontWeight: 800 }}>
-                      <span style={{ width: "7px", height: "7px", borderRadius: "50%", background: "var(--success)", boxShadow: "0 0 6px var(--success)" }} />
-                      <span>{pharma.statusText || "En Stock Immédiat"}</span>
-                    </div>
-                  </div>
-
-                  {pharma.phone && (
-                    <a
-                      href={`tel:${pharma.phone}`}
-                      className="btn-outline magnetic-btn"
-                      style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.45rem", width: "100%", padding: "0.55rem 0.8rem", fontSize: "0.78rem", textDecoration: "none" }}
-                    >
-                      <PhoneCall size={13} color="var(--accent-aqua)" />
-                      <span>{pharma.phone}</span>
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
+            <form onSubmit={handleWilayaSubmit} style={{ display: "flex", gap: "0.6rem", maxWidth: "420px", margin: "0 auto" }}>
+              <input
+                type="text"
+                value={wilayaWaitlist}
+                onChange={(e) => setWilayaWaitlist(e.target.value)}
+                placeholder="Votre Wilaya (ex: 16 Alger, 31 Oran...)"
+                required
+                style={{
+                  flex: 1,
+                  padding: "0.75rem 1rem",
+                  background: "var(--bg-input)",
+                  border: "1px solid var(--border-light)",
+                  borderRadius: "10px",
+                  color: "var(--text-primary)",
+                  fontSize: "0.85rem",
+                  outline: "none"
+                }}
+              />
+              <button type="submit" className="btn-aqua" style={{ padding: "0.75rem 1.4rem", fontSize: "0.85rem" }}>
+                M'informer
+              </button>
+            </form>
           </div>
         </div>
       </section>

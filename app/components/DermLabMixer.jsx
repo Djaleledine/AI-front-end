@@ -578,7 +578,7 @@ export default function DermLabMixer() {
             <div className="dermlab-order-card">
               <div className="order-price-row">
                 <div>
-                  <div className="order-price">1 500 DA</div>
+                  <div className="order-price">1 800 DA</div>
                   <div className="order-shipping-note">Livraison 58 Wilayas • QR Code VIP Inclus</div>
                 </div>
                 <button

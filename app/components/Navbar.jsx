@@ -17,12 +17,14 @@ import {
   Droplets,
   Truck,
   CheckCircle2,
-  ChevronRight
+  ChevronRight,
+  Gamepad2
 } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useTheme } from "../context/ThemeContext";
 import { useLanguage } from "../context/LanguageContext";
 import QuickSkinMatchModal from "./QuickSkinMatchModal";
+import AnjuciaLogo from "./brand/AnjuciaLogo";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -88,15 +90,7 @@ export default function Navbar() {
           <nav className="nav-main">
             {/* Brand Logo & Tagline */}
             <a href="/" className="brand-logo-wrap" title="ANJUCIA • Haute Précision Skincare">
-              <img
-                src="/assets/anjucia-symbol.png"
-                alt="ANJUCIA Monogram"
-                className="brand-symbol-icon"
-              />
-              <div className="brand-text-block">
-                <span className="brand-title">Anjucia</span>
-                <span className="brand-tagline">ADVANCED SKINCARE</span>
-              </div>
+              <AnjuciaLogo size={26} />
             </a>
 
             {/* Desktop Navigation Links — Clean, perfectly spaced */}
@@ -213,12 +207,8 @@ export default function Navbar() {
 
       <aside className={`mobile-nav-drawer ${isMobileMenuOpen ? "open" : ""}`}>
         <div className="mobile-drawer-header">
-          <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-            <img src="/assets/anjucia-symbol.png" alt="ANJUCIA" className="brand-symbol-icon" style={{ width: "28px", height: "28px" }} />
-            <div>
-              <div style={{ fontSize: "1.15rem", fontWeight: 900, color: "var(--text-primary)" }}>ANJUCIA</div>
-              <div style={{ fontSize: "0.62rem", fontWeight: 800, color: "var(--accent-aqua)", letterSpacing: "0.1em" }}>ADVANCED SKINCARE</div>
-            </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <AnjuciaLogo size={24} />
           </div>
           <button
             className="mobile-drawer-close"

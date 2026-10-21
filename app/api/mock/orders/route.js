@@ -39,7 +39,7 @@ export async function POST(request) {
       customerAddress: customerAddress || "Non spécifié",
       wilaya: wilaya || "16 - Alger",
       items: items || [],
-      totalDZD: totalDZD || 1500,
+      totalDZD: totalDZD || 1800,
       paymentMethod: "COD (Paiement Main à Main à la Livraison)",
       carrier: "Yalidine Express / ZR Express",
       estimatedDelivery: "24h - 48h ouvrées",

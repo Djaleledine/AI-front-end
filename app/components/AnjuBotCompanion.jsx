@@ -1,440 +1,339 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useLanguage } from "../context/LanguageContext";
 import { useCart } from "../context/CartContext";
-import { Sparkles, ArrowUp, Zap, MessageCircle, X, ChevronRight, Compass } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Sparkles, X, ChevronRight, MessageCircle } from "lucide-react";
+import { DropletMark } from "./brand/AnjuciaLogo";
 
-const FLIGHT_STATIONS = {
-  hero: {
-    side: "right",
-    topV: 26,
-    xOffset: 0,
-    bubblePos: "left",
-    highlightText: {
-      fr: "✦ Analyse Clinique : Soin apaisant 1 500 DA formulé sous climat algérien !",
-      dz: "✦ تحليل مخبري : جل-كريم طبي 1500 دج مصمم خصيصاً لمناخ الجزائر !"
-    }
-  },
-  packs: {
-    side: "left",
-    topV: 24,
-    xOffset: 0,
-    bubblePos: "right",
-    highlightText: {
-      fr: "✦ Alerte Économie : Le Pack Duo offre la livraison sur les 58 Wilayas ! 📦",
-      dz: "✦ فرصة توفير : باك الثنائي مع توصيل مجاني لكل الـ 58 ولاية ! 📦"
-    }
-  },
-  mixer: {
-    side: "center",
-    topV: 18,
-    xOffset: 0,
-    bubblePos: "bottom",
-    highlightText: {
-      fr: "✦ Labo Virtuel : Choisissez votre trésor végétal & observez la réaction ! 🧪",
-      dz: "✦ مخبر الخلطات : اختر الزيت الطبيعي وشوف النتيجة والملمس مباشرة ! 🧪"
-    }
-  },
-  rituels: {
-    side: "center",
-    topV: 18,
-    xOffset: 0,
-    bubblePos: "bottom",
-    highlightText: {
-      fr: "✦ Labo Virtuel : Choisissez votre trésor végétal & observez la réaction ! 🧪",
-      dz: "✦ مخبر الخلطات : اختر الزيت الطبيعي وشوف النتيجة والملمس مباشرة ! 🧪"
-    }
-  },
-  produits: {
-    side: "right",
-    topV: 28,
-    xOffset: 0,
-    bubblePos: "left",
-    highlightText: {
-      fr: "✦ Pureté Maximale : Niacinamide 3% pure, 0% parfum, pH 5.2 strict ✨",
-      dz: "✦ نقاوة طبية : نياسيناميد 3%، بدون عطور، بـ pH 5.2 متوازن تماماً ✨"
-    }
-  },
-  avis: {
-    side: "left",
-    topV: 25,
-    xOffset: 0,
-    bubblePos: "right",
-    highlightText: {
-      fr: "✦ 8 500+ Utilisateurs : Retours réels testés sous vent sec et chaleur ⭐",
-      dz: "✦ أكثر من 8500 تجربة حقيقية وموثقة تحت حرارة ورياح بلادنا ⭐"
-    }
-  },
-  charte: {
-    side: "right",
-    topV: 28,
-    xOffset: 0,
-    bubblePos: "left",
-    highlightText: {
-      fr: "✦ Charte Formulateur : Stabilité 45°C & embout canule zéro-panne 🛡️",
-      dz: "✦ ضمان الجودة : مقاومة حتى 45 درجة وتيوب كانول محمي من الأعطال 🛡️"
-    }
-  },
-  pharmacies: {
-    side: "center",
-    topV: 22,
-    xOffset: 0,
-    bubblePos: "bottom",
-    highlightText: {
-      fr: "✦ Réseau National : Disponible en ligne et en officines 58 Wilayas 📍",
-      dz: "✦ شبكة التوزيع : متوفر بالطلب السريع أو في الصيدليات المعتمدة 📍"
-    }
-  }
+const TIPS = {
+  fr: [
+    "✦ Soin Apaisant disponible : Gel-Crème 50 ml à 1 800 DA, livraison 58 Wilayas !",
+    "✦ Formulé pour le climat algérien : Niacinamide 3% pure, 0% parfum, pH 5.2 strict ✨",
+    "✦ Astuce : Vous pouvez installer l'App ANJUCIA sur votre écran d'accueil 📲",
+    "✦ Nouveau : Testez le jeu Goutte Rescue dans l'onglet Jeu 🎮 !",
+    "✦ Tube canule hygiénique : dosage précis sans risque de panne de pompe 🛡️"
+  ],
+  dz: [
+    "✦ متوفر الآن : جل-كريم طبي 50 مل بسعر 1800 دج مع توصيل لكل الـ 58 ولاية !",
+    "✦ تركيبة مخصصة لبلادنا : نياسيناميد 3%، بدون عطور، وبـ pH 5.2 متوازن تماماً ✨",
+    "✦ نصيحة : تقدر تثبت تطبيق أنجوسيا في شاشة هاتفك باش تطلب في ثواني 📲",
+    "✦ جرب اللعبة الجديدة : أنقذ القطرة في قسم الألعاب 🎮 !",
+    "✦ تيوب كانول محمي : يضمنلك استعمال نظيف وبلا أعطال 🛡️"
+  ],
+  en: [
+    "✦ Live Flagship: Soothing Face Gel-Cream 50 ml at 1,800 DZD, 58 Wilayas shipping!",
+    "✦ Formulated for North African climate: 3% pure Niacinamide, pH 5.2, 0% fragrance ✨",
+    "✦ Tip: Install ANJUCIA as a native app on your home screen 📲",
+    "✦ New: Play Droplet Rescue in the Game tab 🎮!",
+    "✦ Zero-fail cannula tube: maximum hygienic precision 🛡️"
+  ]
 };
 
 export default function AnjuBotCompanion() {
   const { lang } = useLanguage();
-  const [currentStation, setCurrentStation] = useState("hero");
-  const [isBubbleOpen, setIsBubbleOpen] = useState(true);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrollPercent, setScrollPercent] = useState(0);
+  const { isCartOpen } = useCart();
 
-  const containerRef = useRef(null);
-  const botPodRef = useRef(null);
-  const bubbleRef = useRef(null);
-  const thrusterRef = useRef(null);
-  const lastScrollYRef = useRef(0);
+  const [isOpen, setIsOpen] = useState(true);
+  const [tipIndex, setTipIndex] = useState(0);
+  const [isBlinking, setIsBlinking] = useState(false);
+  const [isHappy, setIsHappy] = useState(false);
+  const [pupilPos, setPupilPos] = useState({ x: 0, y: 0 });
 
-  const activeStationData = FLIGHT_STATIONS[currentStation] || FLIGHT_STATIONS.hero;
+  // Spring physics position
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const targetPos = useRef({ x: 0, y: 0 });
+  const currentPos = useRef({ x: 0, y: 0 });
+  const velocity = useRef({ x: 0, y: 0 });
 
-  // Fly Anju-Bot dynamically between sections!
+  const isDragging = useRef(false);
+  const dragStart = useRef({ x: 0, y: 0 });
+  const companionRef = useRef(null);
+
+  // Periodically cycle tips
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const isMobile = window.innerWidth < 768;
+    const timer = setInterval(() => {
+      setTipIndex((prev) => (prev + 1) % (TIPS[lang] || TIPS.fr).length);
+    }, 9000);
+    return () => clearInterval(timer);
+  }, [lang]);
 
-    if (!botPodRef.current) return;
-
-    let targetLeft = "calc(100vw - 86px)";
-    let targetTop = `${activeStationData.topV}vh`;
-
-    if (isMobile) {
-      targetLeft = "calc(100vw - 64px)";
-      targetTop = "78vh";
-    } else {
-      if (activeStationData.side === "left") {
-        targetLeft = "24px";
-      } else if (activeStationData.side === "center") {
-        targetLeft = "calc(50vw - 36px)";
-      } else {
-        targetLeft = "calc(100vw - 92px)";
-      }
-    }
-
-    // Swoop flight animation with banking tilt
-    gsap.to(botPodRef.current, {
-      left: targetLeft,
-      top: targetTop,
-      duration: 1.15,
-      ease: "power2.inOut",
-      overwrite: "auto"
-    });
-
-    // Animate bubble pop
-    if (bubbleRef.current && isBubbleOpen) {
-      gsap.fromTo(bubbleRef.current,
-        { scale: 0.8, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.8)" }
-      );
-    }
-  }, [currentStation, activeStationData, isBubbleOpen]);
-
-  // Section Tracking via ScrollTrigger
+  // Periodic blinking
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    gsap.registerPlugin(ScrollTrigger);
+    const blinkInterval = setInterval(() => {
+      setIsBlinking(true);
+      setTimeout(() => setIsBlinking(false), 140);
+    }, 3800 + Math.random() * 2000);
+    return () => clearInterval(blinkInterval);
+  }, []);
 
-    // 1. Ambient Hover Bobbing
-    const bobTween = gsap.to(botPodRef.current, {
-      y: "-=8",
-      duration: 2.2,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut"
-    });
+  // Eye tracking: pupils follow pointer
+  useEffect(() => {
+    const handleMove = (e) => {
+      if (!companionRef.current) return;
+      const rect = companionRef.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
 
-    // 2. Thruster flame pulsating
-    const thrusterTween = gsap.to(thrusterRef.current, {
-      scaleY: 1.35,
-      scaleX: 1.2,
-      opacity: 0.95,
-      duration: 0.6,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut"
-    });
+      const angle = Math.atan2(clientY - centerY, clientX - centerX);
+      const dist = Math.min(3.5, Math.hypot(clientX - centerX, clientY - centerY) * 0.03);
 
-    // 3. Scroll Tracking & Velocity Banking
-    let scrollTimeout;
-    const onScroll = () => {
-      const currentScrollY = window.scrollY;
-      const delta = currentScrollY - lastScrollYRef.current;
-      lastScrollYRef.current = currentScrollY;
-
-      const total = document.documentElement.scrollHeight - window.innerHeight;
-      if (total > 0) {
-        setScrollPercent(Math.round((currentScrollY / total) * 100));
-      }
-
-      // Bank tilt based on scroll speed
-      const targetTilt = Math.max(Math.min(delta * 0.45, 18), -18);
-      if (botPodRef.current) {
-        gsap.to(botPodRef.current, {
-          rotation: targetTilt,
-          duration: 0.2,
-          ease: "power1.out",
-          overwrite: "auto"
-        });
-      }
-
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        if (botPodRef.current) {
-          gsap.to(botPodRef.current, {
-            rotation: 0,
-            duration: 0.5,
-            ease: "elastic.out(1, 0.4)",
-            overwrite: "auto"
-          });
-        }
-      }, 100);
+      setPupilPos({
+        x: Math.cos(angle) * dist,
+        y: Math.sin(angle) * dist
+      });
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    // 4. Section Triggers
-    const stationIds = ["hero", "packs", "mixer", "rituels", "produits", "avis", "charte", "pharmacies"];
-    const triggers = [];
-
-    stationIds.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const st = ScrollTrigger.create({
-        trigger: el,
-        start: "top 65%",
-        end: "bottom 35%",
-        onEnter: () => setCurrentStation(id),
-        onEnterBack: () => setCurrentStation(id),
-      });
-      triggers.push(st);
-    });
-
+    window.addEventListener("mousemove", handleMove, { passive: true });
+    window.addEventListener("touchmove", handleMove, { passive: true });
     return () => {
-      bobTween.kill();
-      thrusterTween.kill();
-      window.removeEventListener("scroll", onScroll);
-      triggers.forEach((t) => t.kill());
-      clearTimeout(scrollTimeout);
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("touchmove", handleMove);
     };
   }, []);
 
-  // Bot Click Action: 360° Joyful Backflip + Sparkle Burst
-  const handleBotClick = () => {
-    if (botPodRef.current) {
-      gsap.fromTo(botPodRef.current,
-        { scale: 1, rotation: 0 },
-        {
-          scale: 1.3,
-          rotation: 360,
-          duration: 0.7,
-          ease: "back.out(2.2)",
-          onComplete: () => {
-            gsap.to(botPodRef.current, { scale: 1, rotation: 0, duration: 0.3 });
-          }
-        }
-      );
-      spawnBotSparks();
-    }
-    setIsMenuOpen((prev) => !prev);
+  // Damped spring animation loop for dragging / settling
+  useEffect(() => {
+    let animId;
+    const springK = 0.16;
+    const damping = 0.72;
+
+    const tick = () => {
+      animId = requestAnimationFrame(tick);
+      if (isDragging.current) return;
+
+      const fX = (targetPos.current.x - currentPos.current.x) * springK;
+      const fY = (targetPos.current.y - currentPos.current.y) * springK;
+
+      velocity.current.x = (velocity.current.x + fX) * damping;
+      velocity.current.y = (velocity.current.y + fY) * damping;
+
+      currentPos.current.x += velocity.current.x;
+      currentPos.current.y += velocity.current.y;
+
+      // Only update react state if movement is non-negligible
+      if (
+        Math.abs(velocity.current.x) > 0.01 ||
+        Math.abs(velocity.current.y) > 0.01 ||
+        Math.abs(currentPos.current.x - pos.x) > 0.2
+      ) {
+        setPos({ x: currentPos.current.x, y: currentPos.current.y });
+      }
+    };
+
+    animId = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(animId);
+  }, [pos.x]);
+
+  const handlePointerDown = (e) => {
+    isDragging.current = true;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    dragStart.current = {
+      x: clientX - currentPos.current.x,
+      y: clientY - currentPos.current.y
+    };
   };
 
-  const spawnBotSparks = () => {
-    if (!botPodRef.current) return;
-    const rect = botPodRef.current.getBoundingClientRect();
-    const colors = ["#38BDF8", "#719FB7", "#FFFFFF", "#9BB0A0"];
-    for (let i = 0; i < 14; i++) {
-      const p = document.createElement("div");
-      const sz = Math.random() * 6 + 3;
-      p.style.cssText = `position:fixed;width:${sz}px;height:${sz}px;border-radius:50%;background:${colors[Math.floor(Math.random() * colors.length)]};box-shadow:0 0 8px #38BDF8;left:${rect.left + rect.width / 2}px;top:${rect.top + rect.height / 2}px;pointer-events:none;z-index:9999;`;
-      document.body.appendChild(p);
-      gsap.to(p, {
-        x: (Math.random() - 0.5) * 140,
-        y: (Math.random() - 0.5) * 140 - 20,
-        scale: 0,
-        opacity: 0,
-        duration: Math.random() * 0.7 + 0.4,
-        ease: "power2.out",
-        onComplete: () => p.remove(),
-      });
-    }
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return;
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    currentPos.current = {
+      x: clientX - dragStart.current.x,
+      y: clientY - dragStart.current.y
+    };
+    setPos({ ...currentPos.current });
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    setIsMenuOpen(false);
+  const handlePointerUp = () => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    // Spring back to base dock
+    targetPos.current = { x: 0, y: 0 };
   };
 
-  const currentHighlightText = activeStationData.highlightText[lang] || activeStationData.highlightText.fr;
+  const handleCompanionClick = () => {
+    setIsHappy(true);
+    setTipIndex((prev) => (prev + 1) % (TIPS[lang] || TIPS.fr).length);
+    try { navigator.vibrate?.(12); } catch (_) {}
+    setTimeout(() => setIsHappy(false), 900);
+  };
+
+  if (isCartOpen) return null; // Avoid overlapping cart drawer
+
+  const currentTip = (TIPS[lang] || TIPS.fr)[tipIndex];
 
   return (
-    <div ref={containerRef} className="anjubot-viewport-stage" aria-label="Anju-Bot Volant">
-      {/* ── Autonomous Flying Pod ───────────────────────────────────────────── */}
-      <div
-        ref={botPodRef}
-        className={`anjubot-flying-pod station-${currentStation} side-${activeStationData.side}`}
-      >
-        {/* Holographic Speech HUD Bubble */}
-        {isBubbleOpen && (
-          <div
-            ref={bubbleRef}
-            className={`anjubot-flight-bubble bubble-dock-${activeStationData.bubblePos}`}
-          >
-            <button
-              onClick={(e) => { e.stopPropagation(); setIsBubbleOpen(false); }}
-              className="anjubot-bubble-close"
-              title="Masquer le message"
-              aria-label="Masquer"
-            >
-              <X size={12} />
-            </button>
-            <div className="anjubot-bubble-header">
-              <span className="anjubot-status-dot" />
-              <span className="anjubot-badge-title">ANJU-BOT EN VOL</span>
-              <span className="anjubot-section-pill">{currentStation.toUpperCase()}</span>
-            </div>
-            <p className="anjubot-bubble-text">{currentHighlightText}</p>
-            <div className="anjubot-bubble-footer">
-              <span>Position : {scrollPercent}%</span>
-              <button
-                onClick={(e) => { e.stopPropagation(); setIsMenuOpen(true); }}
-                className="anjubot-action-link"
-              >
-                <span>Menu</span>
-                <ChevronRight size={13} />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* The Physical Mascot Drone Orb */}
+    <aside
+      ref={companionRef}
+      aria-label="Compagnon Anjucia Droplet"
+      className="anju-companion-dock"
+      style={{
+        position: "fixed",
+        bottom: "calc(var(--tab-bar-height, 64px) + 14px)",
+        right: "14px",
+        zIndex: 990,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-end",
+        transform: `translate(${pos.x}px, ${pos.y}px)`,
+        touchAction: "none"
+      }}
+      onPointerDown={handlePointerDown}
+      onPointerMove={handlePointerMove}
+      onPointerUp={handlePointerUp}
+    >
+      {/* Speech Tip Bubble */}
+      {isOpen && (
         <div
-          className="anjubot-drone-core"
-          onClick={handleBotClick}
-          title="Anju-Bot • Cliquez pour faire un salto ou ouvrir les actions !"
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") handleBotClick(); }}
+          className="companion-bubble"
+          style={{
+            maxWidth: "260px",
+            background: "var(--bg-card)",
+            border: "1.5px solid var(--accent-aqua)",
+            borderRadius: "16px 16px 4px 16px",
+            padding: "0.75rem 0.95rem",
+            marginBottom: "0.55rem",
+            boxShadow: "var(--shadow-md), var(--shadow-glow)",
+            fontSize: "0.78rem",
+            color: "var(--text-primary)",
+            lineHeight: 1.45,
+            position: "relative",
+            animation: "fade-in 0.25s ease"
+          }}
         >
-          {/* Orbital Glowing Cyan Ring */}
-          <div className="anjubot-orbital-ring" />
-
-          {/* Holographic Drone Dome Frame */}
-          <div className="anjubot-dome-frame">
-            <img
-              src="/assets/anju-bot.jpg"
-              alt="Anju-Bot Mascot ANJUCIA"
-              className="anjubot-mascot-img"
-            />
-          </div>
-
-          {/* Ion Thruster Flare Below */}
-          <div ref={thrusterRef} className="anjubot-ion-thruster" />
-
-          {/* Online Beacon */}
-          <div className="anjubot-pulse-beacon" />
-        </div>
-
-        {/* Quick Bubble Re-open Button if closed */}
-        {!isBubbleOpen && (
           <button
-            onClick={(e) => { e.stopPropagation(); setIsBubbleOpen(true); }}
-            className="anjubot-reopen-bubble-btn"
-            title="Afficher les conseils d'Anju-Bot"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsOpen(false);
+            }}
+            style={{
+              position: "absolute",
+              top: "4px",
+              right: "4px",
+              background: "transparent",
+              border: "none",
+              color: "var(--text-muted)",
+              cursor: "pointer",
+              padding: "2px"
+            }}
+            aria-label="Fermer"
           >
-            💬
+            <X size={12} />
           </button>
-        )}
+          <div style={{ paddingRight: "0.8rem" }}>{currentTip}</div>
+        </div>
+      )}
 
-        {/* Command Menu Popover */}
-        {isMenuOpen && (
-          <div className="anjubot-command-menu">
-            <div className="anjubot-menu-head">
-              <div style={{ display: "flex", alignItems: "center", gap: "0.4rem" }}>
-                <Zap size={15} color="var(--accent-aqua)" />
-                <span style={{ fontWeight: 900, fontSize: "0.82rem", color: "var(--text-primary)" }}>
-                  ANJU-BOT ACTIONS
-                </span>
-              </div>
-              <button
-                onClick={(e) => { e.stopPropagation(); setIsMenuOpen(false); }}
-                style={{ background: "none", border: "none", color: "var(--text-muted)", cursor: "pointer" }}
-              >
-                <X size={15} />
-              </button>
+      {/* Main Droplet Creature */}
+      <button
+        onClick={handleCompanionClick}
+        aria-label="Interagir avec la goutte Anjucia"
+        style={{
+          background: "none",
+          border: "none",
+          cursor: "grab",
+          padding: 0,
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "56px",
+          height: "68px",
+          filter: "drop-shadow(0 8px 16px rgba(113, 159, 183, 0.45))",
+          transform: isHappy ? "scale(1.18) translateY(-6px)" : "scale(1)",
+          transition: "transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)"
+        }}
+      >
+        {/* Vector Anjucia Droplet Body */}
+        <DropletMark size={54} color="#719FB7" />
+
+        {/* Cute Face Overlay positioned on the droplet belly */}
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -40%)",
+            width: "30px",
+            height: "20px",
+            pointerEvents: "none"
+          }}
+        >
+          {/* Eyes */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            {/* Left Eye */}
+            <div
+              style={{
+                width: "7px",
+                height: isBlinking ? "1.5px" : isHappy ? "5px" : "7px",
+                borderRadius: isHappy ? "7px 7px 0 0" : "50%",
+                background: "#FFFFFF",
+                position: "relative",
+                overflow: "hidden",
+                transition: "height 0.1s ease"
+              }}
+            >
+              {!isBlinking && !isHappy && (
+                <div
+                  style={{
+                    width: "4px",
+                    height: "4px",
+                    borderRadius: "50%",
+                    background: "#11171A",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: `translate(calc(-50% + ${pupilPos.x}px), calc(-50% + ${pupilPos.y}px))`
+                  }}
+                />
+              )}
             </div>
 
-            <div className="anjubot-menu-items">
-              <a
-                href="/analyzer"
-                className="anjubot-menu-item"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <Sparkles size={16} color="var(--accent-aqua)" />
-                <div>
-                  <div style={{ fontWeight: 800, fontSize: "0.82rem", color: "var(--text-primary)" }}>
-                    Station DermoScan AI™
-                  </div>
-                  <div style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>
-                    Diagnostic cutané & formule sur-mesure
-                  </div>
-                </div>
-              </a>
-
-              <a
-                href="https://wa.me/213550000000?text=Bonjour%20Anjucia,%20je%20souhaite%20un%20conseil%20sur%20ma%20routine."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="anjubot-menu-item"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <MessageCircle size={16} color="var(--success)" />
-                <div>
-                  <div style={{ fontWeight: 800, fontSize: "0.82rem", color: "var(--text-primary)" }}>
-                    Conseil Expert WhatsApp
-                  </div>
-                  <div style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>
-                    Assistance formateur en direct
-                  </div>
-                </div>
-              </a>
-
-              <button
-                onClick={scrollToTop}
-                className="anjubot-menu-item"
-                style={{ width: "100%", background: "none", border: "none", textAlign: "left" }}
-              >
-                <ArrowUp size={16} color="var(--accent-aqua)" />
-                <div>
-                  <div style={{ fontWeight: 800, fontSize: "0.82rem", color: "var(--text-primary)" }}>
-                    Remonter en Haut de Page
-                  </div>
-                  <div style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>
-                    Retour instantané au sommet
-                  </div>
-                </div>
-              </button>
+            {/* Right Eye */}
+            <div
+              style={{
+                width: "7px",
+                height: isBlinking ? "1.5px" : isHappy ? "5px" : "7px",
+                borderRadius: isHappy ? "7px 7px 0 0" : "50%",
+                background: "#FFFFFF",
+                position: "relative",
+                overflow: "hidden",
+                transition: "height 0.1s ease"
+              }}
+            >
+              {!isBlinking && !isHappy && (
+                <div
+                  style={{
+                    width: "4px",
+                    height: "4px",
+                    borderRadius: "50%",
+                    background: "#11171A",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: `translate(calc(-50% + ${pupilPos.x}px), calc(-50% + ${pupilPos.y}px))`
+                  }}
+                />
+              )}
             </div>
           </div>
-        )}
-      </div>
-    </div>
+
+          {/* Cute Smile */}
+          <div
+            style={{
+              width: "6px",
+              height: isHappy ? "4px" : "2.5px",
+              borderBottom: "1.8px solid #FFFFFF",
+              borderRadius: "0 0 6px 6px",
+              margin: "2px auto 0"
+            }}
+          />
+        </div>
+      </button>
+    </aside>
   );
 }

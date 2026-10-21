@@ -6,6 +6,7 @@ import { useCart } from "../context/CartContext";
 import { useLanguage } from "../context/LanguageContext";
 import { mock } from "../services/mockApi";
 import { ALGERIAN_WILAYAS } from "../data/products";
+import { DropletMark } from "./brand/AnjuciaLogo";
 
 export default function CartDrawer() {
   const {
@@ -137,7 +138,23 @@ export default function CartDrawer() {
               <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "1.5rem" }}>
                 {cartItems.map((item) => (
                   <div key={item.id} className="cart-item-row">
-                    <img src={item.image} alt={item.name} className="cart-item-thumb" />
+                    {item.image ? (
+                      <img src={item.image} alt={item.name} className="cart-item-thumb" />
+                    ) : (
+                      <div
+                        className="cart-item-thumb"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          background: "var(--bg-secondary)",
+                          borderRadius: "10px",
+                          border: "1px solid var(--border-light)"
+                        }}
+                      >
+                        <DropletMark size={28} color="var(--accent-aqua)" />
+                      </div>
+                    )}
                     <div className="cart-item-details">
                       <div className="cart-item-name">{item.name}</div>
                       <div style={{ fontSize: "0.72rem", color: "var(--text-secondary)" }}>{item.volume}</div>

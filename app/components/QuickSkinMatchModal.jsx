@@ -19,13 +19,12 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
 
   const handleFinish = () => {
     // Generate recommendation
-    const isDry = skinType === "dry" || region === "sahara";
-    const recommendedProduct = isDry ? "cerahydra-cream-50" : "soothing-gel-cream";
+    const recommendedProduct = "soothing-gel-cream";
     const naturalTip = isDry
       ? {
-          fr: "Ajoutez 2 gouttes d'Huile d'Argan pure le soir pour sceller l'hydratation sans effet comédogène.",
-          en: "Add 2 drops of pure cold-pressed Argan Oil at night to seal moisture without clogging pores.",
-          dz: "زيد 2 قطرات تاع زيت الأركان الطبيعي فالليل باش تقفل المسامات وتحبس الماء داخل البشرة."
+          fr: "Ajoutez 2 gouttes d'Huile d'Argan pure le soir avec votre Gel-Crème pour sceller l'hydratation face à la sécheresse.",
+          en: "Add 2 drops of pure cold-pressed Argan Oil at night with your Gel-Cream to seal moisture.",
+          dz: "زيد 2 قطرات تاع زيت الأركان الطبيعي فالليل مع الجل-كريم باش تحبس الترطيب وتحمي حاجز البشرة."
         }
       : {
           fr: "Vaporisez de l'Eau de Rose pure le matin avant votre Gel-Cream pour un effet matifiant et frais.",
@@ -35,7 +34,7 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
 
     setResult({
       productId: recommendedProduct,
-      productName: isDry ? "CeraHydra+ Cellular Cream (3 800 DZD)" : "Lightweight Soothing Face Gel-Cream (1 500 DA)",
+      productName: "Lightweight Soothing Face Gel-Cream (1 800 DA)",
       naturalTip: naturalTip[lang] || naturalTip.fr
     });
     setStep(4);

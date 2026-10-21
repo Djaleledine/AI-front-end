@@ -29,8 +29,8 @@ export const MOCK_BUNDLES = [
     badge: { fr: "ESSENTIEL FORMULATEUR", en: "SOLO STAR CARE", dz: "المنتج النجم" },
     name: { fr: "Soin Seul Soothing Gel-Cream", en: "Single Soothing Gel-Cream", dz: "جل-كريم المرطب والمهدئ" },
     subtitle: { fr: "50 ml • Tube canule précision", en: "50 ml • Precision nozzle tube", dz: "50 مل • أنبوب كانول دقيق" },
-    priceDZD: 1500,
-    priceFormatted: "1 500 DA",
+    priceDZD: 1800,
+    priceFormatted: "1 800 DA",
     originalPriceDZD: 2000,
     items: ["soothing-gel-cream"],
     features: [

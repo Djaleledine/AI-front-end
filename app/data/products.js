@@ -12,8 +12,7 @@ export const ANJUCIA_PRODUCTS = [
     category: "hydratation",
     volume: "50 ml ℮ 1.7 FL. OZ.",
     packaging: "Tube Canule Haute Précision (Anti-Contamination, Zéro Panne de Pompe)",
-    priceDZD: 1500,
-    originalPriceDZD: 2000,
+    priceDZD: 1800,
     badge: "FORMULATION AVANCÉE",
     isHero: true,
     isNew: true,
@@ -221,6 +220,21 @@ export const ANJUCIA_PRODUCTS = [
     benefitClaim: "Respecte scrupuleusement le film hydrolipidique • pH 5.5 certifié"
   }
 ];
+
+/**
+ * Launch configuration: only one product is purchasable for now.
+ * Every other formula is shown as "coming soon" (no images, no price, no add-to-cart).
+ */
+export const AVAILABLE_PRODUCT_ID = "soothing-gel-cream";
+
+ANJUCIA_PRODUCTS.forEach((p) => {
+  p.status = p.id === AVAILABLE_PRODUCT_ID ? "available" : "coming_soon";
+  p.image = null; // No product photography yet — UI renders an animated droplet placeholder
+});
+
+export const FLAGSHIP_PRODUCT = ANJUCIA_PRODUCTS.find((p) => p.id === AVAILABLE_PRODUCT_ID);
+export const COMING_SOON_PRODUCTS = ANJUCIA_PRODUCTS.filter((p) => p.status === "coming_soon");
+export const isPurchasable = (id) => id === AVAILABLE_PRODUCT_ID;
 
 export const ALGERIAN_WILAYAS = [
   "01 - Adrar", "02 - Chlef", "03 - Laghouat", "04 - Oum El Bouaghi", "05 - Batna",

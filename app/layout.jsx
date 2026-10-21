@@ -1,22 +1,23 @@
 import "./globals.css";
-import Navbar from "./components/Navbar";
+import TopAppBar from "./components/app/TopAppBar";
+import BottomTabBar from "./components/app/BottomTabBar";
 import CartDrawer from "./components/CartDrawer";
 import Footer from "./components/Footer";
 import PWAInstallBanner from "./components/PWAInstallBanner";
-import StickyMobileBuyBar from "./components/StickyMobileBuyBar";
 import AnjuBotCompanion from "./components/AnjuBotCompanion";
 import GsapEngine from "./components/GsapEngine";
+import ToastContainer from "./components/ui/ToastContainer";
 import { CartProvider } from "./context/CartContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { LanguageProvider } from "./context/LanguageContext";
 
 export const metadata = {
-  title: "Anjucia | Boutique Officielle Algérie • Advanced Skincare",
-  description: "Boutique officielle ANJUCIA Algérie. Soin visage apaisant 1 500 DA, crème barrière CeraHydra+ et analyse cutanée DermoScan AI. Expédition 58 Wilayas.",
+  title: "Anjucia | Boutique & App Officielle Algérie • 1 800 DA",
+  description: "Boutique & Application officielle ANJUCIA Algérie. Soin visage apaisant 1 800 DA, tube canule haute précision, livraison 58 Wilayas.",
   manifest: "/manifest.json",
   icons: {
     icon: "/assets/symbol.svg",
-    apple: "/assets/symbol.svg"
+    apple: "/icons/apple-touch-icon.png"
   },
   appleWebApp: {
     capable: true,
@@ -28,8 +29,6 @@ export const metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
   viewportFit: "cover",
   themeColor: "#11171A"
 };
@@ -42,18 +41,22 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body>
         <ThemeProvider>
           <LanguageProvider>
             <CartProvider>
               <GsapEngine />
-              <AnjuBotCompanion />
+              <ToastContainer />
               <PWAInstallBanner />
-              <Navbar />
-              {children}
+              <TopAppBar />
+              <div className="app-shell-content">
+                {children}
+              </div>
+              <AnjuBotCompanion />
               <CartDrawer />
-              <StickyMobileBuyBar />
+              <BottomTabBar />
               <Footer />
             </CartProvider>
           </LanguageProvider>
