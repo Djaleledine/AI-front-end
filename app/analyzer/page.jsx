@@ -9,19 +9,26 @@ import {
   Sun,
   Wind,
   AlertTriangle,
+  Check,
   CheckCircle2,
   ShoppingBag,
   Send,
   RefreshCw,
+  Eye,
   EyeOff,
   Lock,
+  Unlock,
+  Key,
+  X,
+  Loader2,
   Activity,
   FlaskConical,
   TrendingUp,
   Trash2,
   MapPin,
   Sliders,
-  MessageSquare
+  MessageSquare,
+  ArrowRight
 } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { useCart } from "../context/CartContext";
@@ -97,7 +104,37 @@ const UI_TEXT = {
     chatSend: "Envoyer",
     memoryTitle: "Mémoire Clinique Enregistrée (Appareil Local)",
     clearMemory: "Réinitialiser l'historique",
-    scansCountLabel: "Scans effectués"
+    scansCountLabel: "Scans effectués",
+    comingSoonTag: "EN COURS DE DÉPLOIEMENT • PHASE DE FORMULATION CLINIQUE",
+    comingSoonTitle: "DermoScan AI™ Station arrive prochainement",
+    comingSoonSubtitle:
+      "La première station clinique d'analyse biophotonique et d'adaptation bioclimatique pour les 58 Wilayas algériennes est actuellement en phase de calibrage et réservée aux tests dermatologiques.",
+    comingSoonFeature1Title: "Cartographie 3 Zones Haute Précision",
+    comingSoonFeature1Desc:
+      "Analyse télémétrique du front (Zone T) et des joues (Zone U) avec détection du stress cutané, tiraillement et rougeurs.",
+    comingSoonFeature2Title: "Bioclimat 58 Wilayas & Eau Calcaire",
+    comingSoonFeature2Desc:
+      "Ajustement selon les agressions locales : humidité côtière, froid sec des hauts plateaux, sirocco saharien et eau dure.",
+    comingSoonFeature3Title: "Synergies Naturelles & Détection Conflits pH",
+    comingSoonFeature3Desc:
+      "Prescription d'actifs purs combinés aux bio-actifs locaux (thé vert EGCG, avoine, hydrolats) et neutralisation des fausses recettes maison.",
+    waitlistBadge: "LISTE D'ATTENTE PRIORITAIRE",
+    waitlistTitle: "Soyez informé(e) en avant-première dès l'ouverture officielle",
+    waitlistDesc: "Laissez votre contact pour recevoir une invitation prioritaire dès l'ouverture publique de la station.",
+    waitlistPlaceholder: "Votre numéro de téléphone (05/06/07) ou e-mail",
+    waitlistBtn: "Rejoindre la liste d'attente",
+    waitlistSuccess: "Inscription validée ! Vous recevrez une invitation prioritaire dès l'ouverture officielle.",
+    waitlistError: "Veuillez renseigner un numéro de téléphone algérien ou un e-mail valide.",
+    labUnlockBtn: "Accès Laboratoire / Déverrouiller",
+    labUnlockModalTitle: "Accès Laboratoire DermoScan AI™",
+    labUnlockModalDesc:
+      "Veuillez saisir le mot de passe d'accès réservé pour déverrouiller la station de diagnostic en avant-première.",
+    labPasswordLabel: "Mot de passe d'accès",
+    labPasswordPlaceholder: "Entrez le mot de passe...",
+    labUnlockSubmit: "Déverrouiller la Station",
+    labUnlockClose: "Fermer",
+    labUnlockedBanner: "Session Laboratoire Active • DermoScan AI™ Déverrouillé",
+    labRelockBtn: "Reverrouiller"
   },
   en: {
     tag: "DERMOSCAN AI™ STATION • 58-WILAYA CLINICAL TELEMETRY",
@@ -166,7 +203,37 @@ const UI_TEXT = {
     chatSend: "Send",
     memoryTitle: "Saved Clinical Memory (Local Device)",
     clearMemory: "Reset History",
-    scansCountLabel: "Completed scans"
+    scansCountLabel: "Completed scans",
+    comingSoonTag: "COMING SOON • CLINICAL FORMULATION PHASE",
+    comingSoonTitle: "DermoScan AI™ Station is Coming Soon",
+    comingSoonSubtitle:
+      "The first clinical biophotonic and bioclimatic skin diagnostic station calibrated for all 58 Algerian Wilayas is currently undergoing calibration and restricted to laboratory testing.",
+    comingSoonFeature1Title: "High-Precision 3-Zone Mapping",
+    comingSoonFeature1Desc:
+      "Telemetric scanning of the forehead (T-Zone) and cheeks (U-Zone) detecting barrier stress, dryness, and redness.",
+    comingSoonFeature2Title: "58-Wilaya Bioclimate & Hard Water",
+    comingSoonFeature2Desc:
+      "Physiological tuning for local climate stressors: coastal humidity, continental high plateaus, Saharan sirocco, and hard water.",
+    comingSoonFeature3Title: "Natural Synergies & pH Conflict Guardrail",
+    comingSoonFeature3Desc:
+      "Prescription of pure actives paired with local botanical treasures (EGCG green tea, colloidal oat, hydrolats) and replacement of caustic DIY recipes.",
+    waitlistBadge: "PRIORITY WAITLIST",
+    waitlistTitle: "Get notified first when the station goes live",
+    waitlistDesc: "Leave your contact details to receive an exclusive priority invitation to the public launch.",
+    waitlistPlaceholder: "Phone number (05/06/07) or email address",
+    waitlistBtn: "Join Priority Waitlist",
+    waitlistSuccess: "You're registered! You will receive priority access when DermoScan AI™ opens publicly.",
+    waitlistError: "Please enter a valid Algerian phone number or email address.",
+    labUnlockBtn: "Lab Access / Unlock Station",
+    labUnlockModalTitle: "DermoScan AI™ Laboratory Access",
+    labUnlockModalDesc:
+      "Enter the laboratory access password to unlock the diagnostic station in preview mode.",
+    labPasswordLabel: "Access Password",
+    labPasswordPlaceholder: "Enter password...",
+    labUnlockSubmit: "Unlock Station",
+    labUnlockClose: "Cancel",
+    labUnlockedBanner: "Active Laboratory Session • DermoScan AI™ Unlocked",
+    labRelockBtn: "Relock Station"
   },
   dz: {
     tag: "DERMOSCAN AI™ STATION • التشخيص العيادي الذكي عبر 58 ولاية",
@@ -235,7 +302,37 @@ const UI_TEXT = {
     chatSend: "إرسال",
     memoryTitle: "الذاكرة العيادية المحفوظة",
     clearMemory: "مسح السجل",
-    scansCountLabel: "عدد الفحوصات"
+    scansCountLabel: "عدد الفحوصات",
+    comingSoonTag: "قريباً • مرحلة التطوير والضبط المخبري",
+    comingSoonTitle: "محطة DermoScan AI™ قادمة قريباً",
+    comingSoonSubtitle:
+      "أول محطة تشخيص بيومتري وبيوكيميائي للبشرة مخصصة لولايات الجزائر الـ 58 (الماء الكلسي، رطوبة الساحل، الهضاب والشهيلي الصحراوي)، مخصصة حالياً للتجارب المخبرية.",
+    comingSoonFeature1Title: "مسح ثلاثي الأبعاد عالي الدقة",
+    comingSoonFeature1Desc:
+      "تحليل دقيق لمنطقة T (الجبين والأنف) ومنطقة U (الخدود) للكشف عن جفاف الحاجز الجلدي والاحمرار.",
+    comingSoonFeature2Title: "معايرة مناخ 58 ولاية والماء الكلسي",
+    comingSoonFeature2Desc:
+      "ضبط البروتوكول حسب مناخ ولايتك: الرطوبة الساحلية، جفاف الهضاب العليا، حرارة الشهيلي وملوحة الماء.",
+    comingSoonFeature3Title: "تكامل طبيعي ومنع تعارضات الـ pH",
+    comingSoonFeature3Desc:
+      "توليفات علمية مع المكونات الطبيعية المتوفرة في البيت الجزائري (مغلي الشاي الأخضر EGCG، دقيق الشوفان، مقطرات الورد).",
+    waitlistBadge: "قائمة الانتظار الأولوية",
+    waitlistTitle: "كوني أول من يستفيد من الفحص عند الإطلاق الرسمي",
+    waitlistDesc: "سجلي رقم هاتفك أو بريدك الإلكتروني ليصلك رابط الفحص فور افتتاحه للعموم.",
+    waitlistPlaceholder: "رقم الهاتف (05/06/07) أو البريد الإلكتروني",
+    waitlistBtn: "الانضمام لقائمة الانتظار",
+    waitlistSuccess: "تم تسجيلك بنجاح! سنقوم بإشعارك بالأولوية فور فتح المحطة.",
+    waitlistError: "يرجى إدخال رقم هاتف جزائري أو بريد إلكتروني صحيح.",
+    labUnlockBtn: "ولوج المخبر / فتح القفل",
+    labUnlockModalTitle: "ولوج مخبر DermoScan AI™",
+    labUnlockModalDesc:
+      "أدخلي كلمة سر المخبر لفتح محطة الفحص الذكي في النسخة التجريبية الحصرية.",
+    labPasswordLabel: "كلمة السر",
+    labPasswordPlaceholder: "أدخل كلمة المرور...",
+    labUnlockSubmit: "تأكيد وفتح المحطة",
+    labUnlockClose: "إلغاء",
+    labUnlockedBanner: "جلسة مخبرية مفعّلة • محطة DermoScan AI™ مفتوحة",
+    labRelockBtn: "إعادة القفل"
   }
 };
 
@@ -299,6 +396,146 @@ export default function AnalyzerPage() {
   const [chatHistory, setChatHistory] = useState([]);
   const [chatInput, setChatInput] = useState("");
   const [isChatting, setIsChatting] = useState(false);
+
+  // Coming Soon & Lab Access Gate State
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isUnlockModalOpen, setIsUnlockModalOpen] = useState(false);
+  const [unlockPassword, setUnlockPassword] = useState("");
+  const [unlockError, setUnlockError] = useState("");
+  const [isSubmittingUnlock, setIsSubmittingUnlock] = useState(false);
+  const [showUnlockPassword, setShowUnlockPassword] = useState(false);
+  const [waitlistInput, setWaitlistInput] = useState("");
+  const [waitlistStatus, setWaitlistStatus] = useState("idle"); // "idle" | "loading" | "success" | "error"
+  const [waitlistMsg, setWaitlistMsg] = useState("");
+
+  // Check initial DermoScan unlock status on mount
+  useEffect(() => {
+    let isMounted = true;
+    async function checkAuth() {
+      try {
+        const res = await fetch("/api/dermoscan/auth", { cache: "no-store" });
+        if (res.ok) {
+          const json = await res.json();
+          if (isMounted) {
+            setIsUnlocked(Boolean(json?.unlocked));
+          }
+        }
+      } catch {
+        // Defaults to locked
+      } finally {
+        if (isMounted) setIsCheckingAuth(false);
+      }
+    }
+    checkAuth();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleUnlockSubmit = async (e) => {
+    if (e) e.preventDefault();
+    if (!unlockPassword.trim() || isSubmittingUnlock) return;
+    setIsSubmittingUnlock(true);
+    setUnlockError("");
+
+    try {
+      const res = await fetch("/api/dermoscan/auth", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password: unlockPassword.trim() })
+      });
+      const json = await res.json();
+      if (res.ok && json.unlocked) {
+        setIsUnlocked(true);
+        setIsUnlockModalOpen(false);
+        setUnlockPassword("");
+        showToast?.(
+          lang === "dz" || lang === "ar"
+            ? "تم تفعيل محطة DermoScan AI™ بنجاح 🔓"
+            : lang === "en"
+            ? "DermoScan AI™ Station Unlocked 🔓"
+            : "Station DermoScan AI™ déverrouillée avec succès 🔓",
+          "success"
+        );
+      } else {
+        setUnlockError(
+          json?.error ||
+            (lang === "dz"
+              ? "كلمة المرور غير صحيحة."
+              : lang === "en"
+              ? "Incorrect access password."
+              : "Mot de passe d'accès incorrect.")
+        );
+      }
+    } catch {
+      setUnlockError(
+        lang === "dz"
+          ? "تعذر الاتصال بخادم التحقق."
+          : lang === "en"
+          ? "Network error while checking password."
+          : "Erreur de connexion au serveur d'authentification."
+      );
+    } finally {
+      setIsSubmittingUnlock(false);
+    }
+  };
+
+  const handleRelock = async () => {
+    try {
+      await fetch("/api/dermoscan/auth", { method: "DELETE" });
+    } catch {}
+    setIsUnlocked(false);
+    stopCameraStream();
+    showToast?.(
+      lang === "dz" || lang === "ar"
+        ? "تم إعادة قفل المحطة"
+        : lang === "en"
+        ? "Station Relocked"
+        : "Station DermoScan reverrouillée",
+      "info"
+    );
+  };
+
+  const handleWaitlistSubmit = async (e) => {
+    if (e) e.preventDefault();
+    const contact = waitlistInput.trim();
+    if (!contact) {
+      setWaitlistMsg(t.waitlistError);
+      setWaitlistStatus("error");
+      return;
+    }
+
+    setWaitlistStatus("loading");
+    setWaitlistMsg("");
+    try {
+      const res = await fetch("/api/store", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "lead",
+          payload: {
+            contact,
+            productName: "DermoScan AI™ Station - Early Access",
+            source: "dermoscan_coming_soon",
+            notes: `Wilaya selected: ${wilaya}`
+          }
+        })
+      });
+
+      if (res.ok) {
+        setWaitlistStatus("success");
+        setWaitlistMsg(t.waitlistSuccess);
+        setWaitlistInput("");
+      } else {
+        setWaitlistStatus("error");
+        setWaitlistMsg(t.waitlistError);
+      }
+    } catch {
+      setWaitlistStatus("error");
+      setWaitlistMsg(t.waitlistError);
+    }
+  };
 
   // Sync saved Wilaya once memory loads
   useEffect(() => {
@@ -692,6 +929,20 @@ export default function AnalyzerPage() {
       });
 
       const json = await res.json();
+
+      if (res.status === 403 || json?.isLocked) {
+        setIsUnlocked(false);
+        setIsUnlockModalOpen(true);
+        showToast?.(
+          json?.error ||
+            (lang === "dz"
+              ? "محطة DermoScan مقفلة حالياً. يرجى إدخال كلمة السر."
+              : "DermoScan AI™ est actuellement en formulation. Mot de passe requis."),
+          "warning"
+        );
+        return;
+      }
+
       if (json?.data) {
         setScanResult(json.data);
         setActiveModelUsed(json.modelUsed || "gemini-3.8-flash");
@@ -758,6 +1009,20 @@ export default function AnalyzerPage() {
       });
 
       const json = await res.json();
+
+      if (res.status === 403 || json?.isLocked) {
+        setIsUnlocked(false);
+        setIsUnlockModalOpen(true);
+        showToast?.(
+          json?.error ||
+            (lang === "dz"
+              ? "محطة DermoScan مقفلة حالياً. يرجى إدخال كلمة السر."
+              : "DermoScan AI™ est actuellement en formulation. Mot de passe requis."),
+          "warning"
+        );
+        return;
+      }
+
       if (json?.data) {
         const replyText = json.data.reply;
         const conflictAlert = json.data.routineConflictAlert;
@@ -814,11 +1079,708 @@ export default function AnalyzerPage() {
     setIsCartOpen(true);
   };
 
+  const renderUnlockModal = () => {
+    if (!isUnlockModalOpen) return null;
+    return (
+      <div
+        role="dialog"
+        aria-modal="true"
+        style={{
+          position: "fixed",
+          inset: 0,
+          background: "rgba(0, 0, 0, 0.75)",
+          backdropFilter: "blur(10px)",
+          WebkitBackdropFilter: "blur(10px)",
+          zIndex: 1200,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "1rem"
+        }}
+        onClick={(e) => {
+          if (e.target === e.currentTarget) {
+            setIsUnlockModalOpen(false);
+          }
+        }}
+      >
+        <div
+          style={{
+            background: "var(--bg-primary)",
+            border: "1px solid var(--border-subtle)",
+            borderRadius: "0px",
+            width: "100%",
+            maxWidth: "460px",
+            padding: "2rem",
+            boxShadow: "0 24px 48px rgba(0, 0, 0, 0.6)",
+            position: "relative"
+          }}
+        >
+          {/* Close button */}
+          <button
+            type="button"
+            onClick={() => setIsUnlockModalOpen(false)}
+            aria-label="Fermer"
+            style={{
+              position: "absolute",
+              top: "1rem",
+              right: "1rem",
+              background: "transparent",
+              border: "none",
+              color: "var(--text-secondary)",
+              cursor: "pointer",
+              padding: "0.4rem"
+            }}
+          >
+            <X size={18} />
+          </button>
+
+          {/* Icon + Title */}
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "0.75rem",
+              marginBottom: "0.75rem"
+            }}
+          >
+            <div
+              style={{
+                width: "38px",
+                height: "38px",
+                background: "rgba(113, 159, 183, 0.12)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "0px"
+              }}
+            >
+              <Lock size={18} color="var(--accent-aqua)" />
+            </div>
+            <h2
+              style={{
+                fontSize: "1.15rem",
+                fontWeight: 500,
+                color: "var(--text-primary)",
+                margin: 0
+              }}
+            >
+              {t.labUnlockModalTitle}
+            </h2>
+          </div>
+
+          <p
+            style={{
+              fontSize: "0.85rem",
+              color: "var(--text-secondary)",
+              lineHeight: 1.55,
+              marginBottom: "1.4rem"
+            }}
+          >
+            {t.labUnlockModalDesc}
+          </p>
+
+          <form onSubmit={handleUnlockSubmit}>
+            <div style={{ marginBottom: "1.2rem" }}>
+              <label
+                style={{
+                  display: "block",
+                  fontSize: "0.78rem",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em",
+                  color: "var(--text-secondary)",
+                  marginBottom: "0.45rem"
+                }}
+              >
+                {t.labPasswordLabel}
+              </label>
+              <div style={{ position: "relative" }}>
+                <input
+                  type={showUnlockPassword ? "text" : "password"}
+                  value={unlockPassword}
+                  onChange={(e) => {
+                    setUnlockPassword(e.target.value);
+                    if (unlockError) setUnlockError("");
+                  }}
+                  placeholder={t.labPasswordPlaceholder}
+                  autoFocus
+                  style={{
+                    width: "100%",
+                    padding: "0.75rem 2.8rem 0.75rem 0.95rem",
+                    background: "var(--bg-secondary)",
+                    border: unlockError
+                      ? "1px solid #ef4444"
+                      : "1px solid var(--border-subtle)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.92rem",
+                    borderRadius: "0px",
+                    outline: "none"
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowUnlockPassword(!showUnlockPassword)}
+                  style={{
+                    position: "absolute",
+                    right: "0.6rem",
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "transparent",
+                    border: "none",
+                    color: "var(--text-secondary)",
+                    cursor: "pointer",
+                    padding: "0.3rem"
+                  }}
+                  aria-label={showUnlockPassword ? "Masquer" : "Afficher"}
+                >
+                  {showUnlockPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
+              {unlockError && (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.4rem",
+                    color: "#f87171",
+                    fontSize: "0.8rem",
+                    marginTop: "0.5rem"
+                  }}
+                >
+                  <AlertTriangle size={14} />
+                  <span>{unlockError}</span>
+                </div>
+              )}
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                gap: "0.75rem",
+                justifyContent: "flex-end"
+              }}
+            >
+              <button
+                type="button"
+                onClick={() => setIsUnlockModalOpen(false)}
+                style={{
+                  padding: "0.65rem 1.1rem",
+                  background: "transparent",
+                  border: "1px solid var(--border-subtle)",
+                  color: "var(--text-secondary)",
+                  fontSize: "0.84rem",
+                  cursor: "pointer",
+                  borderRadius: "0px"
+                }}
+              >
+                {t.labUnlockClose}
+              </button>
+              <button
+                type="submit"
+                disabled={isSubmittingUnlock || !unlockPassword.trim()}
+                className="btn-aqua"
+                style={{
+                  padding: "0.65rem 1.3rem",
+                  fontSize: "0.84rem",
+                  cursor:
+                    isSubmittingUnlock || !unlockPassword.trim()
+                      ? "not-allowed"
+                      : "pointer",
+                  opacity:
+                    isSubmittingUnlock || !unlockPassword.trim() ? 0.7 : 1,
+                  borderRadius: "0px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.45rem"
+                }}
+              >
+                {isSubmittingUnlock ? (
+                  <Loader2 size={16} style={{ animation: "spin 1s linear infinite" }} />
+                ) : (
+                  <>
+                    <Key size={14} />
+                    <span>{t.labUnlockSubmit}</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  };
+
+  if (isCheckingAuth) {
+    return (
+      <main
+        style={{
+          padding: "5rem 0 6rem",
+          minHeight: "80vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <div style={{ textAlign: "center", color: "var(--text-secondary)" }}>
+          <Loader2
+            size={32}
+            style={{
+              animation: "spin 1s linear infinite",
+              color: "var(--accent-aqua)",
+              marginBottom: "0.9rem"
+            }}
+          />
+          <p
+            style={{
+              fontSize: "0.85rem",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase"
+            }}
+          >
+            Vérification des accès cliniques...
+          </p>
+        </div>
+      </main>
+    );
+  }
+
+  if (!isUnlocked) {
+    return (
+      <main style={{ padding: "2.2rem 0 6rem", minHeight: "100vh" }}>
+        <div className="container" style={{ maxWidth: "880px" }}>
+          {/* Header Section */}
+          <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.45rem",
+                padding: "0.4rem 1.1rem",
+                borderRadius: "0px",
+                background: "rgba(113, 159, 183, 0.12)",
+                color: "var(--accent-aqua)",
+                fontSize: "0.74rem",
+                fontWeight: 500,
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                marginBottom: "1rem",
+                border: "1px solid rgba(113, 159, 183, 0.24)"
+              }}
+            >
+              <Lock size={13} />
+              <span>{t.comingSoonTag}</span>
+            </span>
+
+            <h1
+              style={{
+                fontSize: "clamp(1.9rem, 4.4vw, 2.75rem)",
+                fontWeight: 400,
+                color: "var(--text-primary)",
+                lineHeight: 1.18,
+                marginBottom: "0.85rem"
+              }}
+            >
+              {t.comingSoonTitle}
+            </h1>
+
+            <p
+              style={{
+                fontSize: "0.95rem",
+                color: "var(--text-secondary)",
+                lineHeight: 1.65,
+                maxWidth: "680px",
+                margin: "0 auto 1.6rem"
+              }}
+            >
+              {t.comingSoonSubtitle}
+            </p>
+
+            {/* Unlock Toggle Button */}
+            <div style={{ display: "flex", justifyContent: "center", gap: "0.8rem" }}>
+              <button
+                type="button"
+                onClick={() => {
+                  setUnlockError("");
+                  setIsUnlockModalOpen(true);
+                }}
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.55rem",
+                  padding: "0.65rem 1.4rem",
+                  background: "var(--bg-secondary)",
+                  border: "1px solid var(--border-subtle)",
+                  color: "var(--text-primary)",
+                  fontSize: "0.86rem",
+                  cursor: "pointer",
+                  borderRadius: "0px",
+                  transition: "all 0.2s ease"
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = "var(--accent-aqua)";
+                  e.currentTarget.style.color = "var(--accent-aqua)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = "var(--border-subtle)";
+                  e.currentTarget.style.color = "var(--text-primary)";
+                }}
+              >
+                <Key size={15} color="var(--accent-aqua)" />
+                <span>{t.labUnlockBtn}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* 3 Innovation Pillar Cards */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+              gap: "1.2rem",
+              marginBottom: "2.8rem"
+            }}
+          >
+            {/* Card 1 */}
+            <div
+              style={{
+                background: "var(--bg-secondary)",
+                border: "1px solid var(--border-subtle)",
+                borderRadius: "0px",
+                padding: "1.5rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.6rem"
+              }}
+            >
+              <div
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  background: "rgba(113, 159, 183, 0.12)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: "0.3rem",
+                  borderRadius: "0px"
+                }}
+              >
+                <Camera size={20} color="var(--accent-aqua)" />
+              </div>
+              <h3
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                  color: "var(--text-primary)",
+                  margin: 0
+                }}
+              >
+                {t.comingSoonFeature1Title}
+              </h3>
+              <p
+                style={{
+                  fontSize: "0.84rem",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.55,
+                  margin: 0
+                }}
+              >
+                {t.comingSoonFeature1Desc}
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div
+              style={{
+                background: "var(--bg-secondary)",
+                border: "1px solid var(--border-subtle)",
+                borderRadius: "0px",
+                padding: "1.5rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.6rem"
+              }}
+            >
+              <div
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  background: "rgba(113, 159, 183, 0.12)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: "0.3rem",
+                  borderRadius: "0px"
+                }}
+              >
+                <MapPin size={20} color="var(--accent-aqua)" />
+              </div>
+              <h3
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                  color: "var(--text-primary)",
+                  margin: 0
+                }}
+              >
+                {t.comingSoonFeature2Title}
+              </h3>
+              <p
+                style={{
+                  fontSize: "0.84rem",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.55,
+                  margin: 0
+                }}
+              >
+                {t.comingSoonFeature2Desc}
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div
+              style={{
+                background: "var(--bg-secondary)",
+                border: "1px solid var(--border-subtle)",
+                borderRadius: "0px",
+                padding: "1.5rem",
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.6rem"
+              }}
+            >
+              <div
+                style={{
+                  width: "40px",
+                  height: "40px",
+                  background: "rgba(113, 159, 183, 0.12)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginBottom: "0.3rem",
+                  borderRadius: "0px"
+                }}
+              >
+                <FlaskConical size={20} color="var(--accent-aqua)" />
+              </div>
+              <h3
+                style={{
+                  fontSize: "1rem",
+                  fontWeight: 500,
+                  color: "var(--text-primary)",
+                  margin: 0
+                }}
+              >
+                {t.comingSoonFeature3Title}
+              </h3>
+              <p
+                style={{
+                  fontSize: "0.84rem",
+                  color: "var(--text-secondary)",
+                  lineHeight: 1.55,
+                  margin: 0
+                }}
+              >
+                {t.comingSoonFeature3Desc}
+              </p>
+            </div>
+          </div>
+
+          {/* Waitlist Lead Capture Card */}
+          <div
+            style={{
+              background: "var(--bg-secondary)",
+              border: "1px solid var(--border-subtle)",
+              borderRadius: "0px",
+              padding: "clamp(1.6rem, 3.2vw, 2.4rem)",
+              textAlign: "center",
+              maxWidth: "680px",
+              margin: "0 auto"
+            }}
+          >
+            <span
+              style={{
+                fontSize: "0.72rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.12em",
+                color: "var(--accent-aqua)",
+                fontWeight: 500,
+                display: "block",
+                marginBottom: "0.45rem"
+              }}
+            >
+              {t.waitlistBadge}
+            </span>
+            <h2
+              style={{
+                fontSize: "1.25rem",
+                fontWeight: 500,
+                color: "var(--text-primary)",
+                marginBottom: "0.5rem"
+              }}
+            >
+              {t.waitlistTitle}
+            </h2>
+            <p
+              style={{
+                fontSize: "0.86rem",
+                color: "var(--text-secondary)",
+                lineHeight: 1.55,
+                marginBottom: "1.4rem"
+              }}
+            >
+              {t.waitlistDesc}
+            </p>
+
+            <form
+              onSubmit={handleWaitlistSubmit}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "0.8rem",
+                maxWidth: "480px",
+                margin: "0 auto"
+              }}
+            >
+              <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+                <input
+                  type="text"
+                  value={waitlistInput}
+                  onChange={(e) => setWaitlistInput(e.target.value)}
+                  placeholder={t.waitlistPlaceholder}
+                  style={{
+                    flex: "1 1 240px",
+                    padding: "0.75rem 1rem",
+                    background: "var(--bg-primary)",
+                    border: "1px solid var(--border-subtle)",
+                    color: "var(--text-primary)",
+                    fontSize: "0.88rem",
+                    borderRadius: "0px",
+                    outline: "none"
+                  }}
+                />
+                <button
+                  type="submit"
+                  disabled={waitlistStatus === "loading"}
+                  className="btn-aqua"
+                  style={{
+                    padding: "0.75rem 1.4rem",
+                    fontSize: "0.86rem",
+                    whiteSpace: "nowrap",
+                    cursor: "pointer",
+                    borderRadius: "0px"
+                  }}
+                >
+                  {waitlistStatus === "loading" ? (
+                    <Loader2 size={16} style={{ animation: "spin 1s linear infinite" }} />
+                  ) : (
+                    <span>{t.waitlistBtn}</span>
+                  )}
+                </button>
+              </div>
+
+              {waitlistStatus === "success" && (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.45rem",
+                    justifyContent: "center",
+                    fontSize: "0.82rem",
+                    color: "#4ade80",
+                    marginTop: "0.4rem"
+                  }}
+                >
+                  <Check size={15} />
+                  <span>{waitlistMsg}</span>
+                </div>
+              )}
+
+              {waitlistStatus === "error" && (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.45rem",
+                    justifyContent: "center",
+                    fontSize: "0.82rem",
+                    color: "#f87171",
+                    marginTop: "0.4rem"
+                  }}
+                >
+                  <AlertTriangle size={15} />
+                  <span>{waitlistMsg}</span>
+                </div>
+              )}
+            </form>
+          </div>
+
+          {/* Unlock Modal */}
+          {renderUnlockModal()}
+        </div>
+      </main>
+    );
+  }
+
   const climateInfo = classifyWilayaClimate(wilaya);
 
   return (
     <main style={{ padding: "1.5rem 0 6rem", minHeight: "100vh" }}>
       <div className="container" style={{ maxWidth: "920px" }}>
+        {/* Laboratory Active Session Banner */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: "0.8rem",
+            padding: "0.75rem 1.1rem",
+            marginBottom: "1.5rem",
+            background: "rgba(77, 115, 88, 0.12)",
+            border: "1px solid rgba(77, 115, 88, 0.35)",
+            borderRadius: "0px"
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+            <Unlock size={16} color="#4d7358" />
+            <span
+              style={{
+                fontSize: "0.84rem",
+                fontWeight: 500,
+                color: "var(--text-primary)"
+              }}
+            >
+              {t.labUnlockedBanner}
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={handleRelock}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.4rem",
+              background: "transparent",
+              border: "1px solid rgba(255, 255, 255, 0.15)",
+              color: "var(--text-secondary)",
+              padding: "0.3rem 0.75rem",
+              fontSize: "0.76rem",
+              cursor: "pointer",
+              borderRadius: "0px",
+              transition: "all 0.2s ease"
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = "#ef4444";
+              e.currentTarget.style.color = "#ef4444";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255, 255, 255, 0.15)";
+              e.currentTarget.style.color = "var(--text-secondary)";
+            }}
+          >
+            <Lock size={12} />
+            <span>{t.labRelockBtn}</span>
+          </button>
+        </div>
         {/* Header Section */}
         <div style={{ textAlign: "center", marginBottom: "1.8rem" }}>
           <span
@@ -2683,6 +3645,9 @@ export default function AnalyzerPage() {
             </div>
           </div>
         )}
+
+        {/* Lab Unlock Modal (available in unlocked view if needed) */}
+        {renderUnlockModal()}
       </div>
     </main>
   );

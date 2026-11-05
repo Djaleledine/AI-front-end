@@ -30,6 +30,11 @@ export const ADMIN_COOKIE_NAME =
     ? "__Host-anjucia_admin_session"
     : "anjucia_admin_session";
 
+export const DERMOSCAN_COOKIE_NAME =
+  process.env.NODE_ENV === "production"
+    ? "__Host-anjucia_dermoscan_unlocked"
+    : "anjucia_dermoscan_unlocked";
+
 const MAX_RATE_LIMIT_ENTRIES = 5000;
 
 function pruneRateLimitMap(now) {
@@ -366,6 +371,84 @@ export function isAuthorizedAdminRequest(request, storedPinHash = null) {
   // 2. Check x-admin-pin header (for server-to-server CLI automation)
   const headerPin = request.headers.get("x-admin-pin");
   if (headerPin && verifyAdminPin(headerPin, storedPinHash)) {
+    return true;
+  }
+
+  return false;
+}
+
+/**
+ * Creates a signed token granting access to DermoScan AI™ when unlocked.
+ * Lasts 24 hours.
+ */
+export function createDermoScanAccessToken() {
+  const expiresAt = Date.now() + 1000 * 60 * 60 * 24; // 24 hours
+  const salt = crypto.randomBytes(12).toString("hex");
+  const payload = `dermoscan.${expiresAt}.${salt}`;
+  const signature = crypto
+    .createHmac("sha256", SESSION_SECRET)
+    .update(payload)
+    .digest("hex");
+  return `${payload}.${signature}`;
+}
+
+/**
+ * Verifies a DermoScan AI™ access token.
+ */
+export function verifyDermoScanAccessToken(token) {
+  if (!token || typeof token !== "string") return false;
+  const parts = token.split(".");
+  if (parts.length !== 4) return false;
+
+  const [prefix, expiresAtStr, salt, providedSig] = parts;
+  if (prefix !== "dermoscan") return false;
+
+  const expiresAt = Number(expiresAtStr);
+  if (!expiresAt || Date.now() > expiresAt) return false;
+
+  const payload = `${prefix}.${expiresAtStr}.${salt}`;
+  const expectedSig = crypto
+    .createHmac("sha256", SESSION_SECRET)
+    .update(payload)
+    .digest("hex");
+
+  return safeCompare(providedSig, expectedSig);
+}
+
+/**
+ * Validates the DermoScan access password against process.env.DERMOSCAN_ACCESS_PASSWORD
+ * using constant-time comparison.
+ */
+export function verifyDermoScanPassword(candidate) {
+  const envPassword = process.env.DERMOSCAN_ACCESS_PASSWORD;
+  if (!envPassword || typeof candidate !== "string") return false;
+  return safeCompare(candidate.trim(), envPassword.trim());
+}
+
+/**
+ * Checks whether an incoming request to /api/dermoscan has verified access.
+ * Returns true if:
+ * 1. An authorized Admin session exists, OR
+ * 2. A valid signed DermoScan unlock cookie is present, OR
+ * 3. A valid Authorization Bearer / x-dermoscan-key matches DERMOSCAN_ACCESS_PASSWORD.
+ */
+export function isAuthorizedDermoScanRequest(request) {
+  // 1. Authorized Admin session
+  if (isAuthorizedAdminRequest(request)) {
+    return true;
+  }
+
+  // 2. Check signed DermoScan unlock cookie (supports both prod __Host- and dev names)
+  const prodCookie = request.cookies?.get?.("__Host-anjucia_dermoscan_unlocked")?.value;
+  const devCookie = request.cookies?.get?.("anjucia_dermoscan_unlocked")?.value;
+  const cookieToken = prodCookie || devCookie;
+  if (cookieToken && verifyDermoScanAccessToken(cookieToken)) {
+    return true;
+  }
+
+  // 3. Direct header verification (for programmatic tests / API keys)
+  const headerKey = request.headers.get("x-dermoscan-key");
+  if (headerKey && verifyDermoScanPassword(headerKey)) {
     return true;
   }
 

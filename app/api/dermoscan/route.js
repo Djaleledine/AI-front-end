@@ -5,6 +5,7 @@ import { getFullDatabaseState, logDermoScanEvent } from "../../lib/dbStore";
 import {
   checkRateLimit,
   getClientIp,
+  isAuthorizedDermoScanRequest,
   sanitizeText,
   verifyFetchMetadata
 } from "../../lib/security";
@@ -382,6 +383,17 @@ export async function POST(request) {
     if (!fetchMeta.allowed) {
       return NextResponse.json(
         { error: fetchMeta.reason },
+        { status: 403, headers: { Vary: "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site" } }
+      );
+    }
+
+    // Enforce Coming Soon gate: require authorized unlock cookie, admin session, or key
+    if (!isAuthorizedDermoScanRequest(request)) {
+      return NextResponse.json(
+        {
+          error: "DermoScan AI™ est actuellement en phase de formulation (Bientôt Disponible). Veuillez entrer le mot de passe d'accès pour déverrouiller la station.",
+          isLocked: true
+        },
         { status: 403, headers: { Vary: "Sec-Fetch-Dest, Sec-Fetch-Mode, Sec-Fetch-Site" } }
       );
     }

@@ -10,7 +10,7 @@ const TABS = [
   { id: "home", path: "/", icon: Home, label: { fr: "Accueil", dz: "الرئيسية", en: "Home" } },
   { id: "products", path: "/products", icon: ShoppingBag, label: { fr: "Boutique", dz: "المتجر", en: "Shop" } },
   { id: "game", path: "/game", icon: Gamepad2, label: { fr: "Jeu", dz: "اللعبة", en: "Game" }, badge: { fr: "Nouveau", en: "New", dz: "جديد" } },
-  { id: "analyzer", path: "/analyzer", icon: Sparkles, label: { fr: "Scan AI", dz: "فحص AI", en: "Scan AI" } },
+  { id: "analyzer", path: "/analyzer", icon: Sparkles, label: { fr: "Scan AI", dz: "فحص AI", en: "Scan AI" }, badge: { fr: "Bientôt", en: "Soon", dz: "قريباً" } },
   { id: "profile", path: "/profile", icon: User, label: { fr: "Profil", dz: "حسابي", en: "Profile" } }
 ];
 

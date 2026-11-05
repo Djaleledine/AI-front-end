@@ -141,6 +141,21 @@ export default function Navbar() {
                 >
                   <Sparkles size={14} />
                   <span>{t.nav.analyzer}</span>
+                  <span
+                    style={{
+                      fontSize: "0.6rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.06em",
+                      padding: "0.15rem 0.45rem",
+                      background: "rgba(113, 159, 183, 0.16)",
+                      color: "var(--accent-aqua)",
+                      borderRadius: "0px",
+                      marginLeft: "0.3rem",
+                      lineHeight: 1
+                    }}
+                  >
+                    {lang === "dz" || lang === "ar" ? "قريباً" : lang === "en" ? "Soon" : "Bientôt"}
+                  </span>
                 </a>
               </li>
             </ul>
@@ -221,9 +236,24 @@ export default function Navbar() {
 
         {/* AI Analyzer Quick Card inside Mobile Drawer */}
         <div style={{ margin: "1.2rem 1.2rem 0.8rem", padding: "1.1rem", background: "var(--bg-secondary)", borderRadius: "0px", border: "none" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
-            <Sparkles size={18} color="var(--accent-aqua)" />
-            <span style={{ fontSize: "0.92rem", fontWeight: 400, color: "var(--text-primary)" }}>DermoScan AI™</span>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.35rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+              <Sparkles size={18} color="var(--accent-aqua)" />
+              <span style={{ fontSize: "0.92rem", fontWeight: 400, color: "var(--text-primary)" }}>DermoScan AI™</span>
+            </div>
+            <span
+              style={{
+                fontSize: "0.62rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.06em",
+                padding: "0.2rem 0.5rem",
+                background: "rgba(113, 159, 183, 0.16)",
+                color: "var(--accent-aqua)",
+                borderRadius: "0px"
+              }}
+            >
+              {lang === "dz" || lang === "ar" ? "قريباً" : lang === "en" ? "Soon" : "Bientôt"}
+            </span>
           </div>
           <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)", lineHeight: 1.45, marginBottom: "0.85rem" }}>
             {lang === "dz" ? "فحص فوري للبشرة واقتراح روتين مخصص بالذكاء الاصطناعي." : "Analyse cutanée personnalisée et routine naturelle sur-mesure."}
