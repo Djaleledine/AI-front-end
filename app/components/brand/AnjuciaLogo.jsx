@@ -1,47 +1,142 @@
 "use client";
 
-import React, { useId } from "react";
+import React from "react";
 
 /**
- * Anjucia droplet mark — vector redraw of /public/brand/anjucia-logo.png.
- * The inner swirl is cut out with a mask so the mark works on any background.
+ * Anjucia Droplet Mark — official symbol extracted from brand logo.
+ * Supports custom tinting via mask-image when `color` is provided.
  */
-export const DROPLET_PATH =
-  "M50 3C50 3 11 50 11 84C11 107 28.5 125 50 125C71.5 125 89 107 89 84C89 50 50 3 50 3Z";
+export function DropletMark({
+  size = 28,
+  color,
+  className = "",
+  title = "Anjucia",
+  style
+}) {
+  const height = Math.round((size * 124) / 89);
 
-export const SWIRL_PATH =
-  "M11 80C23 70 39 65.5 54 67.5C66.5 69.5 73 78 67 86.5C63 92 55.5 91.5 53.5 87C58 86 61.5 82.5 59.5 78.5C56.5 73.5 46 73.5 36 77.5C26.5 81.5 18 87.5 11 93Z";
+  if (color && color !== "currentColor") {
+    return (
+      <span
+        role="img"
+        aria-label={title}
+        className={`anj-droplet-mark ${className}`}
+        style={{
+          display: "inline-block",
+          width: size,
+          height: height,
+          backgroundColor: color,
+          WebkitMaskImage: "url('/brand/anjucia-mark.png')",
+          maskImage: "url('/brand/anjucia-mark.png')",
+          WebkitMaskSize: "contain",
+          maskSize: "contain",
+          WebkitMaskRepeat: "no-repeat",
+          maskRepeat: "no-repeat",
+          WebkitMaskPosition: "center",
+          maskPosition: "center",
+          verticalAlign: "middle",
+          ...style
+        }}
+      />
+    );
+  }
 
-export function DropletMark({ size = 28, color = "currentColor", className = "", title = "Anjucia", style }) {
-  const id = useId().replace(/:/g, "");
   return (
-    <svg
-      viewBox="0 0 100 128"
+    <img
+      src="/brand/anjucia-mark.png"
+      alt={title}
       width={size}
-      height={(size * 128) / 100}
-      className={className}
-      style={style}
-      role="img"
-      aria-label={title}
-    >
-      <defs>
-        <mask id={`swirl-${id}`}>
-          <rect width="100" height="128" fill="#fff" />
-          <path d={SWIRL_PATH} fill="#000" />
-        </mask>
-      </defs>
-      <path d={DROPLET_PATH} fill={color} mask={`url(#swirl-${id})`} />
-    </svg>
+      height={height}
+      className={`anj-droplet-mark ${className}`}
+      style={{
+        width: size,
+        height: "auto",
+        display: "inline-block",
+        verticalAlign: "middle",
+        filter: "var(--logo-filter, none)",
+        ...style
+      }}
+    />
   );
 }
 
-/** Full lockup: droplet + "Anjucia" wordmark (rounded geometric type). */
-export default function AnjuciaLogo({ variant = "full", size = 26, className = "", onClick }) {
-  if (variant === "mark") return <DropletMark size={size} className={className} />;
+/**
+ * Official ANJUCIA Brand Logo
+ * - variant="stacked" (default): Droplet on top, "Anjucia" below (exact 1:1 match of brand logo)
+ * - variant="horizontal": Droplet on left, "Anjucia" on right
+ * - variant="mark": Standalone droplet symbol
+ * - variant="wordmark": Standalone typography
+ */
+export default function AnjuciaLogo({
+  variant = "stacked",
+  size = 38,
+  className = "",
+  onClick,
+  style
+}) {
+  if (variant === "mark") {
+    return <DropletMark size={size} className={className} style={style} />;
+  }
+
+  if (variant === "horizontal") {
+    return (
+      <img
+        src="/brand/anjucia-logo-horizontal.png"
+        alt="ANJUCIA"
+        height={size}
+        className={`anj-logo anj-logo-horizontal ${className}`}
+        onClick={onClick}
+        style={{
+          height: size,
+          width: "auto",
+          display: "inline-block",
+          verticalAlign: "middle",
+          filter: "var(--logo-filter, none)",
+          cursor: onClick ? "pointer" : "default",
+          ...style
+        }}
+      />
+    );
+  }
+
+  if (variant === "wordmark") {
+    return (
+      <img
+        src="/brand/anjucia-wordmark.png"
+        alt="ANJUCIA"
+        height={size}
+        className={`anj-logo anj-logo-wordmark ${className}`}
+        onClick={onClick}
+        style={{
+          height: size,
+          width: "auto",
+          display: "inline-block",
+          verticalAlign: "middle",
+          filter: "var(--logo-filter, none)",
+          cursor: onClick ? "pointer" : "default",
+          ...style
+        }}
+      />
+    );
+  }
+
+  // Default: stacked lockup (the exact uploaded logo)
   return (
-    <span className={`anj-logo ${className}`} onClick={onClick}>
-      <DropletMark size={size * 0.78} className="anj-logo-mark" />
-      <span className="anj-logo-word" style={{ fontSize: size * 0.86 }}>Anjucia</span>
-    </span>
+    <img
+      src="/brand/anjucia-logo.png"
+      alt="ANJUCIA"
+      height={size}
+      className={`anj-logo anj-logo-stacked ${className}`}
+      onClick={onClick}
+      style={{
+        height: size,
+        width: "auto",
+        display: "inline-block",
+        verticalAlign: "middle",
+        filter: "var(--logo-filter, none)",
+        cursor: onClick ? "pointer" : "default",
+        ...style
+      }}
+    />
   );
 }

@@ -34,7 +34,8 @@ export default function StickyMobileBuyBar() {
   const labels = {
     fr: { title: "Soothing Gel-Cream", badge: "Livraison 58 Wilayas", btn: "Commander en 1 Clic" },
     en: { title: "Soothing Gel-Cream", badge: "58 Wilayas Delivery", btn: "1-Click Order" },
-    dz: { title: "جل-كريم مرطب ومهدئ", badge: "توصيل لـ 58 ولاية", btn: "اطلب في ثواني" }
+    dz: { title: "جل-كريم مرطب ومهدئ", badge: "توصيل لـ 58 ولاية", btn: "اطلب في ثواني" },
+    ar: { title: "جل-كريم مرطب ومهدئ", badge: "توصيل لـ 58 ولاية", btn: "اطلب في ثواني" }
   };
 
   const current = labels[lang] || labels.fr;
@@ -49,15 +50,12 @@ export default function StickyMobileBuyBar() {
             style={{ width: "38px", height: "46px", objectFit: "contain" }}
           />
           <div>
-            <div style={{ fontSize: "0.78rem", fontWeight: 900, color: "var(--text-primary)", lineHeight: 1.2 }}>
+            <div style={{ fontSize: "0.78rem", fontWeight: 400, color: "var(--text-primary)", lineHeight: 1.2 }}>
               {current.title}
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginTop: "2px" }}>
-              <span style={{ fontSize: "0.95rem", fontWeight: 900, color: "var(--accent-aqua)" }}>
-                {lang === "dz" ? "1800 دج" : "1 800 DA"}
-              </span>
-              <span style={{ fontSize: "0.65rem", color: "var(--success)", fontWeight: 800 }}>
-                • {current.badge}
+              <span style={{ fontSize: "0.75rem", color: "var(--success)", fontWeight: 400 }}>
+                ✓ {current.badge}
               </span>
             </div>
           </div>

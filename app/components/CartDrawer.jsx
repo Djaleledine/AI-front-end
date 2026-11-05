@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { X, Trash2, Plus, Minus, CheckCircle, Truck, ShieldCheck, Sparkles } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useLanguage } from "../context/LanguageContext";
-import { mock } from "../services/mockApi";
+import { storeApi } from "../services/storeApi";
 import { ALGERIAN_WILAYAS } from "../data/products";
 import { DropletMark } from "./brand/AnjuciaLogo";
 
@@ -33,7 +33,7 @@ export default function CartDrawer() {
 
   useEffect(() => {
     async function loadWilayas() {
-      const data = await mock.wilayas.getAll();
+      const data = await storeApi.wilayas.getAll();
       if (data && data.length > 0) {
         setWilayasList(data.map(w => w.fullName || w.name));
       }
@@ -45,16 +45,16 @@ export default function CartDrawer() {
     e.preventDefault();
     if (cartItems.length === 0) return;
     if (!customerName.trim() || !customerPhone.trim()) {
-      showToast(lang === "dz" ? "يرجى كتابة الاسم ورقم الهاتف لتأكيد الطلب !" : "Veuillez renseigner votre nom et votre numéro de téléphone !");
+      showToast(lang === "dz" || lang === "ar" ? "يرجى كتابة الاسم ورقم الهاتف لتأكيد الطلب !" : lang === "en" ? "Please provide your full name and phone number!" : "Veuillez renseigner votre nom et votre numéro de téléphone !");
       return;
     }
 
     setIsSubmitting(true);
     try {
-      const order = await mock.orders.create({
-        customerName,
-        customerPhone,
-        customerAddress,
+      const order = await storeApi.orders.create({
+        customerName: customerName.trim(),
+        customerPhone: customerPhone.trim(),
+        customerAddress: customerAddress.trim(),
         wilaya: selectedWilaya,
         items: cartItems,
         totalDZD: subtotalDZD
@@ -84,8 +84,8 @@ export default function CartDrawer() {
       <div className="cart-drawer" onClick={(e) => e.stopPropagation()}>
         <div className="cart-header">
           <div>
-            <h3 style={{ fontSize: "1.15rem", fontWeight: 900, color: "var(--text-primary)" }}>{t.cart.title}</h3>
-            <span style={{ fontSize: "0.72rem", color: "var(--accent-aqua)", fontWeight: 800 }}>
+            <h3 style={{ fontSize: "1.15rem", fontWeight: 400, color: "var(--text-primary)" }}>{t.cart.title}</h3>
+            <span style={{ fontSize: "0.72rem", color: "var(--accent-aqua)", fontWeight: 400 }}>
               {t.cart.badge}
             </span>
           </div>
@@ -104,25 +104,25 @@ export default function CartDrawer() {
               <div style={{ width: "64px", height: "64px", borderRadius: "50%", background: "var(--accent-aqua-subtle)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 1.2rem", color: "var(--accent-aqua)" }}>
                 <CheckCircle size={36} />
               </div>
-              <h4 style={{ color: "var(--text-primary)", fontSize: "1.4rem", fontWeight: 900, marginBottom: "0.5rem" }}>
+              <h4 style={{ color: "var(--text-primary)", fontSize: "1.4rem", fontWeight: 400, marginBottom: "0.5rem" }}>
                 {t.cart.orderSuccess}
               </h4>
               {confirmedOrder && (
-                <div style={{ margin: "1rem 0", padding: "0.8rem", background: "var(--bg-secondary)", borderRadius: "10px", border: "1px solid var(--border-light)", fontSize: "0.82rem" }}>
-                  <div style={{ fontWeight: 800, color: "var(--accent-aqua)" }}>Réf. Commande : {confirmedOrder.id}</div>
-                  <div style={{ color: "var(--text-secondary)", marginTop: "0.2rem" }}>N° de Suivi Express : <span style={{ fontWeight: 700, color: "var(--text-primary)" }}>{confirmedOrder.trackingCode}</span></div>
+                <div style={{ margin: "1rem 0", padding: "0.8rem", background: "var(--bg-secondary)", borderRadius: "0px", border: "none", fontSize: "0.82rem" }}>
+                  <div style={{ fontWeight: 400, color: "var(--accent-aqua)" }}>Réf. Commande : {confirmedOrder.id}</div>
+                  <div style={{ color: "var(--text-secondary)", marginTop: "0.2rem" }}>N° de Suivi Express : <span style={{ fontWeight: 400, color: "var(--text-primary)" }}>{confirmedOrder.trackingCode}</span></div>
                 </div>
               )}
               <p style={{ color: "var(--text-secondary)", fontSize: "0.9rem", lineHeight: 1.6 }}>
                 {t.cart.orderSuccessDesc} <strong>{selectedWilaya}</strong>.
                 <br />
-                {lang === "dz" ? "سيتصل بك مسؤول التوصيل لتأكيد موعد الاستلام." : "Un agent de livraison vous contactera sous 2h pour la remise en main propre."}
+                {lang === "dz" || lang === "ar" ? "سيتصل بك مسؤول التوصيل لتأكيد موعد الاستلام." : lang === "en" ? "A courier will call you within 2 hours to arrange hand delivery." : "Un agent de livraison vous contactera sous 2h pour la remise en main propre."}
               </p>
             </div>
           ) : cartItems.length === 0 ? (
             <div style={{ textAlign: "center", padding: "4rem 1rem", color: "var(--text-secondary)" }}>
               <div style={{ fontSize: "3rem", marginBottom: "1rem" }}>🛍️</div>
-              <p style={{ fontSize: "1.1rem", fontWeight: 800, color: "var(--text-primary)", marginBottom: "0.5rem" }}>
+              <p style={{ fontSize: "1.1rem", fontWeight: 400, color: "var(--text-primary)", marginBottom: "0.5rem" }}>
                 {t.cart.empty}
               </p>
               <p style={{ fontSize: "0.85rem", maxWidth: "260px", margin: "0 auto 1.5rem" }}>
@@ -148,8 +148,8 @@ export default function CartDrawer() {
                           alignItems: "center",
                           justifyContent: "center",
                           background: "var(--bg-secondary)",
-                          borderRadius: "10px",
-                          border: "1px solid var(--border-light)"
+                          borderRadius: "0px",
+                          border: "none"
                         }}
                       >
                         <DropletMark size={28} color="var(--accent-aqua)" />
@@ -170,7 +170,7 @@ export default function CartDrawer() {
                         >
                           <Minus size={12} />
                         </button>
-                        <span style={{ fontSize: "0.85rem", fontWeight: 800, color: "var(--text-primary)", minWidth: "16px", textAlign: "center" }}>
+                        <span style={{ fontSize: "0.85rem", fontWeight: 400, color: "var(--text-primary)", minWidth: "16px", textAlign: "center" }}>
                           {item.qty}
                         </span>
                         <button
@@ -195,13 +195,13 @@ export default function CartDrawer() {
               </div>
 
               {/* Express Point of Sale Order Form */}
-              <form onSubmit={handleCheckout} style={{ background: "var(--bg-secondary)", border: "1px solid var(--border-subtle)", borderRadius: "calc(var(--card-radius) / 1.2)", padding: "1.2rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-                <div style={{ fontSize: "0.82rem", fontWeight: 900, color: "var(--accent-aqua)", textTransform: "uppercase" }}>
-                  📍 {lang === "dz" ? "معلومات استلام الطلب :" : "Coordonnées de Livraison Express :"}
+              <form onSubmit={handleCheckout} style={{ background: "var(--bg-secondary)", border: "none", borderRadius: "0px", padding: "1.2rem", display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+                <div style={{ fontSize: "0.82rem", fontWeight: 400, color: "var(--accent-aqua)", textTransform: "uppercase" }}>
+                  📍 {lang === "dz" || lang === "ar" ? "معلومات استلام الطلب :" : lang === "en" ? "Express Delivery Details :" : "Coordonnées de Livraison Express :"}
                 </div>
 
                 <div>
-                  <label style={{ fontSize: "0.75rem", fontWeight: 800, color: "var(--text-secondary)", display: "block", marginBottom: "0.25rem" }}>
+                  <label style={{ fontSize: "0.75rem", fontWeight: 400, color: "var(--text-secondary)", display: "block", marginBottom: "0.25rem" }}>
                     {t.cart.customerName} *
                   </label>
                   <input
@@ -209,13 +209,13 @@ export default function CartDrawer() {
                     required
                     value={customerName}
                     onChange={(e) => setCustomerName(e.target.value)}
-                    placeholder={lang === "dz" ? "مثال: أمينة بن علي" : "ex: Amina Benali"}
-                    style={{ width: "100%", padding: "0.65rem 0.8rem", background: "var(--bg-card)", border: "1px solid var(--border-light)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "0.85rem", outline: "none" }}
+                    placeholder={lang === "dz" || lang === "ar" ? "مثال: أمينة بن علي" : lang === "en" ? "e.g. Amina Benali" : "ex: Amina Benali"}
+                    style={{ width: "100%", padding: "0.65rem 0.8rem", background: "var(--bg-card)", border: "none", borderRadius: "0px", color: "var(--text-primary)", fontSize: "0.85rem", outline: "none" }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ fontSize: "0.75rem", fontWeight: 800, color: "var(--text-secondary)", display: "block", marginBottom: "0.25rem" }}>
+                  <label style={{ fontSize: "0.75rem", fontWeight: 400, color: "var(--text-secondary)", display: "block", marginBottom: "0.25rem" }}>
                     {t.cart.customerPhone} *
                   </label>
                   <input
@@ -224,18 +224,18 @@ export default function CartDrawer() {
                     value={customerPhone}
                     onChange={(e) => setCustomerPhone(e.target.value)}
                     placeholder="05 / 06 / 07 XX XX XX XX"
-                    style={{ width: "100%", padding: "0.65rem 0.8rem", background: "var(--bg-card)", border: "1px solid var(--border-light)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "0.85rem", outline: "none" }}
+                    style={{ width: "100%", padding: "0.65rem 0.8rem", background: "var(--bg-card)", border: "none", borderRadius: "0px", color: "var(--text-primary)", fontSize: "0.85rem", outline: "none" }}
                   />
                 </div>
 
                 <div>
-                  <label style={{ fontSize: "0.75rem", fontWeight: 800, color: "var(--text-secondary)", display: "block", marginBottom: "0.25rem" }}>
+                  <label style={{ fontSize: "0.75rem", fontWeight: 400, color: "var(--text-secondary)", display: "block", marginBottom: "0.25rem" }}>
                     {t.cart.wilayaLabel}
                   </label>
                   <select
                     value={selectedWilaya}
                     onChange={(e) => setSelectedWilaya(e.target.value)}
-                    style={{ width: "100%", padding: "0.65rem 0.8rem", background: "var(--bg-card)", border: "1px solid var(--border-light)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "0.85rem", outline: "none" }}
+                    style={{ width: "100%", padding: "0.65rem 0.8rem", background: "var(--bg-card)", border: "none", borderRadius: "0px", color: "var(--text-primary)", fontSize: "0.85rem", outline: "none" }}
                   >
                     {wilayasList.map((w) => (
                       <option key={w} value={w}>{w}</option>
@@ -244,21 +244,21 @@ export default function CartDrawer() {
                 </div>
 
                 <div>
-                  <label style={{ fontSize: "0.75rem", fontWeight: 800, color: "var(--text-secondary)", display: "block", marginBottom: "0.25rem" }}>
+                  <label style={{ fontSize: "0.75rem", fontWeight: 400, color: "var(--text-secondary)", display: "block", marginBottom: "0.25rem" }}>
                     {t.cart.customerAddress}
                   </label>
                   <input
                     type="text"
                     value={customerAddress}
                     onChange={(e) => setCustomerAddress(e.target.value)}
-                    placeholder={lang === "dz" ? "البلدية أو الحي..." : "Commune, quartier ou rue..."}
-                    style={{ width: "100%", padding: "0.65rem 0.8rem", background: "var(--bg-card)", border: "1px solid var(--border-light)", borderRadius: "8px", color: "var(--text-primary)", fontSize: "0.85rem", outline: "none" }}
+                    placeholder={lang === "dz" || lang === "ar" ? "البلدية أو الحي..." : lang === "en" ? "Municipality, district, or street address..." : "Commune, quartier ou rue..."}
+                    style={{ width: "100%", padding: "0.65rem 0.8rem", background: "var(--bg-card)", border: "none", borderRadius: "0px", color: "var(--text-primary)", fontSize: "0.85rem", outline: "none" }}
                   />
                 </div>
 
-                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.74rem", color: "var(--success)", fontWeight: 700, marginTop: "0.2rem" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.74rem", color: "var(--success)", fontWeight: 400, marginTop: "0.2rem" }}>
                   <ShieldCheck size={16} />
-                  <span>{lang === "dz" ? "الدفع نقداً بعد استلام الطرد ومعاينته" : "Paiement en espèces à la livraison après vérification du colis"}</span>
+                  <span>{lang === "dz" || lang === "ar" ? "الدفع نقداً بعد استلام الطرد ومعاينته" : lang === "en" ? "Cash on delivery after package inspection" : "Paiement en espèces à la livraison après vérification du colis"}</span>
                 </div>
               </form>
             </div>
@@ -267,7 +267,7 @@ export default function CartDrawer() {
 
         {cartItems.length > 0 && !orderPlaced && (
           <div className="cart-footer">
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.74rem", color: "var(--accent-aqua)", fontWeight: 700, padding: "0.5rem 0.75rem", background: "var(--accent-aqua-subtle)", borderRadius: "8px", border: "1px solid var(--border-light)", marginBottom: "0.8rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", fontSize: "0.74rem", color: "var(--accent-aqua)", fontWeight: 400, padding: "0.5rem 0.75rem", background: "var(--accent-aqua-subtle)", borderRadius: "0px", border: "none", marginBottom: "0.8rem" }}>
               <Sparkles size={15} style={{ flexShrink: 0 }} />
               <span>{t.cart.qrNotice || "Abonnement VIP automatique inclus : QR code scellé dans la boîte de votre crème."}</span>
             </div>
@@ -287,11 +287,11 @@ export default function CartDrawer() {
             </button>
 
             <div style={{ fontSize: "0.7rem", color: "var(--text-muted)", textAlign: "center", marginTop: "0.6rem" }}>
-              <span>{lang === "dz" ? "بالضغط على تأكيد، توافق على " : "En confirmant, vous acceptez nos "}</span>
+              <span>{lang === "dz" || lang === "ar" ? "بالضغط على تأكيد، توافق على " : lang === "en" ? "By confirming, you accept our " : "En confirmant, vous acceptez nos "}</span>
               <a href="/terms" onClick={() => setIsCartOpen(false)} style={{ color: "var(--accent-aqua)", textDecoration: "underline" }}>
-                {lang === "dz" ? "الشروط العامة والسرية" : "Conditions & Confidentialité"}
+                {lang === "dz" || lang === "ar" ? "الشروط العامة والسرية" : lang === "en" ? "Terms & Privacy" : "Conditions & Confidentialité"}
               </a>
-              <span> • {lang === "dz" ? "بياناتك سرية 100%" : "Données 100% confidentielles"}</span>
+              <span> • {lang === "dz" || lang === "ar" ? "بياناتك سرية 100%" : lang === "en" ? "100% Confidential Data" : "Données 100% confidentielles"}</span>
             </div>
           </div>
         )}

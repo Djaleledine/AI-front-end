@@ -1,2 +1,6 @@
 /.next
 /node_modules
+.env*
+!.env.example
+/data/anjucia-db.json
+/scratch

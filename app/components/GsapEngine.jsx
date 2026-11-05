@@ -34,7 +34,7 @@ function spawnConfetti(ox = window.innerWidth / 2, oy = window.innerHeight * 0.6
 function spawnHeroParticles() {
   const hero = document.querySelector(".gsap-hero-particles");
   if (!hero) return;
-  hero.innerHTML = "";
+  hero.replaceChildren();
   const colors = ["rgba(113,159,183,0.55)", "rgba(155,176,160,0.45)", "rgba(208,225,233,0.35)", "rgba(67,109,136,0.4)"];
   for (let i = 0; i < (isTouch() ? 12 : 24); i++) {
     const dot = document.createElement("div");
@@ -200,9 +200,16 @@ export default function GsapEngine() {
         if (!heading.dataset.splitDone) {
           heading.dataset.splitDone = "true";
           const words = heading.textContent.trim().split(" ");
-          heading.innerHTML = words.map((w) =>
-            `<span class="gsap-word-mask"><span class="gsap-word">${w}&nbsp;</span></span>`
-          ).join("");
+          heading.replaceChildren();
+          words.forEach((w) => {
+            const mask = document.createElement("span");
+            mask.className = "gsap-word-mask";
+            const wordSpan = document.createElement("span");
+            wordSpan.className = "gsap-word";
+            wordSpan.textContent = `${w}\u00A0`;
+            mask.appendChild(wordSpan);
+            heading.appendChild(mask);
+          });
         }
         const wordEls = heading.querySelectorAll(".gsap-word");
         gsap.fromTo(wordEls,

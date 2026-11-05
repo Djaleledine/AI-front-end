@@ -78,15 +78,15 @@ export default function AlgerianClimateWidget() {
   return (
     <section style={{ padding: "3.5rem 0", background: "var(--bg-primary)" }}>
       <div className="container">
-        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border-light)", borderRadius: "20px", padding: "2.2rem", boxShadow: "var(--shadow-sm)" }}>
+        <div style={{ background: "var(--bg-card)", border: "none", borderRadius: "0px", padding: "2.2rem", boxShadow: "var(--shadow-sm)" }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "1rem", marginBottom: "2rem" }}>
             <div>
-              <span className="section-tag">{t.climate.badge}</span>
-              <h3 style={{ fontSize: "1.6rem", fontWeight: 900, color: "var(--text-primary)", margin: "0.4rem 0" }}>
-                {t.climate.title}
+              <span className="section-tag">{t.climate?.badge || (lang === "en" ? "CLIMATIC DERMO-TELEMETRY" : lang === "dz" || lang === "ar" ? "رصد المناخ وتأثيره على البشرة" : "TÉLÉMÉTRIE CLIMATIQUE")}</span>
+              <h3 style={{ fontSize: "1.6rem", fontWeight: 400, color: "var(--text-primary)", margin: "0.4rem 0" }}>
+                {t.climate?.title || (lang === "en" ? "Real-Time Wilaya Climate Adaptation" : lang === "dz" || lang === "ar" ? "تكييف العناية مع مناخ ولايتك" : "Adaptation Clinique selon votre Wilaya")}
               </h3>
               <p style={{ color: "var(--text-secondary)", fontSize: "0.92rem" }}>
-                {t.climate.subtitle}
+                {t.climate?.subtitle || (lang === "en" ? "Select your region to view UV index, humidity, and skin barrier recommendations." : lang === "dz" || lang === "ar" ? "اختر منطقتك للاطلاع على مؤشر الرطوبة والشمس وحماية حاجز بشرتك." : "Sélectionnez votre région pour voir l'impact UV et l'adaptation de votre soin.")}
               </p>
             </div>
 
@@ -98,9 +98,9 @@ export default function AlgerianClimateWidget() {
                   onClick={() => setActiveZone(reg)}
                   style={{
                     padding: "0.5rem 1rem",
-                    borderRadius: "9999px",
+                    borderRadius: "0px",
                     fontSize: "0.82rem",
-                    fontWeight: 700,
+                    fontWeight: 400,
                     border: activeZone.id === reg.id ? "1.5px solid var(--accent-aqua)" : "1px solid var(--border-subtle)",
                     background: activeZone.id === reg.id ? "var(--accent-aqua-subtle)" : "var(--bg-secondary)",
                     color: activeZone.id === reg.id ? "var(--accent-aqua)" : "var(--text-secondary)",
@@ -108,7 +108,7 @@ export default function AlgerianClimateWidget() {
                     transition: "all 0.2s ease"
                   }}
                 >
-                  {reg.name[lang] || reg.name.fr}
+                  {reg.name[lang] || (lang === "ar" ? reg.name.dz : reg.name.fr)}
                 </button>
               ))}
             </div>
@@ -116,46 +116,46 @@ export default function AlgerianClimateWidget() {
 
           {/* Environmental Readout Grid */}
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "1.5rem", marginBottom: "1.8rem" }}>
-            <div style={{ background: "var(--bg-secondary)", padding: "1.2rem", borderRadius: "12px", border: "1px solid var(--border-subtle)" }}>
+            <div style={{ background: "var(--bg-secondary)", padding: "1.2rem", borderRadius: "0px", border: "none" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", color: "var(--accent-aqua)", marginBottom: "0.4rem" }}>
                 <Droplets size={18} />
-                <span style={{ fontSize: "0.78rem", fontWeight: 800 }}>{t.climate.humidity}</span>
+                <span style={{ fontSize: "0.78rem", fontWeight: 400 }}>{t.climate?.humidity || (lang === "en" ? "Relative Humidity" : lang === "dz" || lang === "ar" ? "نسبة الرطوبة" : "Humidité Relative")}</span>
               </div>
-              <div style={{ fontSize: "1.5rem", fontWeight: 900, color: "var(--text-primary)" }}>
+              <div style={{ fontSize: "1.5rem", fontWeight: 400, color: "var(--text-primary)" }}>
                 {activeZone.humidity}
               </div>
             </div>
 
-            <div style={{ background: "var(--bg-secondary)", padding: "1.2rem", borderRadius: "12px", border: "1px solid var(--border-subtle)" }}>
+            <div style={{ background: "var(--bg-secondary)", padding: "1.2rem", borderRadius: "0px", border: "none" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", color: "#F59E0B", marginBottom: "0.4rem" }}>
                 <Sun size={18} />
-                <span style={{ fontSize: "0.78rem", fontWeight: 800 }}>{t.climate.uvIndex}</span>
+                <span style={{ fontSize: "0.78rem", fontWeight: 400 }}>{t.climate?.uvIndex || (lang === "en" ? "UV Solar Index" : lang === "dz" || lang === "ar" ? "مؤشر الأشعة فوق البنفسجية" : "Indice UV Solaire")}</span>
               </div>
-              <div style={{ fontSize: "1.3rem", fontWeight: 900, color: "var(--text-primary)" }}>
+              <div style={{ fontSize: "1.3rem", fontWeight: 400, color: "var(--text-primary)" }}>
                 {activeZone.uvIndex}
               </div>
             </div>
 
-            <div style={{ background: "var(--bg-secondary)", padding: "1.2rem", borderRadius: "12px", border: "1px solid var(--border-subtle)" }}>
+            <div style={{ background: "var(--bg-secondary)", padding: "1.2rem", borderRadius: "0px", border: "none" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", color: "#EF4444", marginBottom: "0.4rem" }}>
                 <ShieldAlert size={18} />
-                <span style={{ fontSize: "0.78rem", fontWeight: 800 }}>{t.climate.skinImpact}</span>
+                <span style={{ fontSize: "0.78rem", fontWeight: 400 }}>{t.climate?.skinImpact || (lang === "en" ? "Skin Impact" : lang === "dz" || lang === "ar" ? "التأثير على البشرة" : "Impact Cutané")}</span>
               </div>
-              <div style={{ fontSize: "0.95rem", fontWeight: 800, color: "var(--text-primary)" }}>
-                {activeZone.risk[lang] || activeZone.risk.fr}
+              <div style={{ fontSize: "0.95rem", fontWeight: 400, color: "var(--text-primary)" }}>
+                {activeZone.risk[lang] || (lang === "ar" ? activeZone.risk.dz : activeZone.risk.fr)}
               </div>
             </div>
           </div>
 
           {/* Tailored Derm Advice Box */}
-          <div style={{ background: "var(--accent-aqua-subtle)", border: "1.5px solid var(--border-light)", borderRadius: "14px", padding: "1.3rem 1.6rem", display: "flex", alignItems: "center", gap: "1rem" }}>
+          <div style={{ background: "var(--accent-aqua-subtle)", border: "none", borderRadius: "0px", padding: "1.3rem 1.6rem", display: "flex", alignItems: "center", gap: "1rem" }}>
             <CheckCircle2 size={26} color="var(--accent-aqua)" style={{ flexShrink: 0 }} />
             <div>
-              <span style={{ fontSize: "0.78rem", fontWeight: 800, color: "var(--accent-aqua)", textTransform: "uppercase" }}>
-                {t.climate.advice}
+              <span style={{ fontSize: "0.78rem", fontWeight: 400, color: "var(--accent-aqua)", textTransform: "uppercase" }}>
+                {t.climate?.advice || (lang === "en" ? "Dermatological Recommendation" : lang === "dz" || lang === "ar" ? "نصيحة الحماية اليومية" : "Recommandation Dermo-Protectrice")}
               </span>
               <p style={{ fontSize: "0.92rem", color: "var(--text-primary)", fontWeight: 600, marginTop: "2px" }}>
-                {activeZone.recommendation[lang] || activeZone.recommendation.fr}
+                {activeZone.recommendation[lang] || (lang === "ar" ? activeZone.recommendation.dz : activeZone.recommendation.fr)}
               </p>
             </div>
           </div>

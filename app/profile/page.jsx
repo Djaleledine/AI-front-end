@@ -5,30 +5,73 @@ import { User, QrCode, Package, History, Bell, ShieldCheck, Sparkles, PhoneCall,
 import { DropletMark } from "../components/brand/AnjuciaLogo";
 import { useLanguage } from "../context/LanguageContext";
 import { useCart } from "../context/CartContext";
+import { storeApi } from "../services/storeApi";
+
+const TEXTS = {
+  fr: {
+    toastSuccess: "Votre inscription au Club VIP est enregistrée !",
+    title: "Espace Membre Anjucia",
+    subtitle: "Votre compte client & avantages officiels Algérie",
+    vipBannerTitle: "Club Privilège ANJUCIA • Accès Anticipé",
+    vipBannerDesc: "Inscrivez votre e-mail ou numéro pour être le premier à tester les prochaines formulations en avant-première.",
+    placeholder: "Votre e-mail ou téléphone...",
+    btnJoin: "Rejoindre",
+    upcomingTitle: "Fonctionnalités à venir dans l'application",
+    statusSoon: "Bientôt",
+    supportTitle: "Besoin d'aide ou commande par téléphone ?",
+    supportSub: "Conseillère dermo disponible 7j/7",
+    btnCall: "Appeler"
+  },
+  en: {
+    toastSuccess: "Your registration to the VIP Club has been saved!",
+    title: "Anjucia Member Space",
+    subtitle: "Your customer account & exclusive Algeria benefits",
+    vipBannerTitle: "ANJUCIA Privilege Club • Early Access",
+    vipBannerDesc: "Enter your email or phone to be among the first to sample our upcoming formulations before launch.",
+    placeholder: "Your email or phone number...",
+    btnJoin: "Join Club",
+    upcomingTitle: "Upcoming Features in the App",
+    statusSoon: "Soon",
+    supportTitle: "Need assistance or phone order?",
+    supportSub: "Dermo advisor available 7 days a week",
+    btnCall: "Call"
+  },
+  dz: {
+    toastSuccess: "تم تسجيل بريدك في قائمة الانتظار !",
+    title: "فضاء زبائن أنجوسيا",
+    subtitle: "كل خدمات تطبيق أنجوسيا في مكان واحد",
+    vipBannerTitle: "نادي الامتياز أنجوسيا • وصول مبكر",
+    vipBannerDesc: "سجل بريدك أو رقم هاتفك لتكون أول من يجرب التركيبات القادمة قبل طرحها في الصيدليات.",
+    placeholder: "بريدك الإلكتروني أو رقم الهاتف...",
+    btnJoin: "انضمام",
+    upcomingTitle: "خدمات قادمة قريباً في التطبيق",
+    statusSoon: "قريباً",
+    supportTitle: "تحتاج مساعدة أو طلب بالهاتف ؟",
+    supportSub: "مستشارة عناية متوفرة 7 أيام في الأسبوع",
+    btnCall: "اتصال"
+  }
+};
 
 export default function ProfilePage() {
   const { lang } = useLanguage();
   const { showToast } = useCart();
   const [waitlistEmail, setWaitlistEmail] = useState("");
 
-  const handleWaitlist = (e) => {
+  const t = TEXTS[lang] || (lang === "ar" ? TEXTS.dz : TEXTS.fr);
+
+  const handleWaitlist = async (e) => {
     e.preventDefault();
     if (!waitlistEmail.trim()) return;
     try {
-      const leads = JSON.parse(localStorage.getItem("anjucia_waitlist_leads") || "[]");
-      leads.unshift({
-        id: `VIP-${Date.now().toString().slice(-5)}`,
+      await storeApi.leads.create({
         productId: "vip-club-access",
         productName: "Club VIP Anjucia",
         contact: waitlistEmail.trim(),
         wilaya: "Algérie",
-        source: "Profile VIP Waitlist",
-        createdAt: new Date().toISOString()
+        source: "Profile VIP Waitlist"
       });
-      localStorage.setItem("anjucia_waitlist_leads", JSON.stringify(leads));
-      window.dispatchEvent(new CustomEvent("anjucia:waitlist_joined", { detail: { email: waitlistEmail.trim() } }));
     } catch (_) {}
-    showToast(lang === "dz" ? "تم تسجيل بريدك في قائمة الانتظار !" : "Votre inscription au Club VIP est enregistrée !");
+    showToast(t.toastSuccess);
     setWaitlistEmail("");
   };
 
@@ -37,25 +80,25 @@ export default function ProfilePage() {
       icon: Package,
       title: { fr: "Suivi de Commande 58 Wilayas", dz: "تتبع طلبيتك في 58 ولاية", en: "58 Wilayas Order Tracking" },
       desc: { fr: "Suivez votre coursier en temps réel avec notification SMS.", dz: "تتبع فوري لمسار التوصيل مع رسالة نصية قصيرة.", en: "Live courier tracking with instant SMS." },
-      status: "Bientôt"
+      status: t.statusSoon
     },
     {
       icon: QrCode,
       title: { fr: "Scanner mon QR Code VIP", dz: "مسح كود الـ QR المختوم", en: "Scan Box VIP QR Code" },
       desc: { fr: "Activez votre garantie et gagnez des points fidélité sur chaque boîte.", dz: "فعّل الضمان واستفد من نقاط المكافأة داخل كل علبة.", en: "Activate authenticity seal & collect points." },
-      status: "Bientôt"
+      status: t.statusSoon
     },
     {
       icon: History,
       title: { fr: "Journal d'Hydratation & Photos", dz: "مفكرة تطور البشرة والصور", en: "Skin Progress Journal" },
       desc: { fr: "Comparez vos résultats après 15 jours de Gel-Crème.", dz: "قارن نضارة بشرتك بعد 15 يوم من الاستعمال.", en: "Compare skin texture after 15 days." },
-      status: "Bientôt"
+      status: t.statusSoon
     },
     {
       icon: Bell,
       title: { fr: "Alertes Sorties de Formules", dz: "إشعارات إطلاق المنتجات الجديدة", en: "New Release Alerts" },
-      desc: { fr: "Soyez prévenu dès la sortie de la crème CeraHydra+ et de l'Essence.", dz: "توصل بإشعار حصري عند طرح المنتجات القادمة.", en: "Get notified when new skincare drops." },
-      status: "Bientôt"
+      desc: { fr: "Soyez prévenu dès la sortie du Sérum Anti-Âge et des nouvelles formules.", dz: "توصل بإشعار حصري عند طرح المنتجات القادمة.", en: "Get notified when new skincare drops." },
+      status: t.statusSoon
     }
   ];
 
@@ -66,8 +109,8 @@ export default function ProfilePage() {
         <div
           style={{
             background: "var(--bg-card)",
-            border: "1.5px solid var(--border-light)",
-            borderRadius: "var(--card-radius, 20px)",
+            border: "none",
+            borderRadius: "0px",
             padding: "1.6rem",
             marginBottom: "1.5rem",
             display: "flex",
@@ -97,7 +140,7 @@ export default function ProfilePage() {
               height: "56px",
               borderRadius: "50%",
               background: "var(--accent-aqua-subtle)",
-              border: "1.5px solid var(--accent-aqua)",
+              border: "none",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -109,25 +152,25 @@ export default function ProfilePage() {
 
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", marginBottom: "0.2rem" }}>
-              <h1 style={{ fontSize: "1.25rem", fontWeight: 900, color: "var(--text-primary)" }}>
-                Espace Membre Anjucia
+              <h1 style={{ fontSize: "1.25rem", fontWeight: 400, color: "var(--text-primary)" }}>
+                {t.title}
               </h1>
               <span
                 style={{
                   fontSize: "0.65rem",
-                  fontWeight: 800,
+                  fontWeight: 400,
                   padding: "0.15rem 0.5rem",
-                  borderRadius: "9999px",
+                  borderRadius: "0px",
                   background: "rgba(113, 159, 183, 0.16)",
                   color: "var(--accent-aqua)",
-                  border: "1px solid var(--border-light)"
+                  border: "none"
                 }}
               >
                 VIP 🇩🇿
               </span>
             </div>
             <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)" }}>
-              {lang === "dz" ? "كل خدمات تطبيق أنجوسيا في مكان واحد" : "Votre compte client & avantages officiels Algérie"}
+              {t.subtitle}
             </p>
           </div>
         </div>
@@ -136,31 +179,31 @@ export default function ProfilePage() {
         <div
           style={{
             background: "linear-gradient(135deg, var(--bg-card) 0%, var(--bg-secondary) 100%)",
-            border: "1px solid var(--border-light)",
-            borderRadius: "var(--card-radius, 16px)",
+            border: "none",
+            borderRadius: "0px",
             padding: "1.4rem",
             marginBottom: "1.8rem"
           }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.4rem", color: "var(--accent-aqua)", fontWeight: 800, fontSize: "0.85rem" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.4rem", marginBottom: "0.4rem", color: "var(--accent-aqua)", fontWeight: 400, fontSize: "0.85rem" }}>
             <Sparkles size={16} />
-            <span>Club Privilège ANJUCIA • Accès Anticipé</span>
+            <span>{t.vipBannerTitle}</span>
           </div>
           <p style={{ fontSize: "0.8rem", color: "var(--text-secondary)", lineHeight: 1.5, marginBottom: "1rem" }}>
-            Inscrivez votre e-mail ou numéro pour être le premier à tester les prochaines formulations en avant-première.
+            {t.vipBannerDesc}
           </p>
           <form onSubmit={handleWaitlist} style={{ display: "flex", gap: "0.5rem" }}>
             <input
               type="text"
               value={waitlistEmail}
               onChange={(e) => setWaitlistEmail(e.target.value)}
-              placeholder="Votre e-mail ou téléphone..."
+              placeholder={t.placeholder}
               required
               style={{
                 flex: 1,
                 padding: "0.65rem 0.85rem",
-                borderRadius: "10px",
-                border: "1px solid var(--border-subtle)",
+                borderRadius: "0px",
+                border: "none",
                 background: "var(--bg-input)",
                 color: "var(--text-primary)",
                 fontSize: "0.82rem",
@@ -168,27 +211,27 @@ export default function ProfilePage() {
               }}
             />
             <button type="submit" className="btn-aqua" style={{ padding: "0.65rem 1.1rem", fontSize: "0.82rem" }}>
-              Rejoindre
+              {t.btnJoin}
             </button>
           </form>
         </div>
 
         {/* Coming Soon Feature Tiles */}
         <div style={{ marginBottom: "1.8rem" }}>
-          <h2 style={{ fontSize: "0.95rem", fontWeight: 800, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.9rem" }}>
-            Fonctionnalités à venir dans l'application
+          <h2 style={{ fontSize: "0.95rem", fontWeight: 400, color: "var(--text-secondary)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: "0.9rem" }}>
+            {t.upcomingTitle}
           </h2>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            {TILES.map((t, idx) => {
-              const Icon = t.icon;
+            {TILES.map((tile, idx) => {
+              const Icon = tile.icon;
               return (
                 <div
                   key={idx}
                   style={{
                     background: "var(--bg-card)",
-                    border: "1px dashed var(--border-light)",
-                    borderRadius: "14px",
+                    border: "none",
+                    borderRadius: "0px",
                     padding: "1rem 1.2rem",
                     display: "flex",
                     alignItems: "center",
@@ -201,7 +244,7 @@ export default function ProfilePage() {
                       style={{
                         width: "40px",
                         height: "40px",
-                        borderRadius: "10px",
+                        borderRadius: "0px",
                         background: "var(--bg-secondary)",
                         display: "flex",
                         alignItems: "center",
@@ -213,11 +256,11 @@ export default function ProfilePage() {
                       <Icon size={20} />
                     </div>
                     <div>
-                      <div style={{ fontSize: "0.88rem", fontWeight: 800, color: "var(--text-primary)" }}>
-                        {t.title[lang] || t.title.fr}
+                      <div style={{ fontSize: "0.88rem", fontWeight: 400, color: "var(--text-primary)" }}>
+                        {tile.title[lang] || tile.title.fr}
                       </div>
                       <div style={{ fontSize: "0.75rem", color: "var(--text-muted)", marginTop: "0.15rem" }}>
-                        {t.desc[lang] || t.desc.fr}
+                        {tile.desc[lang] || tile.desc.fr}
                       </div>
                     </div>
                   </div>
@@ -225,12 +268,12 @@ export default function ProfilePage() {
                   <span
                     style={{
                       fontSize: "0.68rem",
-                      fontWeight: 800,
+                      fontWeight: 400,
                       padding: "0.25rem 0.6rem",
-                      borderRadius: "9999px",
+                      borderRadius: "0px",
                       background: "rgba(113, 159, 183, 0.12)",
                       color: "var(--accent-aqua)",
-                      border: "1px solid var(--border-light)",
+                      border: "none",
                       flexShrink: 0,
                       display: "inline-flex",
                       alignItems: "center",
@@ -238,7 +281,7 @@ export default function ProfilePage() {
                     }}
                   >
                     <Clock size={11} />
-                    <span>{t.status}</span>
+                    <span>{tile.status}</span>
                   </span>
                 </div>
               );
@@ -250,8 +293,8 @@ export default function ProfilePage() {
         <div
           style={{
             background: "var(--bg-card)",
-            border: "1px solid var(--border-subtle)",
-            borderRadius: "14px",
+            border: "none",
+            borderRadius: "0px",
             padding: "1.1rem 1.3rem",
             display: "flex",
             alignItems: "center",
@@ -260,8 +303,8 @@ export default function ProfilePage() {
           }}
         >
           <div>
-            <div style={{ fontWeight: 800, color: "var(--text-primary)" }}>Besoin d'aide ou commande par téléphone ?</div>
-            <div style={{ color: "var(--text-muted)", fontSize: "0.75rem", marginTop: "0.15rem" }}>Conseillère dermo disponible 7j/7</div>
+            <div style={{ fontWeight: 400, color: "var(--text-primary)" }}>{t.supportTitle}</div>
+            <div style={{ color: "var(--text-muted)", fontSize: "0.75rem", marginTop: "0.15rem" }}>{t.supportSub}</div>
           </div>
           <a
             href="tel:0550000000"
@@ -269,7 +312,7 @@ export default function ProfilePage() {
             style={{ padding: "0.45rem 0.95rem", fontSize: "0.78rem", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "0.35rem" }}
           >
             <PhoneCall size={14} color="var(--accent-aqua)" />
-            <span>Appeler</span>
+            <span>{t.btnCall}</span>
           </a>
         </div>
       </div>

@@ -97,8 +97,8 @@ export default function PWAInstallBanner() {
           background: "rgba(17, 23, 26, 0.95)",
           backdropFilter: "blur(18px)",
           WebkitBackdropFilter: "blur(18px)",
-          border: "2px solid var(--accent-aqua)",
-          borderRadius: "18px",
+          border: "none",
+          borderRadius: "0px",
           padding: "0.85rem 1.1rem",
           boxShadow: "var(--shadow-md), var(--shadow-glow)",
           display: "flex",
@@ -113,9 +113,9 @@ export default function PWAInstallBanner() {
             style={{
               width: "42px",
               height: "42px",
-              borderRadius: "12px",
+              borderRadius: "0px",
               background: "var(--bg-card)",
-              border: "1.5px solid var(--border-light)",
+              border: "none",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -125,11 +125,11 @@ export default function PWAInstallBanner() {
             <DropletMark size={24} color="var(--accent-aqua)" />
           </div>
           <div>
-            <div style={{ fontSize: "0.88rem", fontWeight: 900, color: "var(--text-primary)", lineHeight: 1.2 }}>
-              {lang === "dz" ? "تطبيق أنجوسيا الرسمي 🇩🇿" : "Application ANJUCIA 🇩🇿"}
+            <div style={{ fontSize: "0.88rem", fontWeight: 400, color: "var(--text-primary)", lineHeight: 1.2 }}>
+              {lang === "dz" || lang === "ar" ? "تطبيق أنجوسيا الرسمي 🇩🇿" : lang === "en" ? "Official ANJUCIA App 🇩🇿" : "Application ANJUCIA 🇩🇿"}
             </div>
             <div style={{ fontSize: "0.72rem", color: "var(--text-muted)", marginTop: "2px" }}>
-              {lang === "dz" ? "تثبيت خفيف وسريع للطلب بضغطة زر" : "Commander en 1 clic • Accès hors ligne"}
+              {lang === "dz" || lang === "ar" ? "تثبيت خفيف وسريع للطلب بضغطة زر" : lang === "en" ? "1-Click Order • Offline VIP Access" : "Commander en 1 clic • Accès hors ligne"}
             </div>
           </div>
         </div>
@@ -141,7 +141,7 @@ export default function PWAInstallBanner() {
             onClick={handleInstallClick}
           >
             <Download size={14} />
-            <span>{lang === "dz" ? "تثبيت" : "Installer"}</span>
+            <span>{lang === "dz" || lang === "ar" ? "تثبيت" : lang === "en" ? "Install" : "Installer"}</span>
           </button>
           <button
             onClick={handleDismiss}
@@ -172,8 +172,8 @@ export default function PWAInstallBanner() {
           <div
             style={{
               background: "var(--bg-card)",
-              border: "2px solid var(--accent-aqua)",
-              borderRadius: "20px 20px 14px 14px",
+              border: "none",
+              borderRadius: "0px",
               padding: "1.8rem",
               maxWidth: "460px",
               width: "100%",
@@ -182,8 +182,8 @@ export default function PWAInstallBanner() {
             onClick={(e) => e.stopPropagation()}
           >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-              <h3 style={{ fontSize: "1.15rem", fontWeight: 900, color: "var(--text-primary)" }}>
-                Installer sur iPhone / iPad
+              <h3 style={{ fontSize: "1.15rem", fontWeight: 400, color: "var(--text-primary)" }}>
+                {lang === "en" ? "Install on iPhone / iPad" : lang === "dz" || lang === "ar" ? "تثبيت على آيفون / آيباد" : "Installer sur iPhone / iPad"}
               </h3>
               <button
                 onClick={() => setShowIOSGuide(false)}
@@ -195,16 +195,20 @@ export default function PWAInstallBanner() {
 
             <ol style={{ paddingLeft: "1.2rem", fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.7, display: "flex", flexDirection: "column", gap: "0.6rem" }}>
               <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <span>1. Appuyez sur le bouton <strong>Partager</strong></span>
+                <span>{lang === "en" ? "1. Tap the Share button" : lang === "dz" || lang === "ar" ? "1. اضغط على زر المشاركة" : "1. Appuyez sur le bouton Partager"}</span>
                 <Share size={16} color="var(--accent-aqua)" />
-                <span>au bas de Safari.</span>
+                <span>{lang === "en" ? "at the bottom of Safari." : lang === "dz" || lang === "ar" ? "في أسفل متصفح سفاري." : "au bas de Safari."}</span>
               </li>
               <li style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <span>2. Faites défiler et choisissez <strong>Sur l'écran d'accueil</strong></span>
+                <span>{lang === "en" ? "2. Scroll down and tap Add to Home Screen" : lang === "dz" || lang === "ar" ? "2. اختر إضافة إلى الشاشة الرئيسية" : "2. Faites défiler et choisissez Sur l'écran d'accueil"}</span>
                 <PlusSquare size={16} color="var(--accent-aqua)" />
               </li>
               <li>
-                3. Touchez <strong>Ajouter</strong> en haut à droite. L'icône Anjucia apparaîtra comme une vraie application !
+                {lang === "en"
+                  ? "3. Tap Add at the top right. Anjucia will appear as a native app on your screen!"
+                  : lang === "dz" || lang === "ar"
+                  ? "3. اضغط على إضافة في الأعلى. ستظهر أيقونة أنجوسيا كتطبيق حقيقي على هاتفك !"
+                  : "3. Touchez Ajouter en haut à droite. L'icône Anjucia apparaîtra comme une vraie application !"}
               </li>
             </ol>
 
@@ -213,7 +217,7 @@ export default function PWAInstallBanner() {
               style={{ width: "100%", marginTop: "1.4rem", padding: "0.85rem" }}
               onClick={() => setShowIOSGuide(false)}
             >
-              Compris !
+              {lang === "en" ? "Got it!" : lang === "dz" || lang === "ar" ? "فهمت !" : "Compris !"}
             </button>
           </div>
         </div>

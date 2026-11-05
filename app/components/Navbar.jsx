@@ -68,8 +68,8 @@ export default function Navbar() {
       <QuickSkinMatchModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
 
       {/* Clean Topbar */}
-      <div className="nav-topbar">
-        <div className="container">
+      <div className="nav-topbar" style={{ direction: "ltr" }}>
+        <div className="container" style={{ direction: "ltr" }}>
           <div className="topbar-badge">
             <span className="topbar-dot"></span>
             <span>{t.topbar.badge}</span>
@@ -83,14 +83,14 @@ export default function Navbar() {
       </div>
 
       {/* Main Clean Header */}
-      <header className={`header-clinical ${isScrolled ? "scrolled" : ""}`}>
+      <header className={`header-clinical ${isScrolled ? "scrolled" : ""}`} style={{ direction: "ltr" }}>
         {/* GSAP Scroll Progress Indicator */}
         <div className="gsap-scroll-progress" aria-hidden="true" />
-        <div className="container">
-          <nav className="nav-main">
+        <div className="container" style={{ direction: "ltr" }}>
+          <nav className="nav-main" style={{ direction: "ltr" }}>
             {/* Brand Logo & Tagline */}
             <a href="/" className="brand-logo-wrap" title="ANJUCIA • Haute Précision Skincare">
-              <AnjuciaLogo size={26} />
+              <AnjuciaLogo size={38} />
             </a>
 
             {/* Desktop Navigation Links — Clean, perfectly spaced */}
@@ -110,17 +110,27 @@ export default function Navbar() {
               </li>
               <li>
                 <a href="/#rituels" className="nav-link">
-                  {t.nav.rituals || (lang === "dz" ? "خلطات طبيعية" : "Rituels Botaniques")}
+                  {t.nav.rituals || (lang === "dz" || lang === "ar" ? "خلطات طبيعية" : lang === "en" ? "Botanical Rituals" : "Rituels Botaniques")}
                 </a>
               </li>
               <li>
                 <a href="/#charte" className="nav-link">
-                  {t.nav.science || "Stabilité 45°C & Science"}
+                  {t.nav.science || (lang === "en" ? "45°C Stability & Science" : "Stabilité 45°C & Science")}
                 </a>
               </li>
               <li>
                 <a href="/#pharmacies" className="nav-link">
                   {t.nav.pharmacies}
+                </a>
+              </li>
+              <li>
+                <a
+                  href="/game"
+                  className={`nav-link ${pathname === "/game" ? "active" : ""}`}
+                  title="Goutte Rescue"
+                >
+                  <Gamepad2 size={14} style={{ verticalAlign: "middle", marginRight: "4px" }} />
+                  <span>{lang === "dz" || lang === "ar" ? "اللعبة" : lang === "en" ? "Game" : "Jeu"}</span>
                 </a>
               </li>
               <li>
@@ -156,21 +166,11 @@ export default function Navbar() {
                 <button
                   className={`lang-btn ${lang === "dz" ? "active" : ""}`}
                   onClick={() => setLang("dz")}
-                  aria-label="الدارجة الجزائرية"
+                  aria-label="العربية"
                 >
-                  🇩🇿 دز
+                  AR
                 </button>
               </div>
-
-              {/* Dark / Light Theme Toggle */}
-              <button
-                className="theme-toggle-btn"
-                onClick={toggleTheme}
-                title={isDark ? t.nav.themeLight : t.nav.themeDark}
-                aria-label="Changer le thème"
-              >
-                {isDark ? <Sun size={19} className="theme-icon-sun" /> : <Moon size={19} className="theme-icon-moon" />}
-              </button>
 
               {/* Cart Drawer Trigger */}
               <button
@@ -208,7 +208,7 @@ export default function Navbar() {
       <aside className={`mobile-nav-drawer ${isMobileMenuOpen ? "open" : ""}`}>
         <div className="mobile-drawer-header">
           <div style={{ display: "flex", alignItems: "center" }}>
-            <AnjuciaLogo size={24} />
+            <AnjuciaLogo size={34} />
           </div>
           <button
             className="mobile-drawer-close"
@@ -220,10 +220,10 @@ export default function Navbar() {
         </div>
 
         {/* AI Analyzer Quick Card inside Mobile Drawer */}
-        <div style={{ margin: "1.2rem 1.2rem 0.8rem", padding: "1.1rem", background: "var(--bg-secondary)", borderRadius: "var(--card-radius, 14px)", border: "1.5px solid var(--border-light)" }}>
+        <div style={{ margin: "1.2rem 1.2rem 0.8rem", padding: "1.1rem", background: "var(--bg-secondary)", borderRadius: "0px", border: "none" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginBottom: "0.35rem" }}>
             <Sparkles size={18} color="var(--accent-aqua)" />
-            <span style={{ fontSize: "0.92rem", fontWeight: 900, color: "var(--text-primary)" }}>DermoScan AI™</span>
+            <span style={{ fontSize: "0.92rem", fontWeight: 400, color: "var(--text-primary)" }}>DermoScan AI™</span>
           </div>
           <p style={{ fontSize: "0.78rem", color: "var(--text-secondary)", lineHeight: 1.45, marginBottom: "0.85rem" }}>
             {lang === "dz" ? "فحص فوري للبشرة واقتراح روتين مخصص بالذكاء الاصطناعي." : "Analyse cutanée personnalisée et routine naturelle sur-mesure."}
@@ -267,7 +267,7 @@ export default function Navbar() {
               className="mobile-drawer-link"
             >
               <Droplets size={18} />
-              <span>{t.nav.rituals || (lang === "dz" ? "خلطات طبيعية" : "Rituels Botaniques")}</span>
+              <span>{t.nav.rituals || (lang === "dz" || lang === "ar" ? "خلطات طبيعية" : lang === "en" ? "Botanical Rituals" : "Rituels Botaniques")}</span>
             </a>
           </li>
           <li>
@@ -277,7 +277,7 @@ export default function Navbar() {
               className="mobile-drawer-link"
             >
               <ShieldCheck size={18} />
-              <span>{t.nav.science || "Stabilité 45°C & Science"}</span>
+              <span>{t.nav.science || (lang === "en" ? "45°C Stability & Science" : "Stabilité 45°C & Science")}</span>
             </a>
           </li>
           <li>
@@ -288,6 +288,16 @@ export default function Navbar() {
             >
               <MapPin size={18} />
               <span>{t.nav.pharmacies} (58 Wilayas)</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="/game"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`mobile-drawer-link ${pathname === "/game" ? "active" : ""}`}
+            >
+              <Gamepad2 size={18} />
+              <span>{lang === "dz" || lang === "ar" ? "اللعبة" : lang === "en" ? "Game" : "Jeu"}</span>
             </a>
           </li>
           <li>
@@ -318,7 +328,7 @@ export default function Navbar() {
         {/* Bottom Drawer Controls: Language & Cart */}
         <div className="mobile-drawer-footer">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
-            <span style={{ fontSize: "0.78rem", fontWeight: 800, color: "var(--text-muted)" }}>LANGUE / اللّغة :</span>
+            <span style={{ fontSize: "0.78rem", fontWeight: 400, color: "var(--text-muted)" }}>LANGUE / اللّغة :</span>
             <div className="lang-selector-wrap">
               <button
                 className={`lang-btn ${lang === "fr" ? "active" : ""}`}
@@ -335,8 +345,9 @@ export default function Navbar() {
               <button
                 className={`lang-btn ${lang === "dz" ? "active" : ""}`}
                 onClick={() => setLang("dz")}
+                aria-label="العربية"
               >
-                🇩🇿 الدارجة
+                AR
               </button>
             </div>
           </div>
@@ -355,7 +366,7 @@ export default function Navbar() {
 
           <div style={{ textAlign: "center", marginTop: "0.9rem", fontSize: "0.72rem", color: "var(--text-muted)", display: "flex", alignItems: "center", justifyContent: "center", gap: "0.3rem" }}>
             <Truck size={14} color="var(--accent-aqua)" />
-            <span>Livraison 58 Wilayas • Paiement à la réception</span>
+            <span>{lang === "dz" || lang === "ar" ? "توصيل لـ 58 ولاية • دفع عند الاستلام" : lang === "en" ? "58 Wilayas Delivery • Cash on Delivery" : "Livraison 58 Wilayas • Paiement à la réception"}</span>
           </div>
         </div>
       </aside>

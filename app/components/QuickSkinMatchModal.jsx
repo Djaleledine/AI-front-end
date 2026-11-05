@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Sparkles, X, CheckCircle, ArrowRight, Droplets, Heart } from "lucide-react";
+import { X, CheckCircle, Droplets, Sparkles, ArrowRight } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -12,10 +12,12 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
   const [step, setStep] = useState(1);
   const [skinType, setSkinType] = useState("oily");
   const [region, setRegion] = useState("coast");
-  const [goal, setGoal] = useState("hydration");
+  const [goal, setGoal] = useState("matte");
   const [result, setResult] = useState(null);
 
   if (!isOpen) return null;
+
+  const isDry = skinType === "dry";
 
   const handleFinish = () => {
     // Generate recommendation
@@ -32,10 +34,12 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
           dz: "رش ماء الورد المقطر الصباح قبل الجل-كريم باش وجهك يمتصو مليح وما يزيتلكش كامل."
         };
 
+    const currentTip = naturalTip[lang] || naturalTip.en || naturalTip.fr;
+
     setResult({
       productId: recommendedProduct,
-      productName: "Lightweight Soothing Face Gel-Cream (1 800 DA)",
-      naturalTip: naturalTip[lang] || naturalTip.fr
+      productName: "Lightweight Soothing Face Gel-Cream",
+      naturalTip: currentTip
     });
     setStep(4);
   };
@@ -53,8 +57,8 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
       <div
         style={{
           background: "var(--bg-card)",
-          border: "2px solid var(--accent-aqua)",
-          borderRadius: "var(--card-radius)",
+          border: "none",
+          borderRadius: "0px",
           maxWidth: "520px",
           width: "100%",
           padding: "2.2rem",
@@ -74,15 +78,21 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
 
         {step < 4 ? (
           <div>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--accent-aqua)", fontWeight: 800, fontSize: "0.82rem", marginBottom: "0.5rem" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", color: "var(--accent-aqua)", fontWeight: 400, fontSize: "0.82rem", marginBottom: "0.5rem" }}>
               <Sparkles size={16} />
-              <span>TEST EXPRESS 10 SECONDES • ÉTAPE {step}/3</span>
+              <span>
+                {lang === "dz" || lang === "ar"
+                  ? `اختبار سريع 10 ثواني • خطوة ${step}/3`
+                  : lang === "en"
+                  ? `10-SECOND SKIN MATCH • STEP ${step}/3`
+                  : `TEST EXPRESS 10 SECONDES • ÉTAPE ${step}/3`}
+              </span>
             </div>
 
             {step === 1 && (
               <div>
-                <h3 style={{ fontSize: "1.35rem", fontWeight: 900, color: "var(--text-primary)", marginBottom: "1.2rem" }}>
-                  {lang === "dz" ? "واش هو نوع بشرتك ؟" : "Quel est votre type de peau ?"}
+                <h3 style={{ fontSize: "1.35rem", fontWeight: 400, color: "var(--text-primary)", marginBottom: "1.2rem" }}>
+                  {lang === "dz" || lang === "ar" ? "واش هو نوع بشرتك ؟" : lang === "en" ? "What is your skin type?" : "Quel est votre type de peau ?"}
                 </h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "1.8rem" }}>
                   {[
@@ -95,29 +105,29 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
                       onClick={() => setSkinType(opt.id)}
                       style={{
                         padding: "0.9rem 1.1rem",
-                        borderRadius: "12px",
+                        borderRadius: "0px",
                         border: skinType === opt.id ? "2px solid var(--accent-aqua)" : "1px solid var(--border-subtle)",
                         background: skinType === opt.id ? "var(--accent-aqua-subtle)" : "var(--bg-secondary)",
                         color: "var(--text-primary)",
-                        fontWeight: 700,
+                        fontWeight: 400,
                         textAlign: "left",
                         cursor: "pointer"
                       }}
                     >
-                      {opt.label[lang] || opt.label.fr}
+                      {opt.label[lang] || opt.label.en || opt.label.fr}
                     </button>
                   ))}
                 </div>
                 <button className="btn-aqua" style={{ width: "100%" }} onClick={() => setStep(2)}>
-                  <span>{lang === "dz" ? "التالي ←" : "Continuer →"}</span>
+                  <span>{lang === "dz" || lang === "ar" ? "التالي ←" : lang === "en" ? "Continue →" : "Continuer →"}</span>
                 </button>
               </div>
             )}
 
             {step === 2 && (
               <div>
-                <h3 style={{ fontSize: "1.35rem", fontWeight: 900, color: "var(--text-primary)", marginBottom: "1.2rem" }}>
-                  {lang === "dz" ? "وين تسكن في الجزائر ؟" : "Dans quelle région vivez-vous ?"}
+                <h3 style={{ fontSize: "1.35rem", fontWeight: 400, color: "var(--text-primary)", marginBottom: "1.2rem" }}>
+                  {lang === "dz" || lang === "ar" ? "وين تسكن في الجزائر ؟" : lang === "en" ? "Which climate region do you live in?" : "Dans quelle région vivez-vous ?"}
                 </h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "1.8rem" }}>
                   {[
@@ -130,29 +140,29 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
                       onClick={() => setRegion(opt.id)}
                       style={{
                         padding: "0.9rem 1.1rem",
-                        borderRadius: "12px",
+                        borderRadius: "0px",
                         border: region === opt.id ? "2px solid var(--accent-aqua)" : "1px solid var(--border-subtle)",
                         background: region === opt.id ? "var(--accent-aqua-subtle)" : "var(--bg-secondary)",
                         color: "var(--text-primary)",
-                        fontWeight: 700,
+                        fontWeight: 400,
                         textAlign: "left",
                         cursor: "pointer"
                       }}
                     >
-                      {opt.label[lang] || opt.label.fr}
+                      {opt.label[lang] || opt.label.en || opt.label.fr}
                     </button>
                   ))}
                 </div>
                 <button className="btn-aqua" style={{ width: "100%" }} onClick={() => setStep(3)}>
-                  <span>{lang === "dz" ? "التالي ←" : "Continuer →"}</span>
+                  <span>{lang === "dz" || lang === "ar" ? "التالي ←" : lang === "en" ? "Continue →" : "Continuer →"}</span>
                 </button>
               </div>
             )}
 
             {step === 3 && (
               <div>
-                <h3 style={{ fontSize: "1.35rem", fontWeight: 900, color: "var(--text-primary)", marginBottom: "1.2rem" }}>
-                  {lang === "dz" ? "واش هي أولويتك الأساسية ؟" : "Quel résultat recherchez-vous ?"}
+                <h3 style={{ fontSize: "1.35rem", fontWeight: 400, color: "var(--text-primary)", marginBottom: "1.2rem" }}>
+                  {lang === "dz" || lang === "ar" ? "واش هي أولويتك الأساسية ؟" : lang === "en" ? "What is your main priority?" : "Quel résultat recherchez-vous ?"}
                 </h3>
                 <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem", marginBottom: "1.8rem" }}>
                   {[
@@ -165,21 +175,21 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
                       onClick={() => setGoal(opt.id)}
                       style={{
                         padding: "0.9rem 1.1rem",
-                        borderRadius: "12px",
+                        borderRadius: "0px",
                         border: goal === opt.id ? "2px solid var(--accent-aqua)" : "1px solid var(--border-subtle)",
                         background: goal === opt.id ? "var(--accent-aqua-subtle)" : "var(--bg-secondary)",
                         color: "var(--text-primary)",
-                        fontWeight: 700,
+                        fontWeight: 400,
                         textAlign: "left",
                         cursor: "pointer"
                       }}
                     >
-                      {opt.label[lang] || opt.label.fr}
+                      {opt.label[lang] || opt.label.en || opt.label.fr}
                     </button>
                   ))}
                 </div>
                 <button className="btn-aqua" style={{ width: "100%" }} onClick={handleFinish}>
-                  <span>{lang === "dz" ? "شوف نتيجتي ووصفة علاجي ✨" : "Découvrir ma Formule Idéale ✨"}</span>
+                  <span>{lang === "dz" || lang === "ar" ? "شوف نتيجتي ووصفة علاجي ✨" : lang === "en" ? "View My Recommended Care ✨" : "Découvrir ma Formule Idéale ✨"}</span>
                 </button>
               </div>
             )}
@@ -191,16 +201,16 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
             </div>
 
             <span className="section-tag" style={{ background: "rgba(16, 185, 129, 0.15)", color: "var(--success)" }}>
-              {lang === "dz" ? "تم تحديد العلاج المثالي لبشرتك !" : "Votre Correspondance Parfaite Identifiée !"}
+              {lang === "dz" || lang === "ar" ? "تم تحديد العلاج المثالي لبشرتك !" : lang === "en" ? "Your Ideal Formula Identified!" : "Votre Correspondance Parfaite Identifiée !"}
             </span>
 
-            <h3 style={{ fontSize: "1.4rem", fontWeight: 900, color: "var(--text-primary)", margin: "0.6rem 0" }}>
+            <h3 style={{ fontSize: "1.4rem", fontWeight: 400, color: "var(--text-primary)", margin: "0.6rem 0" }}>
               {result.productName}
             </h3>
 
-            <div style={{ background: "var(--bg-secondary)", border: "1px solid var(--border-light)", borderRadius: "14px", padding: "1.2rem", margin: "1.2rem 0", textAlign: "left" }}>
-              <div style={{ fontSize: "0.75rem", fontWeight: 800, color: "var(--accent-aqua)", marginBottom: "0.3rem", textTransform: "uppercase" }}>
-                💡 {lang === "dz" ? "نصيحة الصيدلي الطبيعية المرافقة :" : "Astuce Synergie Naturelle Associée :"}
+            <div style={{ background: "var(--bg-secondary)", border: "none", borderRadius: "0px", padding: "1.2rem", margin: "1.2rem 0", textAlign: "left" }}>
+              <div style={{ fontSize: "0.75rem", fontWeight: 400, color: "var(--accent-aqua)", marginBottom: "0.3rem", textTransform: "uppercase" }}>
+                💡 {lang === "dz" || lang === "ar" ? "نصيحة الصيدلي الطبيعية المرافقة :" : lang === "en" ? "Pharmacist Botanical Synergy Tip :" : "Astuce Synergie Naturelle Associée :"}
               </div>
               <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>
                 {result.naturalTip}
@@ -213,7 +223,7 @@ export default function QuickSkinMatchModal({ isOpen, onClose }) {
               onClick={handleOrderRecommendation}
             >
               <Droplets size={18} />
-              <span>{lang === "dz" ? "أضف هذا العلاج إلى السلة واطلب الآن" : "Commander ma Routine (Paiement à la Réception)"}</span>
+              <span>{lang === "dz" || lang === "ar" ? "أضف هذا العلاج إلى السلة واطلب الآن" : lang === "en" ? "Order My Routine (Cash on Delivery)" : "Commander ma Routine (Paiement à la Réception)"}</span>
             </button>
           </div>
         )}

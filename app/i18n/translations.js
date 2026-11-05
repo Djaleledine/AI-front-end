@@ -24,22 +24,22 @@ export const translations = {
     hero: {
       pill: "FORMULATION AVANCÉE • FABRIQUÉ EN ALGÉRIE 🇩🇿",
       title: "Le Soin Visage Apaisant & Hydratant Conçu pour tout type de peau",
-      desc: "Anjucia est une émulsion ultra-légère au fini pulpeux, velouté et naturellement satiné conçue pour protéger votre peau de la chaleur et de la déshydratation. Sa formule scientifique associe de la Niacinamide (3%), du Panthénol B5 (2%), de la Centella (1%), du Squalane (3%) et bien d'autres actifs experts qui agissent en synergie. Résultat ? Une peau intensément désaltérée et apaisée, sans effet gras, prix tout doux.",
+      desc: "Anjucia est une émulsion ultra-légère au fini pulpeux, velouté et naturellement satiné conçue pour protéger votre peau de la chaleur et de la déshydratation. Sa formule scientifique associe de la Niacinamide (3%), du Panthénol B5 (2%), de la Centella (1%), du Squalane (3%) et bien d'autres actifs experts qui agissent en synergie. Résultat ? Une peau intensément désaltérée et apaisée, sans effet gras.",
       stat1Val: "+148%",
       stat1Lbl: "Hydratation dès 15 min",
       stat2Val: "72H",
       stat2Lbl: "Verrouillage anti-TEWL",
-      stat3Val: "1 800 DA",
-      stat3Lbl: "Prix direct accessible",
-      orderFlagship: "Commander en 1 Clic (1 800 DA)",
+      stat3Val: "pH 5.2",
+      stat3Lbl: "pH Physiologique Strict",
+      orderFlagship: "Commander en 1 Clic",
       launchAI: "Analyse Peau DermoScan AI",
-      flagshipBadge: "PRODUIT PHARE • TUBE CANULE DE PRÉCISION",
-      flagshipVol: "50 ml • Zéro Panne de Pompe",
+      flagshipBadge: "PRODUIT PHARE • FORMULATION DE PRÉCISION",
+      flagshipVol: "Format 50 ml • Haute Précision",
       flagshipTitle: "Lightweight Soothing Face Gel-Cream",
       flagshipDesc: "Fini pulpeux velouté non gras. Niacinamide pure 3%, Panthénol B5 2%, Centella Asiatica 1%, Squalane végétal 3% & Double Acide Hyaluronique. pH 5.2 physiologique.",
       flagshipPrice: "1 800 DA",
       inStock: "En Stock • Expédition 58 Wilayas",
-      addToCart: "Ajouter au Panier (1 800 DA)"
+      addToCart: "Ajouter au Panier"
     },
     quickQuizBtn: "Faire le Test Express (10 secondes) ✨",
     philosophy: {
@@ -47,11 +47,11 @@ export const translations = {
       title: "Une Approche Scientifique Dédiée au Marché Algérien",
       subtitle: "Des formules de pointe ciblées, développées spécifiquement pour répondre aux exigences réelles du climat algérien.",
       card1Title: "Actifs Validés par la Science",
-      card1Desc: "Priorité absolue aux molécules de pureté synthétique ou de grade cosmétique expert (Niacinamide pure, Panthénol B5, Ectoïne) offrant une stabilité et une sécurité supérieures.",
+      card1Desc: "Priorité absolue aux molécules de pureté synthétique ou de grade cosmétique expert (Niacinamide pure, Panthénol B5) offrant une stabilité et une sécurité supérieures.",
       card2Title: "Stabilité Haute Température",
       card2Desc: "Formule testée avec succès sous stress thermique à 45 °C, garantit une stabilité parfaite face aux conditions climatiques extrêmes.",
-      card3Title: "Tube Canule Zéro-Panne",
-      card3Desc: "Conditionnement en tube avec embout canule de précision. Évite les pannes fréquentes des pompes importées en Algérie et garantit un dosage hygiénique."
+      card3Title: "Formulée en Algérie. Validée à l’international.",
+      card3Desc: "La crème Anjucia est conçue par une pharmacienne algérienne, et a obtenu la validation d’une experte internationale en formulation."
     },
     productsPage: {
       tag: "COLLECTION EXPERTE ANJUCIA",
@@ -125,8 +125,8 @@ export const translations = {
       climateSub: "Résistance prouvée au climat extrême",
       delivery: "Livraison 58 Wilayas",
       deliverySub: "Paiement sécurisé à la réception",
-      zeroBreakdown: "Tube Canule Zéro-Panne",
-      zeroBreakdownSub: "Conditionnement fiable et hygiénique",
+      zeroBreakdown: "Conditionnement Protecteur",
+      zeroBreakdownSub: "Flacon fiable et hygiénique",
       about: "Maison de soins avancés dédiée à la haute précision de l'hydratation cutanée et à la protection barrière en Algérie.",
       madeInDz: "Formulé & Conditionné en Algérie 🇩🇿",
       contactPharma: "Service Client & Commandes :",
@@ -160,22 +160,22 @@ export const translations = {
     hero: {
       pill: "ADVANCED FORMULATION • MADE IN ALGERIA 🇩🇿",
       title: "The Soothing & Hydrating Face Care Designed for all skin types",
-      desc: "Anjucia is an ultra-lightweight emulsion with a plump, velvety, and naturally satin finish designed to protect your skin from heat and dehydration. Its scientific formula combines Niacinamide (3%), Panthenol B5 (2%), Centella (1%), Squalane (3%), and many other expert active ingredients working in synergy. The result? Intensely quenched and soothed skin, zero greasiness, at a gentle accessible price.",
+      desc: "Anjucia is an ultra-lightweight emulsion with a plump, velvety, and naturally satin finish designed to protect your skin from heat and dehydration. Its scientific formula combines Niacinamide (3%), Panthenol B5 (2%), Centella (1%), Squalane (3%), and many other expert active ingredients working in synergy. The result? Intensely quenched and soothed skin, zero greasiness.",
       stat1Val: "+148%",
       stat1Lbl: "Hydration in 15 mins",
       stat2Val: "72H",
       stat2Lbl: "Anti-TEWL moisture lock",
-      stat3Val: "1,800 DZD",
-      stat3Lbl: "Direct accessible price",
-      orderFlagship: "1-Click Order (1,800 DZD)",
+      stat3Val: "pH 5.2",
+      stat3Lbl: "Strict Physiological pH",
+      orderFlagship: "1-Click Order",
       launchAI: "DermoScan AI Skin Analysis",
-      flagshipBadge: "FLAGSHIP HERO • PRECISION NOZZLE TUBE",
-      flagshipVol: "50 ml • Zero Mechanical Pump Failure",
+      flagshipBadge: "FLAGSHIP HERO • PRECISION FORMULA",
+      flagshipVol: "50 ml • High-Precision Format",
       flagshipTitle: "Lightweight Soothing Face Gel-Cream",
       flagshipDesc: "Velvety non-greasy matte finish. Pure 3% Niacinamide, 2% Panthenol B5, 1% Centella Asiatica, 3% Phyto-Squalane & Double Hyaluronic Acid. Physiological pH 5.2.",
       flagshipPrice: "1,800 DZD",
       inStock: "In Stock • 58 Wilayas Delivery",
-      addToCart: "Add to Cart (1,800 DZD)"
+      addToCart: "Add to Cart"
     },
     quickQuizBtn: "Take 10-Second Skin Match ✨",
     philosophy: {
@@ -183,11 +183,11 @@ export const translations = {
       title: "An Advanced Approach Tailored for the Algerian Climate",
       subtitle: "Targeted, high-performance formulas developed specifically to meet the real demands of the Algerian climate.",
       card1Title: "Evidence-Backed Actives",
-      card1Desc: "Strict preference for pure synthetic or cosmetic-grade molecules (pure Niacinamide, Panthenol B5, Ectoin) ensuring superior stability, purity, and safety.",
+      card1Desc: "Strict preference for pure synthetic or cosmetic-grade molecules (pure Niacinamide, Panthenol B5) ensuring superior stability, purity, and safety.",
       card2Title: "High Temperature Stability",
       card2Desc: "Formula successfully tested under 45°C thermal stress, ensuring flawless stability against extreme climate conditions.",
-      card3Title: "Zero-Failure Nozzle Tube",
-      card3Desc: "Precision nozzle-tip tube packaging. Completely eliminates common pump failures from imported parts and prevents bacterial contamination."
+      card3Title: "Formulated in Algeria. Validated Internationally.",
+      card3Desc: "Anjucia cream is formulated by an Algerian pharmacist and validated by an international formulation expert."
     },
     productsPage: {
       tag: "ANJUCIA EXPERT COLLECTION",
@@ -261,8 +261,8 @@ export const translations = {
       climateSub: "Proven extreme climate resistance",
       delivery: "Delivery to 58 Wilayas",
       deliverySub: "Safe cash on delivery payment",
-      zeroBreakdown: "Zero-Failure Nozzle Tube",
-      zeroBreakdownSub: "Reliable precision nozzle tubes",
+      zeroBreakdown: "Protective Packaging",
+      zeroBreakdownSub: "Hygienic & durable design",
       about: "Advanced skincare brand dedicated to cellular hydration and skin barrier protection in Algeria.",
       madeInDz: "Formulated & Packaged in Algeria 🇩🇿",
       contactPharma: "Customer Support & Orders :",
@@ -296,22 +296,22 @@ export const translations = {
     hero: {
       pill: "تركيبة عناية متطورة • مخدوم فالدزاير 🇩🇿",
       title: "العناية المرطبة والمهدئة للوجه المصممة لكل أنواع البشرة",
-      desc: "أنجوسيا هو مستحلب خفيف بزاف بملمس ناعم مخملي وساتيني طبيعي مصمم باش يحمي بشرتك من السخانة ونقص الترطيب. تركيبته العلمية تجمع بين النياسيناميد (3%)، البانتينول B5 (2%)، السنتيلا (1%)، السكوالان (3%) ومكونات خبيرة تخدم بتناغم. النتيجة ؟ بشرة مرطبة بعمق ومهدئة، بلا أي تزييت، وبسومة في متناول اليد 1800 دج.",
+      desc: "أنجوسيا هو مستحلب خفيف بزاف بملمس ناعم مخملي وساتيني طبيعي مصمم باش يحمي بشرتك من السخانة ونقص الترطيب. تركيبته العلمية تجمع بين النياسيناميد (3%)، البانتينول B5 (2%)، السنتيلا (1%)، السكوالان (3%) ومكونات خبيرة تخدم بتناغم. النتيجة ؟ بشرة مرطبة بعمق ومهدئة، بلا أي تزييت، وبسومة في متناول اليد.",
       stat1Val: "+148%",
       stat1Lbl: "ترطيب عميق بعد 15 دقيقة",
       stat2Val: "72 ساعة",
       stat2Lbl: "حماية ضد تبخر الماء TEWL",
-      stat3Val: "1800 دج",
-      stat3Lbl: "سومة مباشرة معقولة",
-      orderFlagship: "اطلب الآن في ثواني (1800 دج)",
+      stat3Val: "pH 5.2",
+      stat3Lbl: "حموضة فيزيولوجية مثالية",
+      orderFlagship: "اطلب الآن في ثواني",
       launchAI: "فحص البشرة بالذكاء الاصطناعي",
-      flagshipBadge: "المنتج النجم • أنبوب كانول دقيق بدون أعطال",
-      flagshipVol: "50 مل • ما يتبلوكا ما يفسد",
+      flagshipBadge: "المنتج النجم • تركيبة عالية الدقة",
+      flagshipVol: "حجم 50 مل • عملي ودقيق",
       flagshipTitle: "Lightweight Soothing Face Gel-Cream",
       flagshipDesc: "ملمس مخملي مات زيرو زيوت. نياسيناميد نقي 3%، بانتينول B5 2%، سنتيلا 1%، سكوالان نباتي 3% مع حمض الهيالورونيك المزدوج. درجة حموضة متوازنة pH 5.2.",
       flagshipPrice: "1800 دج",
       inStock: "متوفر • توصيل لكل الـ 58 ولاية",
-      addToCart: "زيد للسلة (1800 دج)"
+      addToCart: "زيد للسلة"
     },
     quickQuizBtn: "دير التيست السريع (10 ثواني) ✨",
     philosophy: {
@@ -322,8 +322,8 @@ export const translations = {
       card1Desc: "نستعملو غير المواد النقية من درجة تجميلية متقدمة (نياسيناميد نقي، بانتينول B5، سنتيلا) لي تضمن استقرار ونتيجة مضمونة وما تحسّسش الوجه.",
       card2Title: "مقاومة الحرارة العالية 45°C",
       card2Desc: "تركيبة مجربة بنجاح تحت حرارة 45 درجة مئوية، تضمن ثباتاً مثالياً يقاوم حرارة الصيف والشهيلي.",
-      card3Title: "أنبوب كانول (مكاش أعطال البومبة)",
-      card3Desc: "اخترنا تيوب برأس كانول دقيق، باش نتفاداو المشكل المعروف فالدزاير تاع البومبات المستوردة لي تحبس بعد سمانة وتفسد البرودوي."
+      card3Title: "مُركّبة في الجزائر. معتمدة دولياً.",
+      card3Desc: "كريم أنجوسيا صُمم من طرف صيدلانية جزائرية، وحصل على اعتماد خبيرة دولية في علم التركيب الصيدلاني."
     },
     productsPage: {
       tag: "تشكيلة أنجوسيا المتطورة",
@@ -397,8 +397,8 @@ export const translations = {
       climateSub: "مقاومة مضمونة للحرارة والشهيلي",
       delivery: "توصيل لـ 58 ولاية",
       deliverySub: "دفع آمن عند وصول الطلب",
-      zeroBreakdown: "أنبوب كانول بدون أعطال",
-      zeroBreakdownSub: "تعليب متين وعملي وصحي",
+      zeroBreakdown: "تعليب واقٍ وصحي",
+      zeroBreakdownSub: "تصميم متين وعملي",
       about: "علامة جزائرية متخصصة في الترطيب المتقدم وحماية حواجز البشرة.",
       madeInDz: "مُركّب ومُعبأ في الجزائر 🇩🇿",
       contactPharma: "خدمة الزبائن والطلبيات :",
@@ -407,3 +407,5 @@ export const translations = {
     }
   }
 };
+
+translations.ar = translations.dz;

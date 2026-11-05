@@ -8,27 +8,29 @@ import { DropletMark } from "./brand/AnjuciaLogo";
 
 const TIPS = {
   fr: [
-    "✦ Soin Apaisant disponible : Gel-Crème 50 ml à 1 800 DA, livraison 58 Wilayas !",
+    "✦ Soin Apaisant disponible : Gel-Crème 50 ml, livraison 58 Wilayas !",
     "✦ Formulé pour le climat algérien : Niacinamide 3% pure, 0% parfum, pH 5.2 strict ✨",
     "✦ Astuce : Vous pouvez installer l'App ANJUCIA sur votre écran d'accueil 📲",
     "✦ Nouveau : Testez le jeu Goutte Rescue dans l'onglet Jeu 🎮 !",
-    "✦ Tube canule hygiénique : dosage précis sans risque de panne de pompe 🛡️"
+    "✦ Formule haute tolérance : testée pour les peaux les plus sensibles 🛡️"
   ],
   dz: [
-    "✦ متوفر الآن : جل-كريم طبي 50 مل بسعر 1800 دج مع توصيل لكل الـ 58 ولاية !",
+    "✦ متوفر الآن : جل-كريم طبي 50 مل مع توصيل لكل الـ 58 ولاية !",
     "✦ تركيبة مخصصة لبلادنا : نياسيناميد 3%، بدون عطور، وبـ pH 5.2 متوازن تماماً ✨",
     "✦ نصيحة : تقدر تثبت تطبيق أنجوسيا في شاشة هاتفك باش تطلب في ثواني 📲",
     "✦ جرب اللعبة الجديدة : أنقذ القطرة في قسم الألعاب 🎮 !",
-    "✦ تيوب كانول محمي : يضمنلك استعمال نظيف وبلا أعطال 🛡️"
+    "✦ تركيبة عالية التحمل : مناسبة للبشرة الحساسة والمعرضة للجفاف 🛡️"
   ],
   en: [
-    "✦ Live Flagship: Soothing Face Gel-Cream 50 ml at 1,800 DZD, 58 Wilayas shipping!",
+    "✦ Live Flagship: Soothing Face Gel-Cream 50 ml, 58 Wilayas shipping!",
     "✦ Formulated for North African climate: 3% pure Niacinamide, pH 5.2, 0% fragrance ✨",
     "✦ Tip: Install ANJUCIA as a native app on your home screen 📲",
     "✦ New: Play Droplet Rescue in the Game tab 🎮!",
-    "✦ Zero-fail cannula tube: maximum hygienic precision 🛡️"
+    "✦ High skin tolerance: thoroughly tested for sensitive skin 🛡️"
   ]
 };
+
+TIPS.ar = TIPS.dz;
 
 export default function AnjuBotCompanion() {
   const { lang } = useLanguage();
@@ -193,8 +195,8 @@ export default function AnjuBotCompanion() {
           style={{
             maxWidth: "260px",
             background: "var(--bg-card)",
-            border: "1.5px solid var(--accent-aqua)",
-            borderRadius: "16px 16px 4px 16px",
+            border: "none",
+            borderRadius: "0px",
             padding: "0.75rem 0.95rem",
             marginBottom: "0.55rem",
             boxShadow: "var(--shadow-md), var(--shadow-glow)",
@@ -328,7 +330,7 @@ export default function AnjuBotCompanion() {
               width: "6px",
               height: isHappy ? "4px" : "2.5px",
               borderBottom: "1.8px solid #FFFFFF",
-              borderRadius: "0 0 6px 6px",
+              borderRadius: "0px",
               margin: "2px auto 0"
             }}
           />

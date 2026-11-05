@@ -379,8 +379,8 @@ export default function DropletGame({ compact = false }) {
       style={{
         position: "relative",
         background: "var(--bg-card)",
-        border: "2px solid var(--accent-aqua)",
-        borderRadius: "var(--card-radius, 22px)",
+        border: "none",
+        borderRadius: "0px",
         boxShadow: "var(--shadow-md), var(--shadow-glow)",
         overflow: "hidden",
         userSelect: "none"
@@ -396,7 +396,7 @@ export default function DropletGame({ compact = false }) {
           background: "var(--bg-secondary)",
           borderBottom: "1px solid var(--border-subtle)",
           fontSize: "0.82rem",
-          fontWeight: 800
+          fontWeight: 400
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "0.8rem" }}>
@@ -409,10 +409,10 @@ export default function DropletGame({ compact = false }) {
               style={{
                 fontSize: "0.72rem",
                 padding: "0.2rem 0.5rem",
-                borderRadius: "9999px",
+                borderRadius: "0px",
                 background: "var(--accent-aqua-subtle)",
                 color: "var(--accent-aqua)",
-                border: "1px solid var(--border-light)"
+                border: "none"
               }}
             >
               Combo ×{combo} 🔥
@@ -428,9 +428,9 @@ export default function DropletGame({ compact = false }) {
               width: "80px",
               height: "10px",
               background: "var(--bg-primary)",
-              borderRadius: "9999px",
+              borderRadius: "0px",
               overflow: "hidden",
-              border: "1px solid var(--border-subtle)"
+              border: "none"
             }}
           >
             <div
@@ -482,7 +482,7 @@ export default function DropletGame({ compact = false }) {
               height: "68px",
               borderRadius: "50%",
               background: "var(--accent-aqua-subtle)",
-              border: "1.5px solid var(--accent-aqua)",
+              border: "none",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -493,12 +493,14 @@ export default function DropletGame({ compact = false }) {
             <span style={{ fontSize: "2rem" }}>💧</span>
           </div>
 
-          <h3 style={{ fontSize: "1.5rem", fontWeight: 900, color: "var(--text-primary)", marginBottom: "0.4rem" }}>
+          <h3 style={{ fontSize: "1.5rem", fontWeight: 400, color: "var(--text-primary)", marginBottom: "0.4rem" }}>
             Goutte Rescue • Anjucia Lab
           </h3>
           <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", maxWidth: "340px", lineHeight: 1.5, marginBottom: "1.4rem" }}>
-            {lang === "dz"
+            {lang === "dz" || lang === "ar"
               ? "حرّك قطرة أنجوسيا بإصبعك : التقط النياسيناميد والبانتينول وتفادى ضربات الشمس والشهيلي !"
+              : lang === "en"
+              ? "Swipe to move the ANJUCIA droplet: catch Niacinamide & Panthenol, and dodge UV rays & dry sirocco heat!"
               : "Glissez votre doigt pour attraper la Niacinamide et le Panthénol, et esquivez les UV et la chaleur !"}
           </p>
 
@@ -508,7 +510,7 @@ export default function DropletGame({ compact = false }) {
             style={{ padding: "0.95rem 2.4rem", fontSize: "1rem", display: "inline-flex", alignItems: "center", gap: "0.6rem" }}
           >
             <Play size={18} />
-            <span>{lang === "dz" ? "ابدأ اللعب الآن" : "Jouer Maintenant"}</span>
+            <span>{lang === "dz" || lang === "ar" ? "ابدأ اللعب الآن" : lang === "en" ? "Play Now" : "Jouer Maintenant"}</span>
           </button>
         </div>
       )}
@@ -529,12 +531,12 @@ export default function DropletGame({ compact = false }) {
           }}
         >
           <Trophy size={48} color="var(--accent-aqua)" style={{ marginBottom: "0.8rem" }} />
-          <h3 style={{ fontSize: "1.4rem", fontWeight: 900, color: "var(--text-primary)", marginBottom: "0.2rem" }}>
-            {lang === "dz" ? "انتهت الجولة !" : "Partie Terminée !"}
+          <h3 style={{ fontSize: "1.4rem", fontWeight: 400, color: "var(--text-primary)", marginBottom: "0.2rem" }}>
+            {lang === "dz" || lang === "ar" ? "انتهت الجولة !" : lang === "en" ? "Game Over!" : "Partie Terminée !"}
           </h3>
           <p style={{ fontSize: "0.9rem", color: "var(--text-secondary)", marginBottom: "1.2rem" }}>
-            Score Final : <strong style={{ color: "var(--accent-aqua)", fontSize: "1.3rem" }}>{score}</strong>
-            {score >= highScore && score > 0 && <span style={{ color: "var(--success)", display: "block", fontSize: "0.78rem" }}>🏆 Nouveau Record Personnel !</span>}
+            {lang === "dz" || lang === "ar" ? "النتيجة النهائية :" : lang === "en" ? "Final Score :" : "Score Final :"} <strong style={{ color: "var(--accent-aqua)", fontSize: "1.3rem" }}>{score}</strong>
+            {score >= highScore && score > 0 && <span style={{ color: "var(--success)", display: "block", fontSize: "0.78rem" }}>{lang === "dz" || lang === "ar" ? "🏆 رقم قياسي جديد !" : lang === "en" ? "🏆 New Personal Best!" : "🏆 Nouveau Record Personnel !"}</span>}
           </p>
 
           {unlockedReward && (
@@ -543,13 +545,17 @@ export default function DropletGame({ compact = false }) {
                 marginBottom: "1.2rem",
                 padding: "0.75rem 1.2rem",
                 background: "var(--accent-aqua-subtle)",
-                border: "1px solid var(--border-light)",
-                borderRadius: "12px",
+                border: "none",
+                borderRadius: "0px",
                 fontSize: "0.82rem",
                 color: "var(--text-primary)"
               }}
             >
-              🎉 <strong>Félicitations Expert !</strong> Vous avez atteint plus de 350 pts. Votre peau est parfaitement protégée.
+              {lang === "dz" || lang === "ar"
+                ? "🎉 تهانينا ! لقد تجاوزت 350 نقطة. بشرتك محمية بالكامل."
+                : lang === "en"
+                ? "🎉 Congratulations Expert! You scored 350+ points. Your skin barrier is fully fortified."
+                : "🎉 Félicitations Expert ! Vous avez atteint plus de 350 pts. Votre peau est parfaitement protégée."}
             </div>
           )}
 
@@ -560,7 +566,7 @@ export default function DropletGame({ compact = false }) {
               style={{ padding: "0.85rem 1.8rem", fontSize: "0.9rem", display: "inline-flex", alignItems: "center", gap: "0.5rem" }}
             >
               <RotateCcw size={16} />
-              <span>{lang === "dz" ? "إعادة المحاولة" : "Rejouer"}</span>
+              <span>{lang === "dz" || lang === "ar" ? "إعادة المحاولة" : lang === "en" ? "Play Again" : "Rejouer"}</span>
             </button>
           </div>
         </div>

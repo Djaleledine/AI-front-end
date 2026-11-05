@@ -19,49 +19,29 @@ export const PALETTES = [
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const [theme, setThemeState] = useState("dark");
-  const [colorPalette, setColorPaletteState] = useState("mineral");
+  const [theme] = useState("light");
 
   useEffect(() => {
-    // Load Dark/Light Mode
-    const savedTheme = localStorage.getItem("anjucia_theme");
-    const initialTheme = savedTheme || "light";
-    setThemeState(initialTheme);
-    document.documentElement.setAttribute("data-theme", initialTheme);
+    try {
+      localStorage.setItem("anjucia_theme", "light");
+    } catch (_) {}
+    document.documentElement.setAttribute("data-theme", "light");
     document.documentElement.setAttribute("data-color-palette", "mineral");
   }, []);
 
-  const setTheme = (newTheme) => {
-    setThemeState(newTheme);
-    localStorage.setItem("anjucia_theme", newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-  };
-
-  const toggleTheme = () => {
-    const next = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-  };
-
-  const setColorPalette = (newPalette) => {
-    setColorPaletteState("mineral");
-  };
-
-  const nextColorPalette = () => {
-    setColorPaletteState("mineral");
-  };
-
-  const isDark = theme === "dark";
+  const setTheme = () => {};
+  const toggleTheme = () => {};
 
   return (
     <ThemeContext.Provider
       value={{
-        theme,
+        theme: "light",
         setTheme,
         toggleTheme,
-        isDark,
+        isDark: false,
         colorPalette: "mineral",
-        setColorPalette,
-        nextColorPalette,
+        setColorPalette: () => {},
+        nextColorPalette: () => {},
         palettes: PALETTES
       }}
     >
