@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Bell, Check, Sparkles, Shield, Clock } from "lucide-react";
-import { DropletMark } from "../brand/AnjuciaLogo";
+import { Bell, Check, Clock } from "lucide-react";
 import { useCart } from "../../context/CartContext";
 import { useLanguage } from "../../context/LanguageContext";
+import { storeApi } from "../../services/storeApi";
 
 export default function ComingSoonCard({ product, index = 0 }) {
   const { showToast } = useCart();
@@ -14,37 +14,30 @@ export default function ComingSoonCard({ product, index = 0 }) {
     return !!localStorage.getItem(`anjucia_notify_${product.id}`);
   });
 
-  const handleNotify = () => {
+  const handleNotify = async () => {
     if (notified) {
-      showToast(lang === "dz" ? "أنت مسجل بالفعل في قائمة الإشعار !" : "Vous êtes déjà inscrit pour être notifié !");
+      showToast(lang === "dz" || lang === "ar" ? "أنت مسجل بالفعل في قائمة الإشعار !" : lang === "en" ? "You are already registered for notifications!" : "Vous êtes déjà inscrit pour être notifié !");
       return;
     }
     try {
       localStorage.setItem(`anjucia_notify_${product.id}`, "true");
-      const leads = JSON.parse(localStorage.getItem("anjucia_waitlist_leads") || "[]");
-      leads.unshift({
-        id: `LEAD-${Date.now().toString().slice(-5)}`,
+      await storeApi.leads.create({
         productId: product.id,
         productName: product.name,
         contact: "Visiteur Boutique (App Web)",
         wilaya: "Algérie",
-        source: "ComingSoonCard",
-        createdAt: new Date().toISOString()
+        source: "ComingSoonCard"
       });
-      localStorage.setItem("anjucia_waitlist_leads", JSON.stringify(leads));
-      window.dispatchEvent(new CustomEvent("anjucia:waitlist_joined", { detail: { productId: product.id } }));
     } catch (_) {}
     setNotified(true);
     showToast(
-      lang === "dz"
+      lang === "dz" || lang === "ar"
         ? `تم تسجيلك ! سنخبرك فور توفر ${product.name}`
+        : lang === "en"
+        ? `Registered! You will be first to know when ${product.name} launches ✨`
         : `Enregistré ! Vous serez le premier informé du lancement de ${product.name} ✨`
     );
   };
-
-  const activesList = Array.isArray(product.actives)
-    ? product.actives.slice(0, 3)
-    : [];
 
   return (
     <article
@@ -52,13 +45,13 @@ export default function ComingSoonCard({ product, index = 0 }) {
       style={{
         position: "relative",
         background: "var(--bg-card)",
-        border: "1px dashed var(--border-light)",
-        borderRadius: "var(--card-radius, 18px)",
-        padding: "1.6rem",
+        border: "none",
+        borderRadius: "0px",
+        padding: "1.8rem",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        minHeight: "360px",
+        minHeight: "260px",
         overflow: "hidden",
         transition: "transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease"
       }}
@@ -80,165 +73,96 @@ export default function ComingSoonCard({ product, index = 0 }) {
 
       {/* Top Header & Badge */}
       <div>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem" }}>
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "1.2rem" }}>
           <span
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "0.35rem",
               fontSize: "0.72rem",
-              fontWeight: 800,
+              fontWeight: 400,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
               padding: "0.3rem 0.75rem",
-              borderRadius: "9999px",
+              borderRadius: "0px",
               background: "rgba(113, 159, 183, 0.14)",
               color: "var(--accent-aqua)",
-              border: "1px solid var(--border-light)"
+              border: "none"
             }}
           >
             <Clock size={12} />
-            {lang === "dz" ? "قريباً • في مرحلة التحضير" : "Bientôt Disponible"}
+            {lang === "dz" || lang === "ar" ? "قريباً • في مرحلة التحضير" : lang === "en" ? "Coming Soon • In Formulation" : "Bientôt Disponible"}
           </span>
-          <span style={{ fontSize: "0.74rem", color: "var(--text-muted)", fontWeight: 700 }}>
-            {product.volume || "Formule Experte"}
-          </span>
-        </div>
-
-        {/* Droplet Silhouette placeholder (NO image) */}
-        <div
-          style={{
-            height: "140px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-input) 100%)",
-            borderRadius: "14px",
-            border: "1px solid var(--border-subtle)",
-            position: "relative",
-            marginBottom: "1.2rem",
-            overflow: "hidden"
-          }}
-        >
-          {/* Subtle shimmering scan line */}
-          <div className="coming-soon-shimmer" />
-
-          <div style={{ textAlign: "center", opacity: 0.85, transform: "scale(1)" }}>
-            <DropletMark size={52} color="var(--accent-aqua)" />
-            <div
-              style={{
-                marginTop: "0.5rem",
-                fontSize: "0.68rem",
-                fontWeight: 800,
-                letterSpacing: "0.14em",
-                color: "var(--text-muted)",
-                textTransform: "uppercase"
-              }}
-            >
-              {lang === "dz" ? "صورة المنتج قريباً" : "Visuel en Préparation"}
-            </div>
-          </div>
         </div>
 
         {/* Product Details */}
         <span
           style={{
             fontSize: "0.7rem",
-            fontWeight: 800,
+            fontWeight: 400,
             textTransform: "uppercase",
             letterSpacing: "0.1em",
             color: "var(--accent-aqua)",
             display: "block",
-            marginBottom: "0.25rem"
+            marginBottom: "0.35rem"
           }}
         >
           {product.category || "Dermocosmétique"}
         </span>
         <h3
           style={{
-            fontSize: "1.18rem",
-            fontWeight: 900,
+            fontSize: "1.24rem",
+            fontWeight: 400,
             color: "var(--text-primary)",
             lineHeight: 1.25,
-            marginBottom: "0.35rem"
+            marginBottom: "0.5rem"
           }}
         >
           {product.name}
         </h3>
         <p
           style={{
-            fontSize: "0.82rem",
+            fontSize: "0.85rem",
             color: "var(--text-secondary)",
-            lineHeight: 1.5,
-            marginBottom: "0.9rem"
+            lineHeight: 1.55,
+            marginBottom: "1.2rem"
           }}
         >
           {product.subtitle || product.description}
         </p>
-
-        {/* Actives preview bullets */}
-        {activesList.length > 0 && (
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.4rem", marginBottom: "1rem" }}>
-            {activesList.map((act, i) => (
-              <span
-                key={i}
-                style={{
-                  fontSize: "0.68rem",
-                  fontWeight: 700,
-                  padding: "0.2rem 0.55rem",
-                  background: "var(--bg-secondary)",
-                  border: "1px solid var(--border-subtle)",
-                  borderRadius: "6px",
-                  color: "var(--text-muted)"
-                }}
-              >
-                {act.name} {act.percentage ? `(${act.percentage})` : ""}
-              </span>
-            ))}
-          </div>
-        )}
       </div>
 
       {/* Card Action footer */}
       <div
         style={{
           borderTop: "1px solid var(--border-subtle)",
-          paddingTop: "1rem",
+          paddingTop: "1.1rem",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "0.8rem"
+          alignItems: "center"
         }}
       >
-        <div>
-          <span style={{ fontSize: "0.72rem", color: "var(--text-muted)", fontWeight: 700, display: "block" }}>
-            {lang === "dz" ? "السعر" : "Tarif Officiel"}
-          </span>
-          <span style={{ fontSize: "0.88rem", fontWeight: 800, color: "var(--accent-aqua)" }}>
-            {lang === "dz" ? "يُحدد عند الإطلاق" : "Annoncé au lancement"}
-          </span>
-        </div>
-
         <button
           onClick={handleNotify}
           className={notified ? "btn-outline" : "btn-aqua"}
           style={{
-            padding: "0.6rem 1.1rem",
-            fontSize: "0.82rem",
+            width: "100%",
+            padding: "0.75rem 1.1rem",
+            fontSize: "0.84rem",
             display: "inline-flex",
             alignItems: "center",
-            gap: "0.4rem"
+            justifyContent: "center",
+            gap: "0.45rem"
           }}
         >
           {notified ? (
             <>
               <Check size={14} color="var(--success)" />
-              <span>{lang === "dz" ? "تم التسجيل ✓" : "Inscrit ✓"}</span>
+              <span>{lang === "dz" || lang === "ar" ? "تم التسجيل ✓" : lang === "en" ? "Registered ✓" : "Inscrit ✓"}</span>
             </>
           ) : (
             <>
               <Bell size={14} />
-              <span>{lang === "dz" ? "أعلمني عند التوفر" : "Me prévenir"}</span>
+              <span>{lang === "dz" || lang === "ar" ? "أعلمني عند التوفر" : lang === "en" ? "Notify Me" : "Me prévenir"}</span>
             </>
           )}
         </button>

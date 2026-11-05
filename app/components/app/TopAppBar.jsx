@@ -2,16 +2,14 @@
 
 import React from "react";
 import Link from "next/link";
-import { ShoppingBag, Sun, Moon, Shield } from "lucide-react";
+import { ShoppingBag, Shield } from "lucide-react";
 import AnjuciaLogo from "../brand/AnjuciaLogo";
 import { useCart } from "../../context/CartContext";
 import { useLanguage } from "../../context/LanguageContext";
-import { useTheme } from "../../context/ThemeContext";
 
 export default function TopAppBar({ onInstallClick }) {
   const { totalCount, setIsCartOpen } = useCart();
   const { lang, setLang } = useLanguage();
-  const { theme, toggleTheme, isDark } = useTheme();
 
   return (
     <header
@@ -25,7 +23,8 @@ export default function TopAppBar({ onInstallClick }) {
         WebkitBackdropFilter: "blur(16px)",
         borderBottom: "1px solid var(--border-subtle)",
         padding: "0.6rem 1rem",
-        transition: "background-color 0.25s ease, border-color 0.25s ease"
+        transition: "background-color 0.25s ease, border-color 0.25s ease",
+        direction: "ltr"
       }}
     >
       <div
@@ -35,46 +34,25 @@ export default function TopAppBar({ onInstallClick }) {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          gap: "0.8rem"
+          gap: "0.8rem",
+          direction: "ltr"
         }}
       >
         {/* Brand Logo Lockup */}
         <Link href="/" style={{ textDecoration: "none", color: "inherit", display: "inline-flex", alignItems: "center" }}>
-          <AnjuciaLogo size={24} />
+          <AnjuciaLogo size={38} />
         </Link>
 
-        {/* Right Controls: Theme Toggle, Language Selector, Admin link, Cart */}
+        {/* Right Controls: Language Selector, Admin link, Cart */}
         <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
-          {/* Dark / Light Mode Switcher */}
-          <button
-            onClick={toggleTheme}
-            aria-label={isDark ? "Passer en mode clair" : "Passer en mode sombre"}
-            title={isDark ? "Mode Clair (Dermocosmétique Blanc & Sauge)" : "Mode Sombre (Ardoise & Glacier)"}
-            style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "10px",
-              background: "var(--bg-secondary)",
-              border: "1px solid var(--border-light)",
-              color: "var(--accent-aqua)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-              transition: "transform 0.15s ease"
-            }}
-          >
-            {isDark ? <Sun size={17} /> : <Moon size={17} />}
-          </button>
-
           {/* Quick Language switch */}
           <div
             style={{
               display: "inline-flex",
               alignItems: "center",
               background: "var(--bg-secondary)",
-              border: "1px solid var(--border-subtle)",
-              borderRadius: "9999px",
+              border: "none",
+              borderRadius: "0px",
               padding: "2px"
             }}
           >
@@ -86,15 +64,15 @@ export default function TopAppBar({ onInstallClick }) {
                   background: lang === l ? "var(--accent-aqua)" : "transparent",
                   color: lang === l ? "var(--text-inverse)" : "var(--text-muted)",
                   border: "none",
-                  borderRadius: "9999px",
+                  borderRadius: "0px",
                   padding: "0.22rem 0.48rem",
                   fontSize: "0.68rem",
-                  fontWeight: 800,
+                  fontWeight: 400,
                   cursor: "pointer",
                   textTransform: "uppercase"
                 }}
               >
-                {l === "dz" ? "🇩🇿" : l}
+                {l === "dz" ? "AR" : l}
               </button>
             ))}
           </div>
@@ -107,9 +85,9 @@ export default function TopAppBar({ onInstallClick }) {
             style={{
               width: "36px",
               height: "36px",
-              borderRadius: "10px",
+              borderRadius: "0px",
               background: "var(--bg-secondary)",
-              border: "1px solid var(--border-subtle)",
+              border: "none",
               color: "var(--text-secondary)",
               display: "flex",
               alignItems: "center",
@@ -128,9 +106,9 @@ export default function TopAppBar({ onInstallClick }) {
               position: "relative",
               width: "38px",
               height: "38px",
-              borderRadius: "10px",
+              borderRadius: "0px",
               background: "var(--bg-secondary)",
-              border: "1px solid var(--border-light)",
+              border: "none",
               color: "var(--text-primary)",
               display: "flex",
               alignItems: "center",
@@ -148,7 +126,7 @@ export default function TopAppBar({ onInstallClick }) {
                   background: "var(--accent-aqua)",
                   color: "var(--text-inverse)",
                   fontSize: "0.65rem",
-                  fontWeight: 900,
+                  fontWeight: 400,
                   width: "16px",
                   height: "16px",
                   borderRadius: "50%",

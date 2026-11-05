@@ -1,80 +1,62 @@
 # 🚀 Guide de Déploiement Hostinger — ANJUCIA Dermaceutics
 
-Ce projet Next.js 15 (App Router) est optimisé pour être déployé sur **Hostinger** selon votre formule d'hébergement.
+Ce projet Next.js 15 Full-Stack (App Router + Node.js API + MongoDB + DermoScan AI™) est prêt pour la production sur **Hostinger**. Pour la checklist complète de sécurité et des variables d'environnement, consultez également [`PRODUCTION_DEPLOYMENT.md`](file:///c:/Users/SAID/Desktop/platform/AI%20front-end/PRODUCTION_DEPLOYMENT.md).
 
 ---
 
-## Option 1 : Déploiement Automatique via Git sur Hostinger (Recommandé ⭐)
+## Option 1 : Déploiement Node.js via Git sur Hostinger (Recommandé ⭐)
 
 Si vous utilisez **Hostinger Web Hosting (avec Node.js)**, **Cloud Hosting** ou **VPS Hostinger** :
 
 1. Poussez les modifications sur votre dépôt GitHub :
    ```bash
    git add .
-   git commit -m "feat: complete dermaceutical skincare design, admin dashboard & light mode"
+   git commit -m "chore: production security hardening, clean database seeds & deployment guide"
    git push origin main
    ```
 2. Dans votre tableau de bord **Hostinger hPanel** :
    - Allez dans **Sites Web** > Cliquez sur votre domaine > **Avancé** > **Git**.
-   - Connectez votre dépôt : `https://github.com/Djaleledine/AI-front-end.git`.
-   - Branche : `main`.
-   - Cochez **Déploiement automatique lors du push**.
+   - Connectez votre dépôt Git et sélectionnez la branche `main`.
 3. Dans la section **Node.js** de votre hébergement :
    - Version de Node.js : **20.x** ou **22.x** (Node LTS).
    - Répertoire racine : `/`
+   - Variables d'environnement : ajoutez `GEMINI_API_KEY`, `MONGODB_URI`, `ADMIN_PIN`, `ADMIN_SESSION_SECRET`, et `NEXT_PUBLIC_SITE_URL` (voir `.env.example`).
    - Commande de build : `npm run build`
    - Commande de démarrage : `npm start`
    - Port : `3000` (ou port assigné par Hostinger).
 
 ---
 
-## Option 2 : Déploiement Standalone (VPS / Docker Hostinger)
+## Option 2 : Déploiement Standalone (VPS / PM2 Hostinger)
 
-Le projet génère automatiquement une version ultra-légère autonome dans `.next/standalone` :
+```bash
+# 1. Cloner le projet
+git clone https://github.com/Djaleledine/AI-front-end.git
+cd AI-front-end
 
-1. Sur votre serveur Hostinger :
-   ```bash
-   # 1. Cloner ou transférer le projet
-   git clone https://github.com/Djaleledine/AI-front-end.git
-   cd AI-front-end
+# 2. Configurer les variables d'environnement
+cp .env.example .env.local
+nano .env.local
 
-   # 2. Installer et compiler
-   npm install
-   npm run build
+# 3. Installer et compiler
+npm ci
+npm run build
 
-   # 3. Lancer avec PM2
-   npm install -g pm2
-   pm2 start server.js --name "anjucia-store" --cwd .next/standalone
-   pm2 save
-   pm2 startup
-   ```
-
----
-
-## Option 3 : Export Statique pour Hébergement Partagé Hostinger (public_html)
-
-Si vous disposez d'un hébergement mutualisé standard sans serveur Node.js permanent :
-
-1. Générez l'export statique complet :
-   ```bash
-   set NEXT_EXPORT=true && npm run build
-   ```
-2. Un dossier `out/` contenant les fichiers HTML, CSS, JS et images sera créé.
-3. Dans **Hostinger hPanel** > **Gestionnaire de Fichiers** :
-   - Ouvrez le dossier `public_html`.
-   - Téléversez l'ensemble du contenu du dossier `out/`.
-   - Vos pages s'afficheront instantanément avec SSL automatique.
+# 4. Lancer avec PM2
+npm install -g pm2
+pm2 start npm --name "anjucia-store" -- start
+pm2 save
+pm2 startup
+```
 
 ---
 
-## 🔐 Accès au Panneau d'Administration (/admin)
+## 🔐 Accès Sécurisé au Panneau d'Administration (`/admin`)
 
-- **URL :** `https://votre-domaine.com/admin` (ou `http://localhost:3000/admin`)
-- **Code PIN Administrateur :** `anjucia2026`
-- **Bouton Démo :** Un clic sur « Connexion Rapide Démo » permet d'accéder instantanément au tableau de bord.
+- **URL :** `https://anjucia.com/admin`
+- **Authentification Serveur :** Protégée par `ADMIN_PIN` (configurable dans `.env.local` ou directement dans l'onglet **CMS & Base MongoDB**), cookie `HttpOnly` signé HMAC-SHA256 et limitation anti-force brute.
 - **Fonctionnalités incluses :**
-  - Gestion des commandes 58 Wilayas (Changement de statut en direct, filtrage, export CSV).
-  - Gestion en direct du prix du Gel-Crème (1 800 DA par défaut, modifiable).
-  - Gestion des stocks (En stock / Rupture).
-  - Suivi des inscrits aux listes d'attente (Coming Soon / Club VIP).
-  - Grille logistique 58 Wilayas (Yalidine, ZR Express, Mayestro).
+  - Gestion intégrale des commandes COD 58 Wilayas (statuts, codes de suivi, export CSV).
+  - Gestion du catalogue produits, prix en DA, stocks et actifs biochimiques (synchronisés en direct avec DermoScan AI™).
+  - Gestion des packs promotionnels, avis clients, pharmacies partenaires et leads VIP.
+  - Télémétrie DermoScan AI™ et configuration MongoDB Atlas en direct.

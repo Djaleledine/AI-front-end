@@ -9,7 +9,7 @@ import { useCart } from "../../context/CartContext";
 const TABS = [
   { id: "home", path: "/", icon: Home, label: { fr: "Accueil", dz: "الرئيسية", en: "Home" } },
   { id: "products", path: "/products", icon: ShoppingBag, label: { fr: "Boutique", dz: "المتجر", en: "Shop" } },
-  { id: "game", path: "/game", icon: Gamepad2, label: { fr: "Jeu", dz: "اللعبة", en: "Game" }, badge: "Nouveau" },
+  { id: "game", path: "/game", icon: Gamepad2, label: { fr: "Jeu", dz: "اللعبة", en: "Game" }, badge: { fr: "Nouveau", en: "New", dz: "جديد" } },
   { id: "analyzer", path: "/analyzer", icon: Sparkles, label: { fr: "Scan AI", dz: "فحص AI", en: "Scan AI" } },
   { id: "profile", path: "/profile", icon: User, label: { fr: "Profil", dz: "حسابي", en: "Profile" } }
 ];
@@ -70,7 +70,8 @@ export default function BottomTabBar() {
         {TABS.map((tab) => {
           const isActive = pathname === tab.path || (tab.path !== "/" && pathname.startsWith(tab.path));
           const Icon = tab.icon;
-          const label = tab.label[lang] || tab.label.fr;
+          const label = tab.label[lang] || (lang === "ar" ? tab.label.dz : tab.label.fr);
+          const badge = tab.badge ? (typeof tab.badge === "object" ? (tab.badge[lang] || (lang === "ar" ? tab.badge.dz : tab.badge.fr)) : tab.badge) : null;
 
           return (
             <button
@@ -101,7 +102,7 @@ export default function BottomTabBar() {
                     top: "2px",
                     width: "36px",
                     height: "30px",
-                    borderRadius: "12px",
+                    borderRadius: "0px",
                     background: "rgba(113, 159, 183, 0.16)",
                     zIndex: 0
                   }}
@@ -119,7 +120,7 @@ export default function BottomTabBar() {
                       background: "var(--accent-aqua)",
                       color: "#11171A",
                       fontSize: "0.62rem",
-                      fontWeight: 900,
+                      fontWeight: 400,
                       width: "14px",
                       height: "14px",
                       borderRadius: "50%",
@@ -141,13 +142,13 @@ export default function BottomTabBar() {
                       background: "var(--success)",
                       color: "#11171A",
                       fontSize: "0.55rem",
-                      fontWeight: 900,
+                      fontWeight: 400,
                       padding: "1px 3px",
-                      borderRadius: "4px",
+                      borderRadius: "0px",
                       lineHeight: 1
                     }}
                   >
-                    {tab.badge}
+                    {badge}
                   </span>
                 )}
               </div>

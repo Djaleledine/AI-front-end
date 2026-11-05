@@ -7,11 +7,11 @@
 :root, [data-theme="dark"] {
   /* Official ANJUCIA Mineral-Botanical Palette (Exact Swatch Colors) */
   --bg-primary: #11171A;         /* Swatch 14: Deep Abyss Charcoal */
-  --bg-secondary: #1E272E;       /* Swatch 13: Midnight Slate Surface */
-  --bg-card: #182229;            /* Refined Card Surface */
-  --bg-card-hover: #213039;      /* Interactive Hover Elevation */
+  --bg-secondary: rgba(30, 39, 46, 0.82);       /* Midnight Slate Surface */
+  --bg-card: rgba(24, 34, 41, 0.48);            /* Refined Card Surface */
+  --bg-card-hover: rgba(33, 48, 57, 0.88);      /* Interactive Hover Elevation */
   --bg-glass: rgba(17, 23, 26, 0.88);
-  --bg-input: #141C21;
+  --bg-input: rgba(20, 28, 33, 0.55);
 
   --text-primary: #FFFFFF;       /* Swatch 1: Pure White */
   --text-secondary: #D0E1E9;     /* Swatch 7: Soft Ice Glacial Blue */
@@ -38,9 +38,9 @@
   --danger: #E06D6D;
   --warning: #D9A066;
 
-  --card-radius: 16px;
-  --btn-radius: 10px;
-  --badge-radius: 9999px;
+  --card-radius: 0px;
+  --btn-radius: 0px;
+  --badge-radius: 0px;
   --btn-gradient: linear-gradient(135deg, #719FB7 0%, #436D88 100%);
   --hero-glow-color: rgba(113, 159, 183, 0.18);
 
@@ -53,11 +53,11 @@
 [data-theme="light"] {
   /* High-End Skincare Mineral & Botanical Light Theme */
   --bg-primary: #FAFBFB;         /* Pristine Alabaster Clinical White */
-  --bg-secondary: #F0F4F7;       /* Soft Mineral Mist */
-  --bg-card: #FFFFFF;            /* Pure Crisp White Card */
-  --bg-card-hover: #F4F8FA;
-  --bg-glass: rgba(250, 251, 251, 0.94);
-  --bg-input: #FFFFFF;
+  --bg-secondary: rgba(240, 244, 247, 0.72);       /* Soft Mineral Mist */
+  --bg-card: rgba(255, 255, 255, 0.48);            /* Frosted Translucent Glass Card */
+  --bg-card-hover: rgba(255, 255, 255, 0.88);      /* A little more opaque on hover */
+  --bg-glass: rgba(250, 251, 251, 0.75);
+  --bg-input: rgba(255, 255, 255, 0.55);
 
   --text-primary: #121E26;       /* Deep Mineral Slate */
   --text-secondary: #3D5A6C;     /* Aegean Slate */
@@ -84,9 +84,9 @@
   --danger: #C0392B;
   --warning: #D3833E;
 
-  --card-radius: 18px;
-  --btn-radius: 10px;
-  --badge-radius: 9999px;
+  --card-radius: 0px;
+  --btn-radius: 0px;
+  --badge-radius: 0px;
   --btn-gradient: linear-gradient(135deg, #386B88 0%, #203A4C 100%);
   --hero-glow-color: rgba(56, 107, 136, 0.08);
 
@@ -94,6 +94,125 @@
   --shadow-md: 0 10px 32px rgba(18, 30, 38, 0.07);
   --shadow-glow: 0 0 24px rgba(56, 107, 136, 0.12);
   --logo-filter: none;
+}
+
+
+/* ==========================================================================
+   GLOBAL TYPOGRAPHY: REGULAR NOT BOLD
+   ========================================================================== */
+*, *::before, *::after {
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6,
+.section-title,
+.section-tag,
+.section-subtitle,
+.hero-title,
+.gsap-headline,
+.price-dzd,
+.badge,
+.nav-link,
+[style*="font-weight"],
+[style*="fontWeight"] {
+  font-weight: 400 !important;
+}
+
+b, strong {
+  font-weight: 600;
+}
+
+
+/* ==========================================================================
+   GLASS RECTANGLE SYSTEM (NO OUTLINE / NO BORDER + HOVER OPACITY)
+   ========================================================================== */
+*, *::before, *::after {
+  border-radius: 0 !important;
+}
+
+/* Retain 50% for tiny circular status dots and pulse waves */
+.topbar-dot,
+.status-dot,
+.pulse-circle,
+.companion-progress-ring {
+  border-radius: 50% !important;
+}
+
+/* Seamless Glass Rectangles: Translucent, borderless & outline-less */
+.glass-rectangle,
+.coming-soon-card,
+.product-card,
+.bundle-card,
+.philosophy-card,
+.droplet-hero-wrap,
+[class*="card"],
+[style*="var(--bg-card)"],
+.top-app-bar,
+.bottom-tab-bar,
+.section-tag,
+.btn-outline,
+input, textarea, select {
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              transform 0.25s ease !important;
+}
+
+/* Mouse pointer hover: turns noticeably more opaque with smooth depth */
+.glass-rectangle:hover,
+.coming-soon-card:hover,
+.product-card:hover,
+.bundle-card:hover,
+.philosophy-card:hover,
+.droplet-hero-wrap:hover,
+[class*="card"]:hover,
+[style*="var(--bg-card)"]:hover,
+.btn-outline:hover,
+.section-tag:hover,
+input:focus, textarea:focus, select:focus {
+  background: var(--bg-card-hover) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.12) !important;
+}
+
+/* Rectangular glass buttons without outlines */
+.btn-aqua {
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-aqua:hover {
+  filter: brightness(1.15) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: 0 8px 24px var(--accent-aqua-glow) !important;
+}
+
+.btn-outline {
+  border: none !important;
+  outline: none !important;
+  border-radius: 0 !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  background: var(--bg-card) !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.btn-outline:hover {
+  background: var(--bg-card-hover) !important;
+  border: none !important;
+  outline: none !important;
 }
 
 /* Base Styles */
@@ -107,16 +226,73 @@
 html {
   scroll-behavior: smooth;
   overflow-x: clip;
+  background-color: #D2C0AF;
+}
+
+[data-theme="dark"] html {
+  background-color: #11171A;
 }
 
 body {
   font-family: 'Zain', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--bg-primary);
+  background-color: transparent;
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* ==========================================================================
+   GLOBAL WEBSITE BACKGROUND TEXTURE (LUXURY DERMACEUTICAL SWATCHES)
+   ========================================================================== */
+.site-background-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.site-background-canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/skincare-texture-bg.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  transform: translateZ(0);
+}
+
+.site-background-canvas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 20%,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.20) 50%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  transition: background 0.3s ease;
+}
+
+[data-theme="dark"] .site-background-canvas::before {
+  opacity: 0.38;
+  filter: brightness(0.65) contrast(1.15);
+}
+
+[data-theme="dark"] .site-background-canvas::after {
+  background: radial-gradient(
+    ellipse at 50% 15%,
+    rgba(17, 23, 26, 0.55) 0%,
+    rgba(17, 23, 26, 0.82) 50%,
+    rgba(17, 23, 26, 0.94) 100%
+  );
 }
 
 /* Arabic RTL Mode */
@@ -124,6 +300,19 @@ html[dir="rtl"] body, body.rtl-mode {
   font-family: 'Zain', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   direction: rtl;
   text-align: right;
+}
+
+/* Keep header, logo, and language controls locked in standard position in Arabic mode */
+html[dir="rtl"] .header-clinical,
+html[dir="rtl"] .header-clinical .container,
+html[dir="rtl"] .nav-main,
+html[dir="rtl"] .top-app-bar,
+html[dir="rtl"] .top-app-bar > div,
+html[dir="rtl"] .nav-topbar,
+html[dir="rtl"] .nav-topbar .container,
+html[dir="rtl"] .nav-controls,
+html[dir="rtl"] .lang-selector-wrap {
+  direction: ltr !important;
 }
 
 /* Ensure inputs, buttons, selects inherit the Zain font */
@@ -148,20 +337,20 @@ input, button, select, textarea, optgroup {
 .section-tag {
   display: inline-block;
   font-size: 0.76rem;
-  font-weight: 800;
+  font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent-aqua);
   background: var(--accent-aqua-subtle);
-  border: 1px solid var(--border-light);
+  border: none;
   padding: 0.35rem 0.85rem;
-  border-radius: var(--badge-radius, 9999px);
+  border-radius: 0px;
   margin-bottom: 0.85rem;
 }
 
 .section-title {
   font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-  font-weight: 900;
+  font-weight: 400;
   color: var(--text-primary);
   line-height: 1.2;
   margin-bottom: 0.8rem;
@@ -183,10 +372,10 @@ input, button, select, textarea, optgroup {
   gap: 0.55rem;
   background: var(--btn-gradient, var(--accent-aqua));
   color: var(--text-inverse, #FFFFFF);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 0.95rem;
   padding: 0.85rem 1.65rem;
-  border-radius: var(--btn-radius, 10px);
+  border-radius: 0px;
   border: none;
   cursor: pointer;
   text-decoration: none;
@@ -207,10 +396,10 @@ input, button, select, textarea, optgroup {
   gap: 0.55rem;
   background: transparent;
   color: var(--text-primary);
-  font-weight: 700;
+  font-weight: 400;
   font-size: 0.95rem;
   padding: 0.85rem 1.55rem;
-  border-radius: var(--btn-radius, 10px);
+  border-radius: 0px;
   border: 1.5px solid var(--border-light);
   cursor: pointer;
   text-decoration: none;
@@ -218,7 +407,7 @@ input, button, select, textarea, optgroup {
 }
 
 .btn-outline:hover {
-  border-color: var(--accent-aqua);
+  border-color: transparent;
   background: var(--accent-aqua-subtle);
   color: var(--accent-aqua);
   transform: translateY(-2px);
@@ -245,7 +434,7 @@ input, button, select, textarea, optgroup {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--accent-aqua);
 }
 
@@ -318,7 +507,7 @@ input, button, select, textarea, optgroup {
 
 .brand-title {
   font-size: 1.35rem;
-  font-weight: 900;
+  font-weight: 400;
   letter-spacing: 0.08em;
   color: var(--text-primary);
   line-height: 1;
@@ -326,7 +515,7 @@ input, button, select, textarea, optgroup {
 
 .brand-tagline {
   font-size: 0.62rem;
-  font-weight: 800;
+  font-weight: 400;
   letter-spacing: 0.14em;
   color: var(--accent-aqua);
   display: block;
@@ -358,7 +547,7 @@ input, button, select, textarea, optgroup {
 
 .nav-link.active {
   color: var(--accent-aqua);
-  font-weight: 800;
+  font-weight: 400;
 }
 
 .nav-link.active::after {
@@ -369,7 +558,7 @@ input, button, select, textarea, optgroup {
   right: 0;
   height: 2px;
   background: var(--accent-aqua);
-  border-radius: 2px;
+  border-radius: 0px;
 }
 
 .nav-link-ai {
@@ -377,7 +566,7 @@ input, button, select, textarea, optgroup {
   align-items: center;
   gap: 0.4rem;
   color: var(--accent-aqua);
-  font-weight: 800;
+  font-weight: 400;
 }
 
 .nav-link-ai:hover {
@@ -394,11 +583,11 @@ input, button, select, textarea, optgroup {
 /* Theme Toggle Button */
 .theme-toggle-btn {
   background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+  border: none;
   color: var(--text-primary);
   width: 38px;
   height: 38px;
-  border-radius: 10px;
+  border-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -407,7 +596,7 @@ input, button, select, textarea, optgroup {
 }
 
 .theme-toggle-btn:hover {
-  border-color: var(--accent-aqua);
+  border-color: transparent;
   color: var(--accent-aqua);
   transform: rotate(35deg) scale(1.05);
   box-shadow: 0 0 12px var(--accent-aqua-glow);
@@ -417,11 +606,11 @@ input, button, select, textarea, optgroup {
 .mobile-menu-btn {
   display: none;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+  border: none;
   color: var(--text-primary);
   width: 40px;
   height: 40px;
-  border-radius: 10px;
+  border-radius: 0px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -429,7 +618,7 @@ input, button, select, textarea, optgroup {
 }
 
 .mobile-menu-btn:hover, .mobile-menu-btn.active {
-  border-color: var(--accent-aqua);
+  border-color: transparent;
   color: var(--accent-aqua);
 }
 
@@ -491,11 +680,11 @@ input, button, select, textarea, optgroup {
 
 .mobile-drawer-close {
   background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+  border: none;
   color: var(--text-secondary);
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -505,7 +694,7 @@ input, button, select, textarea, optgroup {
 
 .mobile-drawer-close:hover {
   color: var(--text-primary);
-  border-color: var(--accent-aqua);
+  border-color: transparent;
 }
 
 .mobile-drawer-links {
@@ -521,10 +710,10 @@ input, button, select, textarea, optgroup {
   align-items: center;
   gap: 0.85rem;
   padding: 0.85rem 1rem;
-  border-radius: 12px;
+  border-radius: 0px;
   color: var(--text-primary);
   font-size: 0.94rem;
-  font-weight: 700;
+  font-weight: 400;
   text-decoration: none;
   background: transparent;
   transition: all 0.2s ease;
@@ -558,8 +747,8 @@ input, button, select, textarea, optgroup {
 .lang-selector-wrap {
   display: flex;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: 10px;
+  border: none;
+  border-radius: 0px;
   padding: 3px;
   gap: 2px;
 }
@@ -569,9 +758,9 @@ input, button, select, textarea, optgroup {
   border: none;
   color: var(--text-secondary);
   font-size: 0.75rem;
-  font-weight: 800;
+  font-weight: 400;
   padding: 0.35rem 0.65rem;
-  border-radius: 7px;
+  border-radius: 0px;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -583,11 +772,11 @@ input, button, select, textarea, optgroup {
 
 .cart-trigger-btn {
   background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+  border: none;
   color: var(--text-primary);
   width: 42px;
   height: 42px;
-  border-radius: 10px;
+  border-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -597,7 +786,7 @@ input, button, select, textarea, optgroup {
 }
 
 .cart-trigger-btn:hover {
-  border-color: var(--accent-aqua);
+  border-color: transparent;
   color: var(--accent-aqua);
 }
 
@@ -608,7 +797,7 @@ input, button, select, textarea, optgroup {
   background: var(--accent-aqua);
   color: #06111C;
   font-size: 0.72rem;
-  font-weight: 900;
+  font-weight: 400;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -627,8 +816,8 @@ input, button, select, textarea, optgroup {
 
 .product-card {
   background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--card-radius, 18px);
+  border: none;
+  border-radius: 0px;
   padding: 1.8rem;
   display: flex;
   flex-direction: column;
@@ -648,13 +837,13 @@ input, button, select, textarea, optgroup {
   top: 1.2rem;
   left: 1.2rem;
   font-size: 0.7rem;
-  font-weight: 800;
+  font-weight: 400;
   letter-spacing: 0.05em;
   padding: 0.3rem 0.75rem;
-  border-radius: var(--badge-radius, 9999px);
+  border-radius: 0px;
   background: var(--badge-bg);
   color: var(--badge-text);
-  border: 1px solid var(--border-light);
+  border: none;
 }
 
 html[dir="rtl"] .product-badge-flag {
@@ -684,13 +873,13 @@ html[dir="rtl"] .product-badge-flag {
 .product-card-vol {
   font-size: 0.75rem;
   color: var(--text-muted);
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
 }
 
 .product-card-title {
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-primary);
   margin: 0.25rem 0 0.5rem;
 }
@@ -711,15 +900,25 @@ html[dir="rtl"] .product-badge-flag {
   padding-top: 1rem;
 }
 
-.price-dzd {
+.price-dzd,
+.price-tag,
+[class*="price"],
+.metric-stat,
+.stats-number {
   font-size: 1.35rem;
-  font-weight: 900;
+  font-weight: 400;
   color: var(--text-primary);
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
+  display: inline-block !important;
+  white-space: nowrap !important;
 }
 
 .price-dzd span {
   font-size: 0.82rem;
   color: var(--accent-aqua);
+  direction: ltr !important;
+  unicode-bidi: isolate !important;
 }
 
 /* Cart Drawer */
@@ -791,8 +990,8 @@ html[dir="rtl"] .cart-drawer {
   gap: 1rem;
   padding: 1rem;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
-  border-radius: 12px;
+  border: none;
+  border-radius: 0px;
 }
 
 .cart-item-thumb {
@@ -800,7 +999,7 @@ html[dir="rtl"] .cart-drawer {
   height: 60px;
   object-fit: contain;
   background: var(--bg-card);
-  border-radius: 8px;
+  border-radius: 0px;
   padding: 4px;
 }
 
@@ -810,13 +1009,13 @@ html[dir="rtl"] .cart-drawer {
 
 .cart-item-name {
   font-size: 0.88rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-primary);
 }
 
 .cart-item-price {
   font-size: 0.95rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--accent-aqua);
   margin-top: 2px;
 }
@@ -830,11 +1029,11 @@ html[dir="rtl"] .cart-drawer {
 
 .qty-btn {
   background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  border: none;
   color: var(--text-primary);
   width: 24px;
   height: 24px;
-  border-radius: 6px;
+  border-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -851,14 +1050,16 @@ html[dir="rtl"] .cart-drawer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 800;
+  font-weight: 400;
   font-size: 1.1rem;
   margin-bottom: 1.2rem;
 }
 
 /* Footer */
 .footer-clinical {
-  background: var(--bg-secondary);
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-top: 1px solid var(--border-subtle);
   padding: 4.5rem 0 2rem;
   margin-top: 5rem;
@@ -893,11 +1094,11 @@ html[dir="rtl"] .cart-drawer {
   border: 1.5px solid var(--accent-aqua);
   color: var(--text-primary);
   padding: 0.9rem 1.8rem;
-  border-radius: 9999px;
+  border-radius: 0px;
   box-shadow: var(--shadow-md), var(--shadow-glow);
   z-index: 3000;
   font-size: 0.88rem;
-  font-weight: 700;
+  font-weight: 400;
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -964,11 +1165,11 @@ html[dir="rtl"] .cart-drawer {
 .mobile-menu-btn {
   display: none;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+  border: none;
   color: var(--text-primary);
   width: 40px;
   height: 40px;
-  border-radius: var(--btn-radius, 10px);
+  border-radius: 0px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -976,7 +1177,7 @@ html[dir="rtl"] .cart-drawer {
 }
 
 .mobile-menu-btn:hover {
-  border-color: var(--accent-aqua);
+  border-color: transparent;
   color: var(--accent-aqua);
 }
 
@@ -1045,11 +1246,11 @@ html[dir="rtl"] .mobile-nav-drawer {
 
 .mobile-drawer-close {
   background: transparent;
-  border: 1px solid var(--border-subtle);
+  border: none;
   color: var(--text-muted);
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1059,7 +1260,7 @@ html[dir="rtl"] .mobile-nav-drawer {
 
 .mobile-drawer-close:hover {
   color: var(--text-primary);
-  border-color: var(--accent-aqua);
+  border-color: transparent;
 }
 
 .mobile-drawer-links {
@@ -1076,10 +1277,10 @@ html[dir="rtl"] .mobile-nav-drawer {
   align-items: center;
   gap: 0.85rem;
   padding: 0.8rem 1rem;
-  border-radius: var(--btn-radius, 10px);
+  border-radius: 0px;
   color: var(--text-primary);
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 400;
   text-decoration: none;
   transition: all 0.18s ease;
 }
@@ -1118,7 +1319,7 @@ html[dir="rtl"] .mobile-drawer-link:hover, html[dir="rtl"] .mobile-drawer-link.a
 .mixer-botanical-btn {
   background: var(--bg-secondary);
   border: 1.5px solid var(--border-subtle);
-  border-radius: var(--card-radius, 14px);
+  border-radius: 0px;
   padding: 0.9rem 1.1rem;
   cursor: pointer;
   display: flex;
@@ -1137,7 +1338,7 @@ html[dir="rtl"] .mobile-drawer-link:hover, html[dir="rtl"] .mobile-drawer-link.a
 
 .mixer-botanical-btn.selected {
   background: var(--accent-aqua-subtle);
-  border-color: var(--accent-aqua);
+  border-color: transparent;
   box-shadow: 0 0 16px var(--accent-aqua-subtle);
 }
 
@@ -1161,7 +1362,7 @@ html[dir="rtl"] .mobile-drawer-link:hover, html[dir="rtl"] .mobile-drawer-link.a
   height: 58px;
   border-radius: 50%;
   background: linear-gradient(135deg, rgba(113, 159, 183, 0.2) 0%, rgba(67, 109, 136, 0.2) 100%);
-  border: 2px solid var(--accent-aqua);
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1245,7 +1446,7 @@ html[dir="rtl"] .mobile-drawer-link:hover, html[dir="rtl"] .mobile-drawer-link.a
 .scanner-box {
   position: relative;
   background: #02060A;
-  border-radius: var(--card-radius);
+  border-radius: 0px;
   overflow: hidden;
   border: 1.5px solid var(--border-light);
   box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8), var(--shadow-glow);
@@ -1318,14 +1519,14 @@ html[dir="rtl"] .mobile-drawer-link:hover, html[dir="rtl"] .mobile-drawer-link.a
 
 @keyframes pulseOval {
   0%, 100% { transform: scale(1); border-color: rgba(0, 210, 196, 0.4); }
-  50% { transform: scale(1.02); border-color: var(--accent-aqua); box-shadow: 0 0 30px rgba(0, 210, 196, 0.25); }
+  50% { transform: scale(1.02); border-color: transparent; box-shadow: 0 0 30px rgba(0, 210, 196, 0.25); }
 }
 
 .scanner-corner {
   position: absolute;
   width: 24px;
   height: 24px;
-  border-color: var(--accent-aqua);
+  border-color: transparent;
   border-style: solid;
   pointer-events: none;
   z-index: 25;
@@ -1341,11 +1542,11 @@ html[dir="rtl"] .mobile-drawer-link:hover, html[dir="rtl"] .mobile-drawer-link.a
   background: rgba(2, 6, 10, 0.75);
   backdrop-filter: blur(8px);
   padding: 0.35rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid var(--border-subtle);
+  border-radius: 0px;
+  border: none;
   font-family: 'Zain', monospace;
   font-size: 0.7rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--accent-aqua);
   display: flex;
   align-items: center;
@@ -1402,9 +1603,9 @@ html[dir="rtl"] .mobile-drawer-link:hover, html[dir="rtl"] .mobile-drawer-link.a
   border: 1px solid var(--accent-aqua);
   color: #FFFFFF;
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 400;
   padding: 0.2rem 0.5rem;
-  border-radius: 4px;
+  border-radius: 0px;
   white-space: nowrap;
   pointer-events: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
@@ -1466,7 +1667,7 @@ html {
   top: -2px;
   bottom: -2px;
   width: 16px;
-  border-radius: 4px;
+  border-radius: 0px;
   background: #FFFFFF;
   box-shadow: 0 0 16px #FFFFFF, 0 0 24px var(--accent-aqua);
 }
@@ -1501,7 +1702,7 @@ html {
 
 .scroll-to-top-orb:hover {
   transform: translateY(-4px) scale(1.08);
-  border-color: var(--accent-aqua);
+  border-color: transparent;
   box-shadow: 0 12px 32px var(--accent-aqua-glow);
 }
 
@@ -1674,7 +1875,7 @@ html.scroll-anim-ready .is-revealed.product-card::after {
   transform: translateX(-50%);
   width: 72%;
   height: 3px;
-  border-radius: 999px;
+  border-radius: 0px;
   background: linear-gradient(90deg, transparent, var(--accent-aqua), transparent);
   box-shadow: 0 0 14px var(--accent-aqua);
   opacity: 0;
@@ -1772,7 +1973,7 @@ html.scroll-anim-ready .is-revealed.product-card::after {
   align-items: center;
   gap: 0.75rem;
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.09em;
@@ -1963,7 +2164,7 @@ html.scroll-anim-ready .is-revealed.product-card::after {
   position: fixed;
   pointer-events: none;
   z-index: 9998;
-  border-radius: 2px;
+  border-radius: 0px;
   will-change: transform, opacity;
 }
 
@@ -2014,7 +2215,7 @@ html.scroll-anim-ready .is-revealed.product-card::after {
 
 .product-title {
   font-size: 1.15rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-primary);
   margin: 0.2rem 0 0.25rem;
   line-height: 1.25;
@@ -2023,7 +2224,7 @@ html.scroll-anim-ready .is-revealed.product-card::after {
 .product-subtitle {
   font-size: 0.83rem;
   color: var(--accent-aqua);
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 0.4rem;
 }
 
@@ -2037,7 +2238,7 @@ html.scroll-anim-ready .is-revealed.product-card::after {
 
 .product-category-tag {
   font-size: 0.7rem;
-  font-weight: 800;
+  font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--text-muted);
@@ -2128,7 +2329,7 @@ html.scroll-anim-ready .is-revealed.product-card::after {
 
 .rotating-text-path {
   font-size: 10.6px;
-  font-weight: 800;
+  font-weight: 400;
   letter-spacing: 0.22em;
   fill: var(--accent-aqua);
   text-transform: uppercase;
@@ -2181,7 +2382,7 @@ html.scroll-anim-ready .is-revealed.product-card::after {
   align-items: center;
   justify-content: center;
   background: var(--bg-card);
-  border: 1px solid var(--border-light);
+  border: none;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22), var(--shadow-glow);
   opacity: 0;
   transform: translateY(20px) scale(0.85);
@@ -2203,7 +2404,7 @@ html.scroll-anim-ready .is-revealed.product-card::after {
 .floating-scroll-companion:hover {
   transform: translateY(-4px) scale(1.08);
   box-shadow: 0 16px 36px rgba(113, 159, 183, 0.35), var(--shadow-glow);
-  border-color: var(--accent-aqua);
+  border-color: transparent;
 }
 
 .floating-scroll-companion:active {
@@ -2239,13 +2440,13 @@ html.scroll-anim-ready .is-revealed.product-card::after {
   height: 38px;
   border-radius: 50%;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+  border: none;
   transition: all 0.25s ease;
 }
 
 .floating-scroll-companion:hover .companion-inner-core {
   background: var(--accent-aqua-subtle);
-  border-color: var(--accent-aqua);
+  border-color: transparent;
 }
 
 .companion-symbol {
@@ -2277,10 +2478,10 @@ html.scroll-anim-ready .is-revealed.product-card::after {
   background: var(--bg-secondary);
   color: var(--text-primary);
   font-size: 0.76rem;
-  font-weight: 800;
+  font-weight: 400;
   padding: 0.35rem 0.75rem;
-  border-radius: var(--badge-radius, 9999px);
-  border: 1px solid var(--border-light);
+  border-radius: 0px;
+  border: none;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
@@ -2381,12 +2582,12 @@ html.scroll-anim-ready .is-revealed.product-card::after {
   justify-content: center;
   gap: 0.5rem;
   padding: 0.45rem 1.15rem;
-  border-radius: var(--badge-radius, 9999px);
+  border-radius: 0px;
   background: var(--accent-aqua-subtle);
   color: var(--accent-aqua);
-  border: 1px solid var(--border-light);
+  border: none;
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 400;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   margin-bottom: 0.85rem;
@@ -2401,7 +2602,7 @@ html.scroll-anim-ready .is-revealed.product-card::after {
 
 .section-title {
   font-size: clamp(1.85rem, 3.2vw, 2.6rem);
-  font-weight: 900;
+  font-weight: 400;
   color: var(--text-primary);
   line-height: 1.22;
   letter-spacing: -0.025em;
@@ -2504,7 +2705,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  border: 2px solid var(--accent-aqua);
+  border: none;
   opacity: 0.85;
   box-shadow: 0 0 16px var(--accent-aqua-glow), inset 0 0 10px rgba(56, 189, 248, 0.3);
   animation: spinOrbital 10s linear infinite;
@@ -2574,7 +2775,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   width: 280px;
   background: var(--bg-card);
   border: 1px solid var(--accent-aqua);
-  border-radius: 16px;
+  border-radius: 0px;
   padding: 0.85rem 1rem;
   box-shadow: var(--shadow-md), 0 0 20px rgba(56, 189, 248, 0.15);
   backdrop-filter: blur(12px);
@@ -2590,7 +2791,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   color: var(--text-muted);
   cursor: pointer;
   padding: 2px;
-  border-radius: 4px;
+  border-radius: 0px;
 }
 
 .anjubot-bubble-close:hover {
@@ -2620,19 +2821,19 @@ html[dir="rtl"] .anjubot-floating-companion {
 
 .anjubot-badge-title {
   font-size: 0.68rem;
-  font-weight: 900;
+  font-weight: 400;
   color: var(--accent-aqua);
   letter-spacing: 0.05em;
 }
 
 .anjubot-section-pill {
   font-size: 0.62rem;
-  font-weight: 800;
+  font-weight: 400;
   background: var(--accent-aqua-subtle);
   color: var(--accent-aqua);
   padding: 0.15rem 0.45rem;
-  border-radius: 9999px;
-  border: 1px solid var(--border-light);
+  border-radius: 0px;
+  border: none;
   margin-left: auto;
 }
 
@@ -2661,7 +2862,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   background: none;
   border: none;
   color: var(--accent-aqua);
-  font-weight: 800;
+  font-weight: 400;
   font-size: 0.72rem;
   cursor: pointer;
   padding: 0;
@@ -2675,7 +2876,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   width: 290px;
   background: var(--bg-card);
   border: 1.5px solid var(--border-light);
-  border-radius: 18px;
+  border-radius: 0px;
   padding: 1rem;
   box-shadow: var(--shadow-lg), 0 0 25px rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(16px);
@@ -2702,23 +2903,23 @@ html[dir="rtl"] .anjubot-floating-companion {
   align-items: center;
   gap: 0.75rem;
   padding: 0.6rem 0.75rem;
-  border-radius: 10px;
+  border-radius: 0px;
   text-decoration: none;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-subtle);
+  border: none;
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .anjubot-menu-item:hover {
   background: var(--accent-aqua-subtle);
-  border-color: var(--accent-aqua);
+  border-color: transparent;
   transform: translateX(-2px);
 }
 
 .anjubot-reopen-bubble-btn {
   background: var(--bg-card);
-  border: 1px solid var(--border-light);
+  border: none;
   border-radius: 50%;
   width: 32px;
   height: 32px;
@@ -2759,7 +2960,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   width: 280px;
   background: var(--bg-card);
   border: 1.5px solid var(--accent-aqua);
-  border-radius: 16px;
+  border-radius: 0px;
   padding: 0.85rem 1rem;
   box-shadow: var(--shadow-md), 0 0 22px rgba(56, 189, 248, 0.25);
   backdrop-filter: blur(16px);
@@ -2835,8 +3036,8 @@ html[dir="rtl"] .anjubot-floating-companion {
   gap: 0.5rem;
   padding: 0.35rem 0.5rem;
   background: var(--bg-secondary);
-  border: 1px solid var(--border-light);
-  border-radius: 9999px;
+  border: none;
+  border-radius: 0px;
   margin-top: 1.5rem;
   box-shadow: var(--shadow-sm);
 }
@@ -2846,12 +3047,12 @@ html[dir="rtl"] .anjubot-floating-companion {
   align-items: center;
   gap: 0.45rem;
   padding: 0.55rem 1.15rem;
-  border-radius: 9999px;
+  border-radius: 0px;
   border: none;
   background: transparent;
   color: var(--text-secondary);
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.25s ease;
 }
@@ -2864,14 +3065,14 @@ html[dir="rtl"] .anjubot-floating-companion {
   background: linear-gradient(135deg, #FFF7ED 0%, #FED7AA 100%);
   color: #9A3412;
   box-shadow: 0 2px 10px rgba(234, 88, 12, 0.25);
-  font-weight: 800;
+  font-weight: 400;
 }
 
 .routine-switch-btn.active-night {
   background: linear-gradient(135deg, #1E1B4B 0%, #312E81 100%);
   color: #E0E7FF;
   box-shadow: 0 2px 12px rgba(99, 102, 241, 0.35);
-  font-weight: 800;
+  font-weight: 400;
 }
 
 /* 3-Zone Workstation Grid */
@@ -2895,7 +3096,7 @@ html[dir="rtl"] .anjubot-floating-companion {
 .dermlab-preview-zone {
   background: var(--bg-card);
   border: 1.5px solid var(--border-light);
-  border-radius: 20px;
+  border-radius: 0px;
   padding: 1.6rem;
   display: flex;
   flex-direction: column;
@@ -2922,18 +3123,18 @@ html[dir="rtl"] .anjubot-floating-companion {
 
 .zone-step-num {
   font-size: 0.72rem;
-  font-weight: 900;
+  font-weight: 400;
   color: var(--accent-aqua);
   background: var(--accent-aqua-subtle);
   padding: 0.2rem 0.55rem;
-  border-radius: 6px;
-  border: 1px solid var(--border-light);
+  border-radius: 0px;
+  border: none;
   letter-spacing: 0.05em;
 }
 
 .zone-title {
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-primary);
   margin: 0 0 0.15rem;
 }
@@ -2957,7 +3158,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   align-items: center;
   gap: 0.85rem;
   padding: 0.9rem;
-  border-radius: 14px;
+  border-radius: 0px;
   background: var(--bg-secondary);
   border: 1.5px solid var(--border-subtle);
   text-align: left;
@@ -2997,7 +3198,7 @@ html[dir="rtl"] .anjubot-floating-companion {
 
 .botanical-name {
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-primary);
   white-space: nowrap;
   overflow: hidden;
@@ -3006,9 +3207,9 @@ html[dir="rtl"] .anjubot-floating-companion {
 
 .botanical-synergy-pill {
   font-size: 0.68rem;
-  font-weight: 900;
+  font-weight: 400;
   padding: 0.1rem 0.4rem;
-  border-radius: 9999px;
+  border-radius: 0px;
   flex-shrink: 0;
 }
 
@@ -3041,7 +3242,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   padding: 1.4rem 1rem;
   position: relative;
   background: radial-gradient(circle at 50% 40%, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
-  border-radius: 16px;
+  border-radius: 0px;
   border: 1px dashed var(--border-subtle);
   margin-bottom: 1.4rem;
 }
@@ -3154,7 +3355,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   display: flex;
   justify-content: space-around;
   font-size: 0.58rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-muted);
   opacity: 0.7;
 }
@@ -3164,19 +3365,19 @@ html[dir="rtl"] .anjubot-floating-companion {
   align-items: center;
   gap: 0.5rem;
   padding: 0.55rem 1.15rem;
-  border-radius: 9999px;
-  border: 1px solid var(--border-light);
+  border-radius: 0px;
+  border: none;
   background: var(--bg-secondary);
   color: var(--text-primary);
   font-size: 0.76rem;
-  font-weight: 800;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.25s ease;
 }
 
 .crucible-blend-btn:hover {
   background: var(--accent-aqua-subtle);
-  border-color: var(--accent-aqua);
+  border-color: transparent;
   color: var(--accent-aqua);
 }
 
@@ -3203,13 +3404,13 @@ html[dir="rtl"] .anjubot-floating-companion {
 
 .dosage-label {
   font-size: 0.78rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-primary);
 }
 
 .dosage-val {
   font-size: 0.82rem;
-  font-weight: 900;
+  font-weight: 400;
 }
 
 .dosage-stepper-grid {
@@ -3223,7 +3424,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   flex-direction: column;
   align-items: center;
   padding: 0.65rem 0.4rem;
-  border-radius: 12px;
+  border-radius: 0px;
   border: 1.5px solid var(--border-subtle);
   cursor: pointer;
   transition: all 0.25s ease;
@@ -3246,7 +3447,7 @@ html[dir="rtl"] .anjubot-floating-companion {
 
 .step-title {
   font-size: 0.76rem;
-  font-weight: 900;
+  font-weight: 400;
   color: var(--text-primary);
   margin-bottom: 0.15rem;
 }
@@ -3262,7 +3463,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   padding: 1.2rem;
   background: var(--bg-secondary);
   border: 1.5px solid var(--border-subtle);
-  border-radius: 16px;
+  border-radius: 0px;
   margin-bottom: 1.3rem;
   text-align: center;
   display: flex;
@@ -3276,7 +3477,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   align-items: center;
   gap: 0.4rem;
   font-size: 0.66rem;
-  font-weight: 900;
+  font-weight: 400;
   letter-spacing: 0.08em;
   color: var(--accent-aqua);
   margin-bottom: 0.85rem;
@@ -3304,7 +3505,7 @@ html[dir="rtl"] .anjubot-floating-companion {
 
 .swatch-title {
   font-size: 0.96rem;
-  font-weight: 900;
+  font-weight: 400;
   margin: 0 0 0.35rem;
 }
 
@@ -3325,7 +3526,7 @@ html[dir="rtl"] .anjubot-floating-companion {
   align-items: center;
   gap: 0.4rem;
   font-size: 0.68rem;
-  font-weight: 900;
+  font-weight: 400;
   letter-spacing: 0.05em;
   color: var(--text-secondary);
   margin-bottom: 0.85rem;
@@ -3344,8 +3545,8 @@ html[dir="rtl"] .anjubot-floating-companion {
   align-items: center;
   padding: 0.65rem 0.3rem;
   background: var(--bg-secondary);
-  border-radius: 12px;
-  border: 1px solid var(--border-subtle);
+  border-radius: 0px;
+  border: none;
 }
 
 .gauge-svg-wrap {
@@ -3361,13 +3562,13 @@ html[dir="rtl"] .anjubot-floating-companion {
 .gauge-value {
   position: absolute;
   font-size: 0.82rem;
-  font-weight: 900;
+  font-weight: 400;
   color: var(--text-primary);
 }
 
 .gauge-label {
   font-size: 0.68rem;
-  font-weight: 800;
+  font-weight: 400;
   color: var(--text-muted);
 }
 
@@ -3387,7 +3588,7 @@ html[dir="rtl"] .anjubot-floating-companion {
 
 .order-price {
   font-size: 1.35rem;
-  font-weight: 900;
+  font-weight: 400;
   color: var(--text-primary);
   line-height: 1.1;
 }
@@ -3406,28 +3607,29 @@ html[dir="rtl"] .anjubot-floating-companion {
   --tab-bar-height: 64px;
 }
 
-/* Brand Wordmark & Droplet */
+/* Brand Logo Image Styling */
 .anj-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  font-family: inherit;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  color: var(--text-primary);
-  text-decoration: none;
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
+  filter: var(--logo-filter, none);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
 }
 
-.anj-logo-mark {
-  color: var(--accent-aqua);
-  filter: drop-shadow(0 2px 8px var(--accent-aqua-glow));
+.anj-logo:hover {
+  transform: scale(1.03);
 }
 
-.anj-logo-word {
-  font-weight: 900;
-  color: var(--text-primary);
-  letter-spacing: -0.025em;
-  line-height: 1;
+.anj-droplet-mark {
+  display: inline-block;
+  vertical-align: middle;
+  object-fit: contain;
+  filter: var(--logo-filter, none);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
+}
+
+.anj-droplet-mark:hover {
+  transform: scale(1.05);
 }
 
 /* App shell content padding */

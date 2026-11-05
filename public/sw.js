@@ -38,8 +38,14 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(event.request.url);
 
-  // Skip API requests and external telemetry
-  if (url.pathname.startsWith("/api/")) return;
+  // Skip API requests, admin routes, and biometric analyzer
+  if (
+    url.pathname.startsWith("/api/") ||
+    url.pathname.startsWith("/admin") ||
+    url.pathname.startsWith("/analyzer")
+  ) {
+    return;
+  }
 
   // Stale-while-revalidate for static assets, network-first for pages
   if (

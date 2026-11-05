@@ -5,7 +5,7 @@ import { Sparkles, ShieldCheck, ThermometerSnowflake, Droplets } from "lucide-re
 import { DropletMark } from "../brand/AnjuciaLogo";
 import { useLanguage } from "../../context/LanguageContext";
 
-export default function DropletHeroVisual({ onAddToCart }) {
+export default function DropletHeroVisual({ onAddToCart, showPrice = false }) {
   const { lang } = useLanguage();
   const [isHovered, setIsHovered] = useState(false);
 
@@ -23,8 +23,8 @@ export default function DropletHeroVisual({ onAddToCart }) {
         minHeight: "340px",
         padding: "2rem 1.5rem",
         background: "radial-gradient(circle at 50% 45%, var(--bg-card-hover) 0%, var(--bg-card) 75%)",
-        border: "2px solid var(--accent-aqua)",
-        borderRadius: "var(--card-radius, 24px)",
+        border: "none",
+        borderRadius: "0px",
         boxShadow: "var(--shadow-md), var(--shadow-glow)",
         overflow: "hidden"
       }}
@@ -55,16 +55,16 @@ export default function DropletHeroVisual({ onAddToCart }) {
           alignItems: "center",
           gap: "0.35rem",
           background: "rgba(113, 159, 183, 0.15)",
-          border: "1px solid var(--border-light)",
+          border: "none",
           padding: "0.35rem 0.75rem",
-          borderRadius: "9999px",
+          borderRadius: "0px",
           fontSize: "0.72rem",
-          fontWeight: 800,
+          fontWeight: 400,
           color: "var(--accent-aqua)"
         }}
       >
         <span className="topbar-dot" />
-        <span>PRODUIT UNIQUE DISPONIBLE</span>
+        <span>{lang === "dz" || lang === "ar" ? "المنتج الحصري المتاح" : lang === "en" ? "SINGLE EXCLUSIVE PRODUCT" : "PRODUIT UNIQUE DISPONIBLE"}</span>
       </div>
 
       <div
@@ -76,16 +76,16 @@ export default function DropletHeroVisual({ onAddToCart }) {
           alignItems: "center",
           gap: "0.35rem",
           background: "rgba(155, 176, 160, 0.15)",
-          border: "1px solid rgba(155, 176, 160, 0.35)",
+          border: "none",
           padding: "0.35rem 0.75rem",
-          borderRadius: "9999px",
+          borderRadius: "0px",
           fontSize: "0.72rem",
-          fontWeight: 800,
+          fontWeight: 400,
           color: "var(--success)"
         }}
       >
         <ShieldCheck size={13} />
-        <span>Stabilité 45°C</span>
+        <span>{lang === "dz" || lang === "ar" ? "ثبات حراري 45°C" : lang === "en" ? "45°C Thermal Stability" : "Stabilité 45°C"}</span>
       </div>
 
       {/* Main Stylized Droplet Sculpture */}
@@ -108,7 +108,7 @@ export default function DropletHeroVisual({ onAddToCart }) {
             width: "190px",
             height: "190px",
             borderRadius: "50%",
-            border: "1.5px dashed var(--accent-aqua)",
+            border: "none",
             opacity: 0.45,
             top: "50%",
             left: "50%",
@@ -128,26 +128,6 @@ export default function DropletHeroVisual({ onAddToCart }) {
           <DropletMark size={118} color="var(--accent-aqua)" />
         </div>
 
-        {/* Canule precision indicator */}
-        <div
-          style={{
-            marginTop: "0.6rem",
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "0.45rem",
-            padding: "0.35rem 0.85rem",
-            background: "var(--bg-primary)",
-            border: "1px solid var(--border-light)",
-            borderRadius: "9999px",
-            fontSize: "0.75rem",
-            fontWeight: 800,
-            color: "var(--text-primary)",
-            boxShadow: "var(--shadow-sm)"
-          }}
-        >
-          <Droplets size={13} color="var(--accent-aqua)" />
-          <span>Embout Canule Zéro-Panne • 50 ml</span>
-        </div>
       </div>
 
       {/* Product identification labels */}
@@ -155,7 +135,7 @@ export default function DropletHeroVisual({ onAddToCart }) {
         <h3
           style={{
             fontSize: "1.28rem",
-            fontWeight: 900,
+            fontWeight: 400,
             color: "var(--text-primary)",
             lineHeight: 1.25,
             marginBottom: "0.35rem"
@@ -168,7 +148,7 @@ export default function DropletHeroVisual({ onAddToCart }) {
         </p>
       </div>
 
-      {/* Bottom price + CTA bar */}
+      {/* Bottom stock status + CTA bar */}
       <div
         style={{
           width: "100%",
@@ -181,24 +161,38 @@ export default function DropletHeroVisual({ onAddToCart }) {
         }}
       >
         <div>
-          <div
-            className="price-dzd"
-            style={{ fontSize: "1.7rem", fontWeight: 900, color: "var(--accent-aqua)", lineHeight: 1 }}
-          >
-            1 800 DA
-          </div>
-          <div style={{ fontSize: "0.72rem", color: "var(--success)", fontWeight: 800, marginTop: "0.2rem" }}>
-            ✓ En Stock Immédiat • 58 Wilayas
+          {showPrice && (
+            <div
+              className="price-dzd"
+              style={{
+                fontSize: "1.7rem",
+                fontWeight: 400,
+                color: "var(--accent-aqua)",
+                lineHeight: 1,
+                marginBottom: "0.25rem",
+                direction: "ltr",
+                unicodeBidi: "isolate"
+              }}
+            >
+              {lang === "dz" || lang === "ar" ? "1800 دج" : lang === "en" ? "1,800 DZD" : "1 800 DA"}
+            </div>
+          )}
+          <div style={{ fontSize: "0.82rem", color: "var(--success)", fontWeight: 400 }}>
+            {lang === "dz" || lang === "ar" ? "✓ متوفر فوراً • توصيل 58 ولاية" : lang === "en" ? "✓ In Stock • 58 Wilayas Delivery" : "✓ En Stock Immédiat • 58 Wilayas"}
           </div>
         </div>
 
         <button
           className="btn-aqua magnetic-btn"
           onClick={onAddToCart}
-          style={{ padding: "0.85rem 1.6rem", fontSize: "0.92rem", display: "inline-flex", alignItems: "center", gap: "0.45rem" }}
+          style={{ padding: "0.85rem 1.6rem", fontSize: "0.92rem", display: "inline-flex", alignItems: "center", gap: "0.45rem", background: "#4d7358", color: "#ffffff" }}
         >
           <Droplets size={16} />
-          <span>{lang === "dz" ? "أضف للسلة (1800 دج)" : "Ajouter (1 800 DA)"}</span>
+          <span>
+            {showPrice
+              ? (lang === "dz" || lang === "ar" ? "أضف للسلة (1800 دج)" : lang === "en" ? "Add to Bag (1,800 DZD)" : "Ajouter (1 800 DA)")
+              : (lang === "dz" || lang === "ar" ? "أضف للسلة" : lang === "en" ? "Add to Bag" : "Ajouter au Panier")}
+          </span>
         </button>
       </div>
     </div>

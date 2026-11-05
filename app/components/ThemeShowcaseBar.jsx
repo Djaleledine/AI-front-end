@@ -20,7 +20,7 @@ export default function ThemeShowcaseBar() {
   return (
     <div className="container" style={{ margin: "1.2rem auto 0" }}>
       <div className="theme-showcase-bar">
-        <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", fontSize: "0.78rem", fontWeight: 900, color: "var(--accent-aqua)", textTransform: "uppercase", letterSpacing: "0.06em", marginRight: "0.5rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.45rem", fontSize: "0.78rem", fontWeight: 400, color: "var(--accent-aqua)", textTransform: "uppercase", letterSpacing: "0.06em", marginRight: "0.5rem" }}>
           <Sparkles size={15} />
           <span>{cur.title}</span>
         </div>
@@ -49,7 +49,7 @@ export default function ThemeShowcaseBar() {
                 />
                 <span>{pName}</span>
                 {isActive && (
-                  <span style={{ fontSize: "0.65rem", padding: "0.15rem 0.4rem", borderRadius: "9999px", background: "var(--accent-aqua)", color: "#06111C", fontWeight: 900 }}>
+                  <span style={{ fontSize: "0.65rem", padding: "0.15rem 0.4rem", borderRadius: "0px", background: "var(--accent-aqua)", color: "#06111C", fontWeight: 400 }}>
                     Actif
                   </span>
                 )}
@@ -57,17 +57,6 @@ export default function ThemeShowcaseBar() {
             );
           })}
 
-          {/* Quick Dark/Light Switcher Pill */}
-          <button
-            type="button"
-            className="theme-pill-btn"
-            onClick={toggleTheme}
-            style={{ border: "1.5px solid var(--border-light)" }}
-            title={cur.darkLight}
-          >
-            {isDark ? <Sun size={14} color="#F59E0B" /> : <Moon size={14} color="var(--accent-aqua)" />}
-            <span>{cur.darkLight}</span>
-          </button>
         </div>
       </div>
     </div>

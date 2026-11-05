@@ -28,24 +28,27 @@ const BOTANICALS = [
     swatchGradient: "radial-gradient(circle at 30% 30%, #FFE0B2 0%, #FFB74D 45%, #E65100 100%)",
     textureOptions: {
       1: {
-        title: { fr: "Fluide Satiné Ultra-Léger", dz: "سائل حريري خفيف" },
+        title: { fr: "Fluide Satiné Ultra-Léger", dz: "سائل حريري خفيف", en: "Ultra-Light Satin Fluid" },
         desc: {
           fr: "1 goutte d'Argan pure apporte un éclat sain immédiat sans alourdir les peaux mixtes.",
-          dz: "قطرة واحدة تعطيك نضارة طبيعية وملمس حريري خفيف للنهار."
+          dz: "قطرة واحدة تعطيك نضارة طبيعية وملمس حريري خفيف للنهار.",
+          en: "1 drop of pure Argan adds an instant healthy glow without weighing down combination skin."
         }
       },
       2: {
-        title: { fr: "Émulsion Veloutée Nourrissante (Équilibre Idéal)", dz: "مستحلب مخملي مغذي (الجرعة المثالية)" },
+        title: { fr: "Émulsion Veloutée Nourrissante (Équilibre Idéal)", dz: "مستحلب مخملي مغذي (الجرعة المثالية)", en: "Velvety Nourishing Emulsion (Optimal Balance)" },
         desc: {
           fr: "2 gouttes d'Argan associées au Gel-Cream créent un bouclier riche en tocophérols sans fini gras.",
-          dz: "زوج قطرات مع جل-كريم أنجوسيا يشكلوا طبقة حماية غنية بالفيتامينات بلا تزييت."
+          dz: "زوج قطرات مع جل-كريم أنجوسيا يشكلوا طبقة حماية غنية بالفيتامينات بلا تزييت.",
+          en: "2 drops of Argan blended into Gel-Cream create a tocopherol-rich barrier with zero greasiness."
         }
       },
       3: {
-        title: { fr: "Baume Protecteur Nuit Réparateur SOS", dz: "بلسم ليلي مكثف لترميم البشرة" },
+        title: { fr: "Baume Protecteur Nuit Réparateur SOS", dz: "بلسم ليلي مكثف لترميم البشرة", en: "SOS Night Repair Protective Balm" },
         desc: {
           fr: "3 gouttes créent un enveloppement réparateur face aux agressions du sirocco et du vent sec.",
-          dz: "3 قطرات لترميم حاجز البشرة المتضرر من حرارة الصيف ورياح الشهيلي الجافة."
+          dz: "3 قطرات لترميم حاجز البشرة المتضرر من حرارة الصيف ورياح الشهيلي الجافة.",
+          en: "3 drops create a restorative cocoon against Sirocco desert winds and dry heat."
         }
       }
     }
@@ -71,24 +74,27 @@ const BOTANICALS = [
     swatchGradient: "radial-gradient(circle at 30% 30%, #FCE4EC 0%, #F48FB1 45%, #C2185B 100%)",
     textureOptions: {
       1: {
-        title: { fr: "Hydro-Gel Frais Pénétrant", dz: "هيدرو-جل منعش وسريع الامتصاص" },
+        title: { fr: "Hydro-Gel Frais Pénétrant", dz: "هيدرو-جل منعش وسريع الامتصاص", en: "Fresh Penetrating Hydro-Gel" },
         desc: {
           fr: "1 vaporisation d'Eau de Rose rafraîchit le teint et permet au Panthénol 2% d'apaiser rapidement.",
-          dz: "رشة واحدة من ماء الورد تنعش الوجه وتخلي البانتينول يهدئ البشرة في ثواني."
+          dz: "رشة واحدة من ماء الورد تنعش الوجه وتخلي البانتينول يهدئ البشرة في ثواني.",
+          en: "1 mist of Rose Water refreshes skin tone and allows 2% Panthenol to soothe instantly."
         }
       },
       2: {
-        title: { fr: "Sérum Désaltérant Pores Resserrés", dz: "سيروم مهدئ ومرطب للمسامات" },
+        title: { fr: "Sérum Désaltérant Pores Resserrés", dz: "سيروم مهدئ ومرطب للمسامات", en: "Pore-Refining Quenching Serum" },
         desc: {
           fr: "2 vaporisations optimisent l'hydratation intracellulaire et resserrent les pores après la chaleur.",
-          dz: "رشتين تعطي ترطيب أعمق وتساعد على تقليص المسامات الواسعة بعد التعرض للشمس."
+          dz: "رشتين تعطي ترطيب أعمق وتساعد على تقليص المسامات الواسعة بعد التعرض للشمس.",
+          en: "2 mists optimize cellular hydration and tighten pores after heat exposure."
         }
       },
       3: {
-        title: { fr: "Bain de Fraîcheur Anti-Échauffement", dz: "ارتواء مائي مكثف ضد الالتهاب" },
+        title: { fr: "Bain de Fraîcheur Anti-Échauffement", dz: "ارتواء مائي مكثف ضد الالتهاب", en: "Anti-Flushing Cooling Soak" },
         desc: {
           fr: "Infusion désaltérante maximale pour réconforter les peaux très sensibles ou réactives.",
-          dz: "ارتواء مائي كامل يهدي البشرة الحساسة المعرضة للالتهاب والحكة."
+          dz: "ارتواء مائي كامل يهدي البشرة الحساسة المعرضة للالتهاب والحكة.",
+          en: "Maximum soothing infusion to relieve extra sensitive or reactive skin."
         }
       }
     }
@@ -114,24 +120,27 @@ const BOTANICALS = [
     swatchGradient: "radial-gradient(circle at 30% 30%, #E8F5E9 0%, #81C784 45%, #2E7D32 100%)",
     textureOptions: {
       1: {
-        title: { fr: "Fluide Cristallin Repulpant", dz: "سائل بلوري مرطب وناعم" },
+        title: { fr: "Fluide Cristallin Repulpant", dz: "سائل بلوري مرطب وناعم", en: "Plumping Crystalline Fluid" },
         desc: {
           fr: "1 noisette apporte un shot d'eau immédiat scellé par le Squalane végétal.",
-          dz: "كمية صغيرة تدخل الترطيب لأعماق البشرة والسكوالان يحافظ عليه بلا تبخر."
+          dz: "كمية صغيرة تدخل الترطيب لأعماق البشرة والسكوالان يحافظ عليه بلا تبخر.",
+          en: "1 pea-size dab delivers an immediate hydration boost sealed by plant squalane."
         }
       },
       2: {
-        title: { fr: "Masque-Gel Hydratation 72H", dz: "ماسك جل ترطيب عميق 72 ساعة" },
+        title: { fr: "Masque-Gel Hydratation 72H", dz: "ماسك جل ترطيب عميق 72 ساعة", en: "72H Hydration Gel-Mask" },
         desc: {
           fr: "En proportion égale avec le Gel-Cream, forme un voile hydro-désaltérant qui stoppe les tiraillements.",
-          dz: "بكميات متساوية، يعطيك قناع مائي يوقف إحساس التجباد ونقص الماء فالحين."
+          dz: "بكميات متساوية، يعطيك قناع مائي يوقف إحساس التجباد ونقص الماء فالحين.",
+          en: "Mixed equally with Gel-Cream to form an intensely soothing anti-tightness veil."
         }
       },
       3: {
-        title: { fr: "Gelée Réparatrice SOS Coup de Chaud", dz: "جل مهدئ لترميم البشرة بعد الشمس" },
+        title: { fr: "Gelée Réparatrice SOS Coup de Chaud", dz: "جل مهدئ لترميم البشرة بعد الشمس", en: "SOS Sunburn Repair Jelly" },
         desc: {
           fr: "Concentration riche pour régénérer la barrière cutanée après une exposition solaire prolongée.",
-          dz: "تركيز عالي لإنقاذ وترميم البشرة المجهدة من حرارة الصيف الحارقة."
+          dz: "تركيز عالي لإنقاذ وترميم البشرة المجهدة من حرارة الصيف الحارقة.",
+          en: "Rich concentration to regenerate the skin barrier after prolonged sun exposure."
         }
       }
     }
@@ -157,24 +166,27 @@ const BOTANICALS = [
     swatchGradient: "radial-gradient(circle at 30% 30%, #FFF9C4 0%, #FBC02D 45%, #F57F17 100%)",
     textureOptions: {
       1: {
-        title: { fr: "Gelée Soyeuse Fini Mat Longue Durée", dz: "جل حريري بلمسة جافة ومات" },
+        title: { fr: "Gelée Soyeuse Fini Mat Longue Durée", dz: "جل حريري بلمسة جافة ومات", en: "Long-Lasting Matte Silky Jelly" },
         desc: {
           fr: "1 goutte aide à réguler les brillances de la zone T sans assécher, sublimée par 3% Niacinamide.",
-          dz: "قطرة واحدة تنقص لمعان الجبهة والأنف بلا ما تنشف الوجه، بفضل النياسيناميد 3%."
+          dz: "قطرة واحدة تنقص لمعان الجبهة والأنف بلا ما تنشف الوجه، بفضل النياسيناميد 3%.",
+          en: "1 drop regulates T-zone shine without drying out skin, boosted by 3% Niacinamide."
         }
       },
       2: {
-        title: { fr: "Émulsion Équilibrante Fini Velours", dz: "مستحلب متوازن بملمس مخملي" },
+        title: { fr: "Émulsion Équilibrante Fini Velours", dz: "مستحلب متوازن بملمس مخملي", en: "Velvet Balancing Emulsion" },
         desc: {
           fr: "2 gouttes renforcent le ciment cellulaire tout en préservant un toucher sec et poudré.",
-          dz: "زوج قطرات يقويو حاجز البشرة مع الحفاظ على ملمس جاف وناعم طول النهار."
+          dz: "زوج قطرات يقويو حاجز البشرة مع الحفاظ على ملمس جاف وناعم طول النهار.",
+          en: "2 drops reinforce cellular cohesion while preserving a dry, powdery touch."
         }
       },
       3: {
-        title: { fr: "Bouclier Anti-Pollution & Sable", dz: "حماية عازلة ضد الغبار والتلوث" },
+        title: { fr: "Bouclier Anti-Pollution & Sable", dz: "حماية عازلة ضد الغبار والتلوث", en: "Anti-Pollution & Sand Shield" },
         desc: {
           fr: "Protège contre l'adhérence des poussières urbaines et du sable tout en matifiant durablement.",
-          dz: "يعزل البشرة عن ذرات الغبار والرمل ويثبت المظهر المات الطبيعي طول اليوم."
+          dz: "يعزل البشرة عن ذرات الغبار والرمل ويثبت المظهر المات الطبيعي طول اليوم.",
+          en: "Shields against urban dust and desert sand while locking in a clean matte finish."
         }
       }
     }
@@ -273,16 +285,20 @@ export default function DermLabMixer() {
         <div className="section-header center" style={{ maxWidth: "840px", margin: "0 auto 3rem", textAlign: "center" }}>
           <div className="section-tag">
             <FlaskConical size={14} />
-            <span>{lang === "dz" ? "مختبر الخلطات الصيدلانية" : "LABORATOIRE DERMACEUTIQUE SUR-MESURE"}</span>
+            <span>{lang === "dz" || lang === "ar" ? "مختبر الخلطات الصيدلانية" : lang === "en" ? "CUSTOM DERMACEUTICAL LAB" : "LABORATOIRE DERMACEUTIQUE SUR-MESURE"}</span>
           </div>
           <h2 className="section-title gsap-headline">
-            {lang === "dz"
+            {lang === "dz" || lang === "ar"
               ? "اصنعي ملمسكِ الخاص : امزجي كريم الأساس مع خلاصات نقية"
+              : lang === "en"
+              ? "Formulate Your Custom Texture Live"
               : "Formulez Votre Texture Sur-Mesure en Direct"}
           </h2>
           <p className="section-subtitle">
-            {lang === "dz"
+            {lang === "dz" || lang === "ar"
               ? "تفاعل حي ومبتكر : اختاري الخلاصة الطبيعية وعدّلي عدد القطرات لمشاهدة تحوّل المستحلب ومؤشرات الراحة الجلدية."
+              : lang === "en"
+              ? "Combine our Soothing Face Gel-Cream (pH 5.2) with pure botanical actives and observe textural evolution in real time."
               : "Associez notre Soin Visage Apaisant (pH 5.2) aux essences botaniques pures et observez la transformation texturale en temps réel."}
           </p>
 
@@ -293,14 +309,14 @@ export default function DermLabMixer() {
               className={`routine-switch-btn ${routineMode === "day" ? "active-day" : ""}`}
             >
               <Sun size={15} />
-              <span>{lang === "dz" ? "روتين الصباح (مات وحماية)" : "Routine Matin (Fini Mat & Bouclier)"}</span>
+              <span>{lang === "dz" || lang === "ar" ? "روتين الصباح (مات وحماية)" : lang === "en" ? "Morning Routine (Matte & Shield)" : "Routine Matin (Fini Mat & Bouclier)"}</span>
             </button>
             <button
               onClick={() => handleRoutineToggle("night")}
               className={`routine-switch-btn ${routineMode === "night" ? "active-night" : ""}`}
             >
               <Moon size={15} />
-              <span>{lang === "dz" ? "روتين المساء (ترميم 72 ساعة)" : "Routine Soir (Réparation Barrière)"}</span>
+              <span>{lang === "dz" || lang === "ar" ? "روتين المساء (ترميم 72 ساعة)" : lang === "en" ? "Evening Routine (72H Barrier Repair)" : "Routine Soir (Réparation Barrière)"}</span>
             </button>
           </div>
         </div>
@@ -312,8 +328,8 @@ export default function DermLabMixer() {
             <div className="zone-header">
               <span className="zone-step-num">01</span>
               <div>
-                <h4 className="zone-title">{lang === "dz" ? "اختر الخلاصة الطبيعية" : "Choisissez l'Actif Botanique"}</h4>
-                <div className="zone-subtitle">{lang === "dz" ? "مكونات نقية 100% طبيعية" : "100% Matières Premières Nobles"}</div>
+                <h4 className="zone-title">{lang === "dz" || lang === "ar" ? "اختر الخلاصة الطبيعية" : lang === "en" ? "Choose Botanical Active" : "Choisissez l'Actif Botanique"}</h4>
+                <div className="zone-subtitle">{lang === "dz" || lang === "ar" ? "مكونات نقية 100% طبيعية" : lang === "en" ? "100% Noble Raw Actives" : "100% Matières Premières Nobles"}</div>
               </div>
             </div>
 
@@ -367,8 +383,8 @@ export default function DermLabMixer() {
             <div className="zone-header center">
               <span className="zone-step-num">02</span>
               <div>
-                <h4 className="zone-title">{lang === "dz" ? "حوض المزج والتفاعل" : "Creuset de Formulation Virtuel"}</h4>
-                <div className="zone-subtitle">{lang === "dz" ? "تفاعل قطرات الزيت مع الجل-كريم" : "Micro-infusion en direct"}</div>
+                <h4 className="zone-title">{lang === "dz" || lang === "ar" ? "حوض المزج والتفاعل" : lang === "en" ? "Virtual Formulation Crucible" : "Creuset de Formulation Virtuel"}</h4>
+                <div className="zone-subtitle">{lang === "dz" || lang === "ar" ? "تفاعل قطرات الزيت مع الجل-كريم" : lang === "en" ? "Live micro-infusion" : "Micro-infusion en direct"}</div>
               </div>
             </div>
 
@@ -401,10 +417,10 @@ export default function DermLabMixer() {
                 >
                   <div className="cream-surface-glint" />
                   <div className="crucible-center-badge">
-                    <span style={{ fontSize: "0.72rem", fontWeight: 900, color: "var(--brand-deep)" }}>
+                    <span style={{ fontSize: "0.72rem", fontWeight: 400, color: "var(--brand-deep)" }}>
                       ANJUCIA GEL-CREAM
                     </span>
-                    <span style={{ fontSize: "0.62rem", color: "var(--accent-aqua)", fontWeight: 800 }}>
+                    <span style={{ fontSize: "0.62rem", color: "var(--accent-aqua)", fontWeight: 400 }}>
                       + {drops} {selectedBotanical.dropUnit[lang] || selectedBotanical.dropUnit.fr}
                     </span>
                   </div>
@@ -421,17 +437,21 @@ export default function DermLabMixer() {
               <button
                 onClick={triggerDropAnimation}
                 className="crucible-blend-btn magnetic-btn"
-                title="Cliquez pour ré-infuser une goutte d'actif"
+                title={lang === "en" ? "Click to infuse a botanical drop" : "Cliquez pour ré-infuser une goutte d'actif"}
               >
                 <RotateCw size={15} className={isBlending ? "spin-active" : ""} />
-                <span>{isBlending ? "Infusion en cours..." : "Homogénéiser la Formule"}</span>
+                <span>
+                  {isBlending
+                    ? (lang === "en" ? "Infusing..." : lang === "dz" || lang === "ar" ? "جاري التفاعل..." : "Infusion en cours...")
+                    : (lang === "en" ? "Homogenize Formula" : lang === "dz" || lang === "ar" ? "مزج التركيبة" : "Homogénéiser la Formule")}
+                </span>
               </button>
             </div>
 
             {/* Tactile 3-Step Dosage Selector */}
             <div className="dermlab-dosage-controller">
               <div className="dosage-header">
-                <span className="dosage-label">{lang === "dz" ? "مقدار الجرعة المضافة :" : "Dosage en Actif Botanique :"}</span>
+                <span className="dosage-label">{lang === "dz" || lang === "ar" ? "مقدار الجرعة المضافة :" : lang === "en" ? "Botanical Active Dosage :" : "Dosage en Actif Botanique :"}</span>
                 <span className="dosage-val" style={{ color: selectedBotanical.color }}>
                   {drops} {selectedBotanical.dropUnit[lang] || selectedBotanical.dropUnit.fr}
                 </span>
@@ -452,10 +472,14 @@ export default function DermLabMixer() {
                       {"💧".repeat(num)}
                     </div>
                     <div className="step-title">
-                      {num === 1 ? "1 Goutte" : num === 2 ? "2 Gouttes" : "3 Gouttes"}
+                      {lang === "en" ? `${num} Drop${num > 1 ? "s" : ""}` : lang === "dz" || lang === "ar" ? `${num} قطرات` : `${num} Goutte${num > 1 ? "s" : ""}`}
                     </div>
                     <div className="step-desc">
-                      {num === 1 ? "Léger Satiné" : num === 2 ? "Émulsion Idéale" : "Baume SOS Nuit"}
+                      {num === 1
+                        ? (lang === "en" ? "Light Satin" : "Léger Satiné")
+                        : num === 2
+                        ? (lang === "en" ? "Ideal Emulsion" : "Émulsion Idéale")
+                        : (lang === "en" ? "SOS Night Balm" : "Baume SOS Nuit")}
                     </div>
                   </button>
                 ))}
@@ -468,8 +492,8 @@ export default function DermLabMixer() {
             <div className="zone-header">
               <span className="zone-step-num">03</span>
               <div>
-                <h4 className="zone-title">{lang === "dz" ? "النتيجة والمؤشرات الحيوية" : "Fini Obtenu & Télémétrie"}</h4>
-                <div className="zone-subtitle">{lang === "dz" ? "توافق معتمد سريرياً" : "Diagnostic Formulateur"}</div>
+                <h4 className="zone-title">{lang === "dz" || lang === "ar" ? "النتيجة والمؤشرات الحيوية" : lang === "en" ? "Result & Telemetry" : "Fini Obtenu & Télémétrie"}</h4>
+                <div className="zone-subtitle">{lang === "dz" || lang === "ar" ? "توافق معتمد سريرياً" : lang === "en" ? "Clinical Compatibility" : "Diagnostic Formulateur"}</div>
               </div>
             </div>
 
@@ -477,7 +501,7 @@ export default function DermLabMixer() {
             <div ref={textureSwatchRef} className="macro-texture-swatch-card">
               <div className="swatch-header">
                 <Sparkles size={14} color="var(--accent-aqua)" />
-                <span>TEXTURE FORMULÉE OBTENUE</span>
+                <span>{lang === "en" ? "FORMULATED TEXTURE RESULT" : lang === "dz" || lang === "ar" ? "النتيجة والملمس النهائي" : "TEXTURE FORMULÉE OBTENUE"}</span>
               </div>
 
               <div className="swatch-visual-disc" style={{ background: selectedBotanical.swatchGradient }}>
@@ -496,7 +520,7 @@ export default function DermLabMixer() {
             <div className="dermlab-circular-telemetry">
               <div className="telemetry-bar-title">
                 <Activity size={14} color="var(--accent-aqua)" />
-                <span>TÉLÉMÉTRIE CUTANÉE • MESURE EN DIRECT</span>
+                <span>{lang === "en" ? "SKIN TELEMETRY • LIVE MEASUREMENT" : lang === "dz" || lang === "ar" ? "المؤشرات الحيوية للبشرة" : "TÉLÉMÉTRIE CUTANÉE • MESURE EN DIRECT"}</span>
               </div>
 
               <div className="circular-gauges-row">
@@ -521,7 +545,7 @@ export default function DermLabMixer() {
                     </svg>
                     <span className="gauge-value">{hydraVal}%</span>
                   </div>
-                  <span className="gauge-label">Hydratation</span>
+                  <span className="gauge-label">{lang === "en" ? "Hydration" : lang === "dz" || lang === "ar" ? "ترطيب" : "Hydratation"}</span>
                 </div>
 
                 {/* Gauge 2: Barrière Lipide */}
@@ -545,7 +569,7 @@ export default function DermLabMixer() {
                     </svg>
                     <span className="gauge-value">{barrierVal}%</span>
                   </div>
-                  <span className="gauge-label">Barrière 72H</span>
+                  <span className="gauge-label">{lang === "en" ? "72H Barrier" : lang === "dz" || lang === "ar" ? "حاجز 72 ساعة" : "Barrière 72H"}</span>
                 </div>
 
                 {/* Gauge 3: Confort Apaisant */}
@@ -569,7 +593,7 @@ export default function DermLabMixer() {
                     </svg>
                     <span className="gauge-value">{comfortVal}%</span>
                   </div>
-                  <span className="gauge-label">Confort SOS</span>
+                  <span className="gauge-label">{lang === "en" ? "SOS Comfort" : lang === "dz" || lang === "ar" ? "راحة فورية" : "Confort SOS"}</span>
                 </div>
               </div>
             </div>
@@ -578,8 +602,13 @@ export default function DermLabMixer() {
             <div className="dermlab-order-card">
               <div className="order-price-row">
                 <div>
-                  <div className="order-price">1 800 DA</div>
-                  <div className="order-shipping-note">Livraison 58 Wilayas • QR Code VIP Inclus</div>
+                  <div className="order-shipping-note" style={{ fontSize: "0.85rem" }}>
+                    {lang === "en"
+                      ? "58 Wilayas Delivery • VIP Sealed QR Code Included"
+                      : lang === "dz" || lang === "ar"
+                      ? "توصيل 58 ولاية • كود QR VIP مشمول"
+                      : "Livraison 58 Wilayas • QR Code VIP Inclus"}
+                  </div>
                 </div>
                 <button
                   onClick={handleAddToCart}

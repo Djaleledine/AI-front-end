@@ -11,7 +11,7 @@ export const ANJUCIA_PRODUCTS = [
     subtitle: "Émulsion H/E Équilibrante & Apaisante • Fini Zéro Brillance",
     category: "hydratation",
     volume: "50 ml ℮ 1.7 FL. OZ.",
-    packaging: "Tube Canule Haute Précision (Anti-Contamination, Zéro Panne de Pompe)",
+    packaging: "Tube Protecteur 50 ml (Haute Précision & Hygiène)",
     priceDZD: 1800,
     badge: "FORMULATION AVANCÉE",
     isHero: true,
@@ -31,18 +31,18 @@ export const ANJUCIA_PRODUCTS = [
       format: "Gel-Crème émulsion Huile dans Eau (H/E)",
       ph: "5.0 – 5.5 physiologique",
       texture: "Fraîche, aqueuse, pénétration en 30 secondes sans résidu gras",
-      packaging: "Tube à embout canule effilé évitant les défaillances de pompe"
+      packaging: "Tube protecteur hygiénique pour préserver les actifs"
     },
     rating: 4.97,
     reviewsCount: 148,
     benefitClaim: "Absorption express en 30s • Apaisement cutané visible • pH 5.2"
   },
   {
-    id: "cerahydra-cream-50",
-    name: "CeraHydra+ Cellular Barrier Cream",
-    frenchName: "Crème Barrière Cellulaire 72H",
-    subtitle: "Restauration des Ponts Lipidiques Sous Climat Aride",
-    category: "reparation",
+    id: "anti-aging-serum",
+    name: "Anti-aging Serum",
+    frenchName: "Sérum Anti-Âge Haute Précision",
+    subtitle: "Régénération Cellulaire & Lissage des Rides Sous Climat Aride",
+    category: "anti-age",
     volume: "50 ml ℮ 1.7 FL. OZ.",
     packaging: "Pot Verre Givré Traité Anti-UV",
     priceDZD: 3800,
@@ -51,83 +51,51 @@ export const ANJUCIA_PRODUCTS = [
     isHero: true,
     isNew: false,
     image: "/assets/cerahydra-cream.svg",
-    description: "Soin barrière cellulaire intensif formulé pour faire face aux agressions thermiques extrêmes du Sahara et du littoral. Infuse un complexe biomimétique de 5 céramides (3:1:1) et de bio-ferment de datte du désert.",
+    description: "Sérum anti-âge haute précision formulé pour relancer le renouvellement cellulaire et lisser les ridules accentuées par la chaleur et le climat sec.",
     actives: [
-      { name: "Complexe 7x Acide Hyaluronique", percentage: "2.4%", role: "Multi-poids pour hydratation en surface et en profondeur" },
-      { name: "5 Céramides Biomimétiques (NP/AP/EOP)", percentage: "3.5%", role: "Ratio physiologique 3:1:1 avec cholestérol" },
-      { name: "Bio-Ferment de Datte du Sahara", percentage: "1.8%", role: "Résilience thermique & osmo-protection" },
-      { name: "Éctoïne Pure", percentage: "2.0%", role: "Extrémolyte protégeant contre le choc salin et UV" },
-      { name: "Niacinamide", percentage: "5.0%", role: "Stimulation de la filaggrine et des lipides" }
+      { name: "Complexe Rétinol-Like & Peptides", percentage: "2.4%", role: "Stimulation collagène & fermeté" },
+      { name: "5 Céramides Biomimétiques", percentage: "3.5%", role: "Renforcement barrière & souplesse" },
+      { name: "Panthénol Pro-Vitamine B5", percentage: "2.0%", role: "Protection cellulaire thermique" }
     ],
     technicalSpecs: {
-      format: "Émulsion riche fondante",
+      format: "Sérum fluide fondant",
       ph: "5.5",
-      texture: "Onctueuse, scellement protecteur longue durée 72H",
-      packaging: "Verre givré recyclable haute densité"
+      texture: "Pénétration immédiate, fini soyeux",
+      packaging: "Flacon verre haute densité"
     },
     rating: 4.96,
     reviewsCount: 384,
-    benefitClaim: "+148% d'hydratation immédiate en 15 min • Scellement 72h"
+    benefitClaim: "Régénération cutanée visible • Lissage des ridules"
   },
   {
-    id: "cerahydra-cream-100",
-    name: "CeraHydra+ Format Économique 100ml",
-    frenchName: "Grand Format Économique 60 Jours",
-    subtitle: "Cure de Continuité pour Peaux Sèches & Déshydratées",
-    category: "reparation",
+    id: "active-repair-spf50",
+    name: "Active Repair 50+ SPF Sunscreen",
+    frenchName: "Soin Solaire Active Repair 50+ SPF",
+    subtitle: "Très Haute Photoprotection & Réparation Barrière 50+ SPF",
+    category: "solaire",
     volume: "100 ml ℮ 3.4 FL. OZ.",
-    packaging: "Double Contenance Avancée",
+    packaging: "Tube Pompe Haute Précision",
     priceDZD: 6200,
     originalPriceDZD: 7600,
-    badge: "MEILLEURE VALEUR ÉCONOMIQUE",
+    badge: "TRÈS HAUTE PROTECTION",
     isHero: true,
     isNew: false,
     image: "/assets/cerahydra-cream.svg",
-    description: "Double format économique idéal pour couvrir un cycle complet de renouvellement de 60 jours.",
+    description: "Photoprotection solaire avancée SPF 50+ anti-UV algériens extrêmes combinée à une réparation active du ciment lipidique.",
     actives: [
-      { name: "Matrice 3:1:1 Céramides & Lipides", percentage: "3.5%", role: "Reconstruction continue du ciment épidermique" },
-      { name: "Bio-Ferment de Datte du Sahara", percentage: "1.8%", role: "Bouclier anti-déshydratation thermique" },
-      { name: "7x Acide Hyaluronique", percentage: "2.4%", role: "Repulpage multi-profondeurs" }
+      { name: "Filtres Solaires Photostables SPF 50+", percentage: "Large Spectre", role: "UVA, UVB & Infrarouges" },
+      { name: "Complexe Réparateur Céramides", percentage: "3.5%", role: "Restauration barrière lipidique" },
+      { name: "Acide Hyaluronique", percentage: "2.4%", role: "Hydratation continue anti-dessèchement" }
     ],
     technicalSpecs: {
-      format: "Émulsion riche réparatrice",
+      format: "Fluide fondant invisible",
       ph: "5.5",
-      texture: "Confort suprême pour peaux très sèches",
-      packaging: "Flacon verre 100 ml"
+      texture: "Toucher sec non gras, résistant à la chaleur",
+      packaging: "Tube haute protection 100 ml"
     },
     rating: 4.98,
     reviewsCount: 192,
-    benefitClaim: "Économie de 1 400 DZD • Traitement complet du cycle épidermique"
-  },
-  {
-    id: "aqualipid-essence",
-    name: "AquaLipid Hydro-Infusion Essence",
-    frenchName: "Essence Pré-Infusion Hydratante",
-    subtitle: "Préparation & Hydratation Légère du Teint",
-    category: "hydratation",
-    volume: "100 ml ℮ 3.4 FL. OZ.",
-    packaging: "Flacon Compte-Gouttes Précision",
-    priceDZD: 2900,
-    originalPriceDZD: 3400,
-    badge: "BOOSTER D'ABSORPTION 3.2X",
-    isHero: false,
-    isNew: false,
-    image: "/assets/aqualipid-essence.svg",
-    description: "Essence aqueuse ultra-pénétrante formulée pour préparer la peau et optimiser l'absorption de votre crème ou gel-crème.",
-    actives: [
-      { name: "Acide Polyglutamique (PGA)", percentage: "1.5%", role: "Retient l'eau pour un toucher repulpé et frais" },
-      { name: "Centella Asiatica Titrée", percentage: "1.0%", role: "Apaisement et confort immédiat" },
-      { name: "Panthénol Pro-Vitamine B5", percentage: "4.0%", role: "Hydratation profonde & souplesse" }
-    ],
-    technicalSpecs: {
-      format: "Essence aqueuse fluide ultra-légère",
-      ph: "5.2",
-      texture: "Fraîche comme l'eau, pénétration instantanée",
-      packaging: "Flacon doseur avec pipette compte-gouttes"
-    },
-    rating: 4.88,
-    reviewsCount: 145,
-    benefitClaim: "Multiplie par 3 l'absorption des soins barrières suivants"
+    benefitClaim: "Zéro trace blanche • Fini invisible • Protection SPF 50+"
   },
   {
     id: "bioshield-spf50",
@@ -136,7 +104,7 @@ export const ANJUCIA_PRODUCTS = [
     subtitle: "Défense Ultime Indice UV > 10 & Anti-TEWL",
     category: "solaire",
     volume: "50 ml ℮ 1.7 FL. OZ.",
-    packaging: "Flacon Agitateur Canule Précision",
+    packaging: "Flacon Shaker Haute Précision",
     priceDZD: 2600,
     originalPriceDZD: 3100,
     badge: "FILTRES PHOTOSTABLES HAUTE TOLÉRANCE",
@@ -146,14 +114,14 @@ export const ANJUCIA_PRODUCTS = [
     description: "Protection solaire invisible dermaceutique résistante à la transpiration, au vent de sable et à l'eau. Zéro traces blanches, fini sec 100% mat.",
     actives: [
       { name: "Filtres Mexoryl-Grade Photostables", percentage: "Broad Spectrum", role: "UVA, UVB, Lumière Visible & Infrarouges" },
-      { name: "Éctoïne Pure", percentage: "1.5%", role: "Protection des cellules contre l'apoptose thermique" },
+      { name: "Panthénol Pro-Vitamine B5", percentage: "1.5%", role: "Protection des cellules contre le stress thermique" },
       { name: "Micro-Sphères d'Eau Osmotiques", percentage: "2.0%", role: "Frein à l'évaporation insensible sous soleil intense" }
     ],
     technicalSpecs: {
       format: "Fluide ultra-léger shaker",
       ph: "6.0",
       texture: "Toucher sec poudré, non gras, résistant au sable",
-      packaging: "Flacon canule précision avec bille de mélange"
+      packaging: "Flacon doseur avec bille de mélange"
     },
     rating: 4.93,
     reviewsCount: 220,
@@ -176,7 +144,7 @@ export const ANJUCIA_PRODUCTS = [
     description: "Baume fondant qui enveloppe la peau d'un cocon protecteur nocturne pour restaurer le ciment lipidique dégradé pendant la journée par le vent sec et la pollution.",
     actives: [
       { name: "Lipides de Datte du Sahara", percentage: "3.0%", role: "Acides gras essentiels bio-compatibles" },
-      { name: "Éctoïne Médicale", percentage: "2.5%", role: "Accélération du renouvellement cellulaire de nuit" },
+      { name: "Céramides & Panthénol B5", percentage: "2.5%", role: "Accélération du renouvellement cellulaire de nuit" },
       { name: "Phytostérols Purs", percentage: "1.0%", role: "Anti-inflammatoire et apaisement des tiraillements" }
     ],
     technicalSpecs: {

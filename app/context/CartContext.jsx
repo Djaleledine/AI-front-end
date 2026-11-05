@@ -10,22 +10,53 @@ export function CartProvider({ children }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [selectedWilaya, setSelectedWilaya] = useState("16 - Alger");
   const [toasts, setToasts] = useState([]);
+  const [serverCatalog, setServerCatalog] = useState(ANJUCIA_PRODUCTS);
 
-  // Load from localStorage on mount
+  // Load cart from localStorage and sync authoritative prices from /api/store
   useEffect(() => {
-    try {
-      const saved = localStorage.getItem("anjucia_next_cart");
-      if (saved) {
-        const fresh = ANJUCIA_PRODUCTS.find((p) => p.id === AVAILABLE_PRODUCT_ID);
-        // Drop items that are no longer for sale and refresh price from the catalog
-        const items = JSON.parse(saved)
-          .filter((i) => isPurchasable(i.id))
-          .map((i) => ({ ...i, priceDZD: fresh?.priceDZD ?? i.priceDZD, image: null }));
-        setCartItems(items);
+    let mounted = true;
+    async function initCartAndCatalog() {
+      let catalogList = ANJUCIA_PRODUCTS;
+      try {
+        const res = await fetch("/api/store");
+        if (res.ok) {
+          const json = await res.json();
+          if (Array.isArray(json?.data?.products) && json.data.products.length > 0) {
+            catalogList = json.data.products;
+            if (mounted) setServerCatalog(catalogList);
+          }
+        }
+      } catch (_) {}
+
+      try {
+        const saved = localStorage.getItem("anjucia_next_cart");
+        if (saved && mounted) {
+          const catalogMap = new Map(catalogList.map((p) => [p.id, p]));
+          const items = JSON.parse(saved)
+            .filter((i) => {
+              const p = catalogMap.get(i.id);
+              return p
+                ? p.status === "available" || p.status === "in_stock"
+                : isPurchasable(i.id);
+            })
+            .map((i) => {
+              const p = catalogMap.get(i.id);
+              return {
+                ...i,
+                priceDZD: p?.priceDZD ?? i.priceDZD,
+                image: null
+              };
+            });
+          setCartItems(items);
+        }
+      } catch (e) {
+        console.warn("Could not load cart from localStorage", e);
       }
-    } catch (e) {
-      console.warn("Could not load cart from localStorage", e);
     }
+    initCartAndCatalog();
+    return () => {
+      mounted = false;
+    };
   }, []);
 
   // Save to localStorage
@@ -46,9 +77,19 @@ export function CartProvider({ children }) {
 
   const addToCart = (productOrId, qty = 1) => {
     const productId = typeof productOrId === "object" ? productOrId?.id : productOrId;
-    const product = ANJUCIA_PRODUCTS.find((p) => p.id === productId) || (typeof productOrId === "object" ? productOrId : null);
+    const product =
+      serverCatalog.find((p) => p.id === productId) ||
+      ANJUCIA_PRODUCTS.find((p) => p.id === productId) ||
+      (typeof productOrId === "object" ? productOrId : null);
     if (!product) return;
-    if (!isPurchasable(product.id)) {
+
+    const liveInStock =
+      product.status === "available" ||
+      product.status === "in_stock" ||
+      isPurchasable(product.id);
+    const livePriceDZD = Number(product.priceDZD) || 1800;
+
+    if (!liveInStock) {
       showToast("Bientôt disponible — on vous préviendra ✨", "info");
       return;
     }
@@ -58,7 +99,7 @@ export function CartProvider({ children }) {
       let updated;
       if (existing) {
         updated = prev.map((item) =>
-          item.id === productId ? { ...item, qty: item.qty + qty } : item
+          item.id === productId ? { ...item, priceDZD: livePriceDZD, qty: item.qty + qty } : item
         );
       } else {
         updated = [
@@ -67,7 +108,7 @@ export function CartProvider({ children }) {
             id: product.id,
             name: product.name,
             subtitle: product.subtitle,
-            priceDZD: product.priceDZD,
+            priceDZD: livePriceDZD,
             volume: product.volume,
             image: product.image,
             qty: qty
